@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LastName-Portfolio.exe</title>
+<title>Day-Portfolio.exe</title>
 <link rel="stylesheet" href="main.css">
 </head>
 <body>
@@ -28,14 +28,14 @@
         <div class="avatar">👤</div>
         <div>
           <h1>Ian Day</h1>
-          <div style="color:#000080; font-weight:bold; margin-bottom:4px;">Student at the College of State</div>
+          <div style="color:#000080; font-weight:bold; margin-bottom:4px;">Student at the College of Southern Maryland</div>
           <div class="inset" style="padding:6px 10px; font-size:11px; line-height:1.5;">
             Hello World!
           </div>
         </div>
       </div>
       <div class="status-bar" style="margin-top:8px;">
-        <div class="status-panel">📍 Town, STATE</div>
+        <div class="status-panel">📍 Leonardtown, MD</div>
         <div class="status-panel">🎓 A.S. Electrical Engineering, 2028 [IN PROGRESS...]</div>
       </div>
     </div>
@@ -101,7 +101,7 @@
       <div class="three-col" id="projects-container"></div>
     </div>
     <div class="status-bar">
-      <div class="status-panel" id="projects-count">0 object(s)</div>
+      <div class="status-panel">3 object(s)</div>
     </div>
   </div>
 
@@ -138,9 +138,9 @@
     </div>
     <div class="window-content">
       <div class="contact-row">
-        <a class="contact-chip" href="mailto:email@mailbox.org">✉ email@mailbox.org</a>
-        <a class="contact-chip" href="">🔗 LinkedIn</a>
-        <a class="contact-chip" href="">🐙 Github</a>
+        <a class="contact-chip" href="mailto:alex@example.com">✉ ian.day@mailbox.org</a>
+        <a class="contact-chip" href="https://www.linkedin.com/in/ian-day-52b459267/">🔗 LinkedIn</a>
+        <a class="contact-chip" href="https://www.github.com/Wet-Hands">🐙 Github</a>
         <a class="contact-chip" href="https://www.portfolio.daybuilt.net">🌐 Portfolio Website</a>
       </div>
     </div>
@@ -162,39 +162,8 @@
   <div class="taskbar-clock" id="clock">00:00</div>
 </div>
 
-<!-- Reusable Project Modal — must be in HTML before the script runs -->
-<div class="modal-overlay" id="project-modal">
-  <div class="modal-window">
-    <div class="title-bar">
-      <div class="title-bar-left" id="modal-title">Project Details</div>
-      <div class="title-bar-buttons">
-        <div class="win-btn" onclick="closeModal()">✕</div>
-      </div>
-    </div>
-    <div class="modal-body">
-      <div class="carousel">
-        <div class="carousel-viewport" id="carousel-viewport"></div>
-        <div class="carousel-controls">
-          <button class="carousel-btn" id="carousel-prev" onclick="carouselMove(-1)">◀ Prev</button>
-          <div class="carousel-dots" id="carousel-dots"></div>
-          <span class="carousel-counter" id="carousel-counter">1 / 1</span>
-          <button class="carousel-btn" id="carousel-next" onclick="carouselMove(1)">Next ▶</button>
-        </div>
-      </div>
-      <div class="modal-section-title">📄 About</div>
-      <div class="modal-text" id="modal-about"></div>
-      <div class="modal-section-title">🔧 Built with</div>
-      <div class="modal-tags" id="modal-tags"></div>
-    </div>
-    <div class="modal-footer">
-      <a class="modal-action-btn" id="modal-url" href="#" target="_blank" rel="noopener">🌐 Visit Site</a>
-      <button class="modal-action-btn" onclick="closeModal()">Close</button>
-    </div>
-  </div>
-</div>
-
 <script>
-  // ── CLOCK ──────────────────────────────────────────────────────────────────
+  // Clock
   function updateClock() {
     const now = new Date();
     const h = String(now.getHours()).padStart(2, '0');
@@ -204,52 +173,174 @@
   updateClock();
   setInterval(updateClock, 10000);
 
-  // ── SKILLS ─────────────────────────────────────────────────────────────────
+  // Skills — grouped by category; bars = number of projects this skill appears in
+  // Each skill lists which project(s) it was used in
   const skillCategories = [
     {
       label: '🖥 Programming',
       skills: [
-        { name: 'C / C++',    projects: ['ShopEasy', 'DataDash', 'Fake Project'] },
-        { name: 'Python',     projects: ['ShopEasy', 'WritePath', 'DataDash'] },
-        { name: 'gdScript',   projects: ['ShopEasy', 'WritePath', 'DataDash'] },
+        { name: 'C / C++',     projects: ['ShopEasy', 'DataDash', 'Fake Project'] },
+        { name: 'Python',      projects: ['ShopEasy', 'WritePath', 'DataDash'] },
+        { name: 'gdScript',    projects: ['ShopEasy', 'WritePath', 'DataDash'] },
       ]
     },
     {
       label: '⚙ CAD',
       skills: [
-        { name: 'SolidWorks', projects: ['ShopEasy', 'WritePath'] },
-        { name: 'AutoCAD',    projects: ['DataDash'] },
+        { name: 'SolidWorks',   projects: ['ShopEasy', 'WritePath'] },
+        { name: 'AutoCAD',      projects: ['DataDash'] },
       ]
     },
     {
       label: '🔧 Tools',
       skills: [
-        { name: 'Git',        projects: ['ShopEasy', 'DataDash', 'WritePath'] },
-        { name: 'Docker',     projects: ['ShopEasy'] },
-        { name: 'Figma',      projects: ['WritePath', 'DataDash'] },
+        { name: 'Git',         projects: ['ShopEasy', 'DataDash', 'WritePath'] },
+        { name: 'Docker',      projects: ['ShopEasy'] },
+        { name: 'Figma',       projects: ['WritePath', 'DataDash'] },
       ]
     },
   ];
 
+  // Total number of projects (for bar scale)
   const totalProjects = 3;
+
   const skillsContainer = document.getElementById('skills-container');
   skillCategories.forEach(cat => {
     const catEl = document.createElement('div');
     catEl.className = 'skill-category';
-    catEl.innerHTML = '<div class="skill-category-label">' + cat.label + '</div>';
+    catEl.innerHTML = `<div class="skill-category-label">${cat.label}</div>`;
+
     cat.skills.forEach(s => {
       const count = s.projects.length;
-      const blocks = Array.from({ length: count }, () => '<div class="progress-block"></div>').join('');
+      const blocks = Array.from({ length: count }, () =>
+        `<div class="progress-block"></div>`).join('');
+      const usedIn = s.projects.join(', ');
       const row = document.createElement('div');
       row.className = 'skill-row';
-      row.innerHTML =
-        '<span class="skill-label">' + s.name + '</span>' +
-        '<div class="progress-track" title="Used in ' + count + ' of ' + totalProjects + ' projects" style="width:' + (totalProjects * 14) + 'px">' + blocks + '</div>' +
-        '<span class="skill-used-in">' + s.projects.join(', ') + '</span>';
+      row.innerHTML = `
+        <span class="skill-label">${s.name}</span>
+        <div class="progress-track" title="Used in ${count} of ${totalProjects} projects" style="width:${totalProjects * 14}px">${blocks}</div>
+        <span class="skill-used-in">${usedIn}</span>
+      `;
       catEl.appendChild(row);
     });
+
     skillsContainer.appendChild(catEl);
   });
+
+  // Projects data
+const projects = [
+  {
+  icon: '🗺',
+  name: 'MyNewProject',
+  desc: 'One-line description shown on the card.',
+  modal: {
+    about: 'Longer description shown in the popup.',
+    tags: ['React', 'Node.js'],
+    url: 'https://yoursite.com',
+    slides: [
+      { emoji: '🗺', bg: '#1a2a1a', caption: 'Main screen' },
+    ]
+  }
+},
+  {
+  icon: '🗺',
+  name: 'MyNewProject',
+  desc: 'One-line description shown on the card.',
+  modal: {
+    about: 'Longer description shown in the popup.',
+    tags: ['React', 'Node.js'],
+    url: 'https://yoursite.com',
+    slides: [
+      { emoji: '🗺', bg: '#1a2a1a', caption: 'Main screen' },
+    ]
+  }
+},
+];
+
+  const projContainer = document.getElementById('projects-container');
+  projects.forEach(p => {
+    let card;
+    if (p.modal) {
+      card = document.createElement('div');
+      card.className = 'project-card';
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', () => openModal(p));
+      card.innerHTML = `
+        <span class="project-icon">${p.icon}</span>
+        <div class="project-name">${p.name}</div>
+        <div class="project-desc">${p.desc}</div>
+        <span class="project-link-label">📂 View details</span>
+      `;
+    } else {
+      card = document.createElement('a');
+      card.className = 'project-card';
+      card.href = p.url;
+      card.target = '_blank';
+      card.rel = 'noopener noreferrer';
+      card.innerHTML = `
+        <span class="project-icon">${p.icon}</span>
+        <div class="project-name">${p.name}</div>
+        <div class="project-desc">${p.desc}</div>
+        <span class="project-link-label">🌐 Open project ↗</span>
+      `;
+    }
+    projContainer.appendChild(card);
+  });
+
+  // Modal
+  function openModal(project) {
+  document.getElementById('modal-title').textContent = project.name;
+  document.getElementById('modal-about').innerHTML = project.modal.about;
+  document.getElementById('modal-url').href = project.modal.url;
+
+  const tagsEl = document.getElementById('modal-tags');
+  tagsEl.innerHTML = project.modal.tags
+    .map(t => `<span class="modal-tag">${t}</span>`)
+    .join('');
+
+  // load slides into carousel...
+  loadSlides(project.modal.slides);
+
+  document.getElementById('project-modal').classList.add('open');
+}
+  function closeModal() {
+    document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('open'));
+    document.body.style.overflow = '';
+  }
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // Carousel
+  let carouselIndex = 0;
+  function carouselRender() {
+    const slides = document.querySelectorAll('#carousel-viewport .carousel-slide');
+    const dots   = document.getElementById('carousel-dots');
+    const counter = document.getElementById('carousel-counter');
+    const total = slides.length;
+    slides.forEach((s, i) => s.classList.toggle('active', i === carouselIndex));
+    counter.textContent = `${carouselIndex + 1} / ${total}`;
+    document.getElementById('carousel-prev').disabled = carouselIndex === 0;
+    document.getElementById('carousel-next').disabled = carouselIndex === total - 1;
+    // dots
+    dots.innerHTML = '';
+    for (let i = 0; i < total; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'carousel-dot' + (i === carouselIndex ? ' active' : '');
+      dot.addEventListener('click', () => { carouselIndex = i; carouselRender(); });
+      dots.appendChild(dot);
+    }
+  }
+  function carouselMove(dir) {
+    const total = document.querySelectorAll('#carousel-viewport .carousel-slide').length;
+    carouselIndex = Math.max(0, Math.min(total - 1, carouselIndex + dir));
+    carouselRender();
+  }
+
+  // Experience data
+
 
   const experience = [
   {
@@ -275,65 +366,6 @@
   },
 ];
 
-  // ── PROJECTS ───────────────────────────────────────────────────────────────
-  // To add a project: copy one object below, fill in your details, done.
-  // slides: use { emoji, bg, caption } for placeholders
-  //         or  { img: 'path/to/file.png', caption } for real screenshots
-  const projects = [
-    {
-      icon: '🗺',
-      name: 'MyNewProject',
-      desc: 'One-line description shown on the card.',
-      modal: {
-        about: 'Longer description shown in the popup.',
-        tags: ['React', 'Node.js'],
-        url: 'https://yoursite.com',
-        slides: [
-          { emoji: '🗺', bg: '#1a2a1a', caption: 'Main screen' },
-        ]
-      }
-    },
-    {
-      icon: '🗺',
-      name: 'MyNewProject2',
-      desc: 'One-line description shown on the card.',
-      modal: {
-        about: 'Longer description shown in the popup.',
-        tags: ['React', 'Node.js'],
-        url: 'https://yoursite.com',
-        slides: [
-          { emoji: '🗺', bg: '#1a2a1a', caption: 'Main screen' },
-        ]
-      }
-    },
-  ];
-
-  const projContainer = document.getElementById('projects-container');
-  document.getElementById('projects-count').textContent = projects.length + ' object(s)';
-  projects.forEach(p => {
-    const card = document.createElement('div');
-    card.className = 'project-card';
-    card.style.cursor = 'pointer';
-    card.addEventListener('click', () => openModal(p));
-    card.innerHTML =
-      '<span class="project-icon">' + p.icon + '</span>' +
-      '<div class="project-name">' + p.name + '</div>' +
-      '<div class="project-desc">' + p.desc + '</div>' +
-      '<span class="project-link-label">📂 View details</span>';
-    projContainer.appendChild(card);
-  });
-
-  // ── EXPERIENCE ─────────────────────────────────────────────────────────────
-  const experience = [
-    {
-      company: 'College of State',
-      role: 'A.S. Electrical Engineering',
-      dates: '2026 – 2028',
-      desc: 'Currently in progress. Focus on circuits, embedded systems, and CAD.',
-      tags: ['SolidWorks', 'AutoCAD', 'C / C++']
-    },
-  ];
-
   const expContainer = document.getElementById('experience-container');
   experience.forEach((e, i) => {
     if (i > 0) {
@@ -344,83 +376,42 @@
     const row = document.createElement('div');
     row.className = 'raised';
     row.style.marginBottom = '4px';
-    row.innerHTML =
-      '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2px;">' +
-        '<strong>' + e.role + '</strong>' +
-        '<span style="font-size:11px;color:#444;">' + e.dates + '</span>' +
-      '</div>' +
-      '<div style="color:#000080;font-size:11px;margin-bottom:4px;">' + e.company + '</div>' +
-      '<div style="font-size:11px;margin-bottom:6px;">' + e.desc + '</div>' +
-      '<div style="display:flex;flex-wrap:wrap;gap:4px;">' +
-        e.tags.map(t => '<span class="modal-tag">' + t + '</span>').join('') +
-      '</div>';
+    row.innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:2px;">
+        <strong>${e.role}</strong>
+        <span style="font-size:11px; color:#444;">${e.dates}</span>
+      </div>
+      <div style="color:#000080; font-size:11px; margin-bottom:4px;">${e.company}</div>
+      <div style="font-size:11px; margin-bottom:6px;">${e.desc}</div>
+      <div style="display:flex; flex-wrap:wrap; gap:4px;">
+        ${e.tags.map(t => `<span class="modal-tag">${t}</span>`).join('')}
+      </div>
+    `;
     expContainer.appendChild(row);
   });
-
-  // ── MODAL ──────────────────────────────────────────────────────────────────
-  function openModal(project) {
-    document.getElementById('modal-title').textContent = project.name + ' — Project Details';
-    document.getElementById('modal-about').textContent = project.modal.about;
-    document.getElementById('modal-url').href = project.modal.url;
-    document.getElementById('modal-tags').innerHTML = project.modal.tags
-      .map(t => '<span class="modal-tag">' + t + '</span>').join('');
-    loadSlides(project.modal.slides);
-    document.getElementById('project-modal').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function loadSlides(slides) {
-    carouselIndex = 0;
-    const viewport = document.getElementById('carousel-viewport');
-    viewport.innerHTML = slides.map((s, i) => {
-      const inner = s.img
-        ? '<img src="' + s.img + '" alt="' + s.caption + '">'
-        : '<div class="slide-placeholder" style="background:' + (s.bg || '#1a1a2e') + '">' +
-            '<span style="font-size:48px">' + (s.emoji || '🖼') + '</span>' +
-            '<span style="font-size:12px;color:#ccc">Screenshot ' + (i + 1) + '</span>' +
-          '</div>';
-      return '<div class="carousel-slide' + (i === 0 ? ' active' : '') + '">' +
-        inner + '<div class="slide-caption">' + s.caption + '</div></div>';
-    }).join('');
-    carouselRender();
-  }
-
-  function closeModal() {
-    document.getElementById('project-modal').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  document.getElementById('project-modal').addEventListener('click', e => {
-    if (e.target === document.getElementById('project-modal')) closeModal();
-  });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-  // ── CAROUSEL ───────────────────────────────────────────────────────────────
-  let carouselIndex = 0;
-
-  function carouselRender() {
-    const slides = document.querySelectorAll('#carousel-viewport .carousel-slide');
-    const total = slides.length;
-    slides.forEach((s, i) => s.classList.toggle('active', i === carouselIndex));
-    document.getElementById('carousel-counter').textContent = (carouselIndex + 1) + ' / ' + total;
-    document.getElementById('carousel-prev').disabled = carouselIndex === 0;
-    document.getElementById('carousel-next').disabled = carouselIndex === total - 1;
-    const dots = document.getElementById('carousel-dots');
-    dots.innerHTML = '';
-    for (let i = 0; i < total; i++) {
-      const dot = document.createElement('div');
-      dot.className = 'carousel-dot' + (i === carouselIndex ? ' active' : '');
-      dot.addEventListener('click', () => { carouselIndex = i; carouselRender(); });
-      dots.appendChild(dot);
-    }
-  }
-
-  function carouselMove(dir) {
-    const total = document.querySelectorAll('#carousel-viewport .carousel-slide').length;
-    carouselIndex = Math.max(0, Math.min(total - 1, carouselIndex + dir));
-    carouselRender();
-  }
 </script>
+
+<div class="modal-overlay" id="project-modal">
+  <div class="modal-window">
+    <div class="title-bar">
+      <div class="title-bar-left" id="modal-title">Project Details</div>
+      <div class="title-bar-buttons">
+        <div class="win-btn" onclick="closeModal()">✕</div>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="carousel"> ... </div>
+      <div class="modal-section-title">📄 About</div>
+      <div class="modal-text" id="modal-about"></div>
+      <div class="modal-section-title">🔧 Built with</div>
+      <div class="modal-tags" id="modal-tags"></div>
+    </div>
+    <div class="modal-footer">
+      <a class="modal-action-btn" id="modal-url" href="#" target="_blank">🌐 Visit Site</a>
+      <button class="modal-action-btn" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
