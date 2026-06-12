@@ -6,39 +6,80 @@
 <title>Day-Portfolio.exe</title>
 <link rel="stylesheet" href="main.css">
 <style>
-  /* ── CERTIFICATIONS ────────────────────────────────────────────────────── */
+  /* ── PROFILE PICTURE ────────────────────────────────────────────────────── */
+  /* Drop a photo at photos/profile.jpg — falls back to the emoji if missing  */
+  .avatar { overflow: hidden; }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; cursor: zoom-in; }
+
+  /* ── CERTIFICATIONS ─────────────────────────────────────────────────────── */
   .cert-card {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    padding: 8px;
-    background: #c0c0c0;
-    border-top: 2px solid #fff;
-    border-left: 2px solid #fff;
-    border-right: 2px solid #404040;
-    border-bottom: 2px solid #404040;
-    margin-bottom: 8px;
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 8px; background: #c0c0c0; margin-bottom: 8px;
+    border-top: 2px solid #fff; border-left: 2px solid #fff;
+    border-right: 2px solid #404040; border-bottom: 2px solid #404040;
   }
   .cert-card:last-child { margin-bottom: 0; }
+  .cert-card.has-modal { cursor: pointer; }
+  .cert-card.has-modal:hover { background: #d0d0d0; }
+  .cert-card.has-modal:active {
+    border-top: 2px solid #404040; border-left: 2px solid #404040;
+    border-right: 2px solid #fff;  border-bottom: 2px solid #fff;
+  }
   .cert-img-wrap {
-    width: 64px; height: 64px;
-    flex-shrink: 0;
-    background: #fff;
-    border-top: 2px solid #404040;
-    border-left: 2px solid #404040;
-    border-right: 2px solid #fff;
-    border-bottom: 2px solid #fff;
+    width: 64px; height: 64px; flex-shrink: 0; background: #fff; font-size: 28px;
+    border-top: 2px solid #404040; border-left: 2px solid #404040;
+    border-right: 2px solid #fff; border-bottom: 2px solid #fff;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .cert-img-wrap img { width: 100%; height: 100%; object-fit: contain; cursor: zoom-in; }
+  .cert-info  { flex: 1; min-width: 0; }
+  .cert-title { font-weight: bold; font-size: 12px; }
+  .cert-issuer { font-size: 10px; color: #000080; font-weight: bold; margin-bottom: 4px; }
+  .cert-desc  { font-size: 11px; line-height: 1.5; color: #333; }
+  .cert-view-details {
+    display: block; font-size: 10px; color: #000080;
+    text-decoration: underline; margin-top: 4px;
+  }
+
+  /* ── LIGHTBOX ───────────────────────────────────────────────────────────── */
+  .lightbox-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.8); z-index: 400;
+    align-items: center; justify-content: center;
+  }
+  .lightbox-overlay.open { display: flex; }
+  .lightbox-win {
+    background: #c0c0c0;
+    border-top: 2px solid #fff; border-left: 2px solid #fff;
+    border-right: 2px solid #404040; border-bottom: 2px solid #404040;
+    box-shadow: 4px 4px 0 #000;
+    max-width: 92vw; max-height: 92vh;
+    display: flex; flex-direction: column;
+  }
+  .lightbox-body {
+    padding: 4px; background: #000;
     display: flex; align-items: center; justify-content: center;
-    overflow: hidden; font-size: 28px;
   }
-  .cert-img-wrap img { width: 100%; height: 100%; object-fit: contain; }
-  .cert-info { flex: 1; min-width: 0; }
-  .cert-title { font-weight: bold; font-size: 12px; margin-bottom: 2px; }
-  .cert-meta {
-    display: flex; gap: 10px;
-    font-size: 10px; color: #000080; font-weight: bold; margin-bottom: 4px;
+  .lightbox-body img {
+    max-width: calc(92vw - 8px); max-height: calc(92vh - 52px);
+    object-fit: contain; display: block;
   }
-  .cert-desc { font-size: 11px; line-height: 1.5; color: #333; }
+  .lightbox-statusbar {
+    display: flex; padding: 3px 6px 2px;
+    border-top: 1px solid #808080; box-shadow: 0 -1px 0 #fff;
+  }
+  .lightbox-statusbar .status-panel { flex: 1; font-size: 11px; }
+
+  /* ── PDF SLIDES ─────────────────────────────────────────────────────────── */
+  .pdf-viewport { width: 100%; height: 170px; background: #fff; }
+  .pdf-frame    { width: 100%; height: 100%; border: none; display: block; }
+  .pdf-open-bar { background: #c0c0c0; padding: 3px 6px; text-align: center; }
+  .pdf-open-btn {
+    font-size: 11px; color: #000080; text-decoration: underline; cursor: pointer;
+  }
+
+  /* ── CLICKABLE CAROUSEL IMAGES ──────────────────────────────────────────── */
+  .carousel-viewport img { cursor: zoom-in; display: block; }
 </style>
 </head>
 <body>
@@ -53,12 +94,22 @@
         My Portfolio
       </div>
       <div class="title-bar-buttons">
-        <div class="win-btn">_</div><div class="win-btn">□</div><div class="win-btn">✕</div>
+        <div class="win-btn">_</div><div class="win-btn">&#9633;</div><div class="win-btn">&#x2715;</div>
       </div>
     </div>
     <div class="window-content">
       <div class="profile-row">
-        <div class="avatar">👤</div>
+        <!-- Profile picture: place your photo at photos/profile.jpg
+             Falls back to the 👤 emoji if the file is missing.          -->
+        <div class="avatar" id="profile-avatar">
+          <img src="photos/profile.jpg" alt="Ian Day"
+               onclick="openLightbox(this.src, this.alt)"
+               onerror="this.style.display='none'; document.getElementById('avatar-emoji').style.display='flex'">
+          <span id="avatar-emoji"
+                style="display:none;width:100%;height:100%;align-items:center;justify-content:center;font-size:32px;">
+            &#128100;
+          </span>
+        </div>
         <div>
           <h1>Ian Day</h1>
           <div style="color:#000080;font-weight:bold;margin-bottom:4px;">Student at the College of Southern Maryland</div>
@@ -68,8 +119,8 @@
         </div>
       </div>
       <div class="status-bar" style="margin-top:8px;">
-        <div class="status-panel">📍 Leonardtown, MD</div>
-        <div class="status-panel">🎓 A.S. Electrical Engineering, 2028 [IN PROGRESS...]</div>
+        <div class="status-panel">&#128205; Leonardtown, MD</div>
+        <div class="status-panel">&#127979; A.S. Electrical Engineering, 2028 [IN PROGRESS...]</div>
       </div>
     </div>
   </div>
@@ -84,7 +135,7 @@
           README.txt
         </div>
         <div class="title-bar-buttons">
-          <div class="win-btn">_</div><div class="win-btn">□</div><div class="win-btn">✕</div>
+          <div class="win-btn">_</div><div class="win-btn">&#9633;</div><div class="win-btn">&#x2715;</div>
         </div>
       </div>
       <div class="window-content">
@@ -104,7 +155,7 @@
           Skills.exe
         </div>
         <div class="title-bar-buttons">
-          <div class="win-btn">_</div><div class="win-btn">□</div><div class="win-btn">✕</div>
+          <div class="win-btn">_</div><div class="win-btn">&#9633;</div><div class="win-btn">&#x2715;</div>
         </div>
       </div>
       <div class="window-content">
@@ -122,7 +173,7 @@
         Projects
       </div>
       <div class="title-bar-buttons">
-        <div class="win-btn">_</div><div class="win-btn">□</div><div class="win-btn">✕</div>
+        <div class="win-btn">_</div><div class="win-btn">&#9633;</div><div class="win-btn">&#x2715;</div>
       </div>
     </div>
     <div class="window-content">
@@ -141,7 +192,7 @@
         Education History
       </div>
       <div class="title-bar-buttons">
-        <div class="win-btn">_</div><div class="win-btn">□</div><div class="win-btn">✕</div>
+        <div class="win-btn">_</div><div class="win-btn">&#9633;</div><div class="win-btn">&#x2715;</div>
       </div>
     </div>
     <div class="window-content">
@@ -160,7 +211,7 @@
         Certifications &amp; Awards
       </div>
       <div class="title-bar-buttons">
-        <div class="win-btn">_</div><div class="win-btn">□</div><div class="win-btn">✕</div>
+        <div class="win-btn">_</div><div class="win-btn">&#9633;</div><div class="win-btn">&#x2715;</div>
       </div>
     </div>
     <div class="window-content">
@@ -179,15 +230,15 @@
         Contact
       </div>
       <div class="title-bar-buttons">
-        <div class="win-btn">_</div><div class="win-btn">□</div><div class="win-btn">✕</div>
+        <div class="win-btn">_</div><div class="win-btn">&#9633;</div><div class="win-btn">&#x2715;</div>
       </div>
     </div>
     <div class="window-content">
       <div class="contact-row">
-        <a class="contact-chip" href="mailto:ian.day@mailbox.org">✉ ian.day@mailbox.org</a>
-        <a class="contact-chip" href="https://www.linkedin.com/in/ian-day-52b459267/">🔗 LinkedIn</a>
-        <a class="contact-chip" href="https://www.github.com/Wet-Hands">🐙 Github</a>
-        <a class="contact-chip" href="https://www.portfolio.daybuilt.net">🌐 Portfolio Website</a>
+        <a class="contact-chip" href="mailto:ian.day@mailbox.org">&#x2709; ian.day@mailbox.org</a>
+        <a class="contact-chip" href="https://www.linkedin.com/in/ian-day-52b459267/">&#x1F517; LinkedIn</a>
+        <a class="contact-chip" href="https://www.github.com/Wet-Hands">&#x1F419; Github</a>
+        <a class="contact-chip" href="https://www.portfolio.daybuilt.net">&#x1F310; Portfolio Website</a>
       </div>
     </div>
     <div class="status-bar">
@@ -204,26 +255,25 @@
     Start
   </button>
   <div class="taskbar-divider"></div>
-  <div class="taskbar-item">📄 My Portfolio</div>
+  <div class="taskbar-item">&#128196; My Portfolio</div>
   <div class="taskbar-clock" id="clock">00:00</div>
 </div>
 
 <!-- ══════════════════════════════════════════════════════════════════════════
-     MODULAR PROJECT MODAL — one shell, populated dynamically by openModal().
-     All project content lives in the `projects` array in the script below.
-     Never add per-project modal HTML here; add a new object to `projects`.
+     MODULAR PROJECT / CERT MODAL
+     One shell, populated dynamically by openModal(item).
+     All content lives in data.js. Never add per-item modal HTML here.
      ══════════════════════════════════════════════════════════════════════════ -->
 <div class="modal-overlay" id="project-modal">
   <div class="modal-window">
     <div class="title-bar">
-      <div class="title-bar-left" id="modal-title">Project Details</div>
+      <div class="title-bar-left" id="modal-title">Details</div>
       <div class="title-bar-buttons">
-        <div class="win-btn" onclick="closeModal()">✕</div>
+        <div class="win-btn" onclick="closeModal()">&#x2715;</div>
       </div>
     </div>
     <div class="modal-body">
-
-      <!-- Carousel — slides are injected by loadSlides() -->
+      <!-- Carousel — slides injected by loadSlides() -->
       <div class="carousel">
         <div class="carousel-viewport" id="carousel-viewport"></div>
         <div class="carousel-controls">
@@ -233,28 +283,50 @@
           <button class="carousel-btn" id="carousel-next" onclick="carouselMove(1)">Next &#9654;</button>
         </div>
       </div>
-
-      <div class="modal-section-title">📄 About</div>
+      <div class="modal-section-title">&#128196; About</div>
       <div class="modal-text" id="modal-about"></div>
-
-      <div class="modal-section-title">🔧 Built with</div>
+      <div class="modal-section-title">&#128295; Built with / Skills</div>
       <div class="modal-tags" id="modal-tags"></div>
-
     </div>
     <div class="modal-footer">
-      <!-- Visit Site button is hidden when a project has no URL -->
-      <a class="modal-action-btn" id="modal-url" href="#" target="_blank" rel="noopener">🌐 Visit Site</a>
+      <!-- Hidden by default; shown only when the item has a URL -->
+      <a class="modal-action-btn" id="modal-url" href="#" target="_blank" rel="noopener"
+         style="display:none;">&#x1F310; Visit / Verify</a>
       <button class="modal-action-btn" onclick="closeModal()">Close</button>
     </div>
   </div>
 </div>
 
+<!-- ══════════════════════════════════════════════════════════════════════════
+     LIGHTBOX — Win95-styled fullscreen image viewer.
+     Triggered by clicking any photo in the carousel or cert thumbnails.
+     Click outside the window, press Escape, or hit ✕ to close.
+     ══════════════════════════════════════════════════════════════════════════ -->
+<div id="lightbox" class="lightbox-overlay" onclick="closeLightbox()">
+  <div class="lightbox-win" onclick="event.stopPropagation()">
+    <div class="title-bar">
+      <div class="title-bar-left">&#128444; Image Viewer</div>
+      <div class="title-bar-buttons">
+        <div class="win-btn" onclick="closeLightbox()">&#x2715;</div>
+      </div>
+    </div>
+    <div class="lightbox-body">
+      <img id="lightbox-img" src="" alt="">
+    </div>
+    <div class="lightbox-statusbar">
+      <div class="status-panel" id="lightbox-caption"></div>
+    </div>
+  </div>
+</div>
+
+<!-- data.js must load before the main script so all const arrays are available -->
+<script src="data.js"></script>
 <script>
   // ══════════════════════════════════════════════════════════════════════════
   // CLOCK
   // ══════════════════════════════════════════════════════════════════════════
   function updateClock() {
-    const now = new Date();
+    var now = new Date();
     document.getElementById('clock').textContent =
       String(now.getHours()).padStart(2, '0') + ':' +
       String(now.getMinutes()).padStart(2, '0');
@@ -264,46 +336,17 @@
 
 
   // ══════════════════════════════════════════════════════════════════════════
-  // SKILLS
-  // Bars show how many projects each skill was used in — no self-rating.
-  // Add a skill by adding its name and the projects array it belongs to.
-  // `totalProjects` sets the maximum bar width (update when you add projects).
+  // SKILLS  (data: skillCategories, totalProjects — from data.js)
   // ══════════════════════════════════════════════════════════════════════════
-  const totalProjects = 9;
-
-  const skillCategories = [
-    {
-      label: '🖥 Programming',
-      skills: [
-        { name: 'C / C++',   projects: ['Rotary Cube Sorter', 'DD Terminal'] },
-        { name: 'Python',    projects: ['Rotary Cube Sorter'] },
-        { name: 'gdScript',  projects: ['Dungeon Doom', 'Jimmy Rings', 'DinoLand'] },
-      ]
-    },
-    {
-      label: '⚙ CAD',
-      skills: [
-        { name: 'SolidWorks', projects: ['CoGRU', 'Quadcopter', 'Rotary Cube Sorter'] },
-        { name: 'AutoCAD',    projects: ['Homework Machine'] },
-      ]
-    },
-    {
-      label: '🔧 Tools',
-      skills: [
-        { name: 'Git', projects: ['Jimmy Rings', 'DinoLand', 'DD Terminal'] },
-      ]
-    },
-  ];
-
-  const skillsContainer = document.getElementById('skills-container');
-  skillCategories.forEach(cat => {
-    const catEl = document.createElement('div');
+  var skillsContainer = document.getElementById('skills-container');
+  skillCategories.forEach(function(cat) {
+    var catEl = document.createElement('div');
     catEl.className = 'skill-category';
     catEl.innerHTML = '<div class="skill-category-label">' + cat.label + '</div>';
-    cat.skills.forEach(s => {
-      const count = s.projects.length;
-      const blocks = Array.from({ length: count }, () => '<div class="progress-block"></div>').join('');
-      const row = document.createElement('div');
+    cat.skills.forEach(function(s) {
+      var count  = s.projects.length;
+      var blocks = Array.from({ length: count }, function() { return '<div class="progress-block"></div>'; }).join('');
+      var row    = document.createElement('div');
       row.className = 'skill-row';
       row.innerHTML =
         '<span class="skill-label">' + s.name + '</span>' +
@@ -317,319 +360,156 @@
 
 
   // ══════════════════════════════════════════════════════════════════════════
-  // PROJECTS
-  // To add a new project, copy one object and fill in your details.
-  // Every project opens the shared modal — no new HTML needed.
-  //
-  // slides: use { emoji, bg, caption } for a colour placeholder,
-  //         or  { img: 'path/to/file.png', caption } for a real screenshot.
-  // url:    optional — omit or set to '' to hide the Visit Site button.
+  // PROJECTS  (data: projects — from data.js)
   // ══════════════════════════════════════════════════════════════════════════
-  const projects = [
-    {
-      icon: '📦',
-      name: 'Rotary Cube Sorter',
-      desc: 'Final project for Intro to Engineering.',
-      modal: {
-        about: 'Our team automated the quality assurance of 2-inch wood blocks. The sorter identifies and bins cubes that fail size or color specs, then sorts passing cubes by color (green, yellow, or orange). Built around a rotating base with three main components: the frame, sensor subassembly, and sorting bins.',
-        tags: ['Arduino', 'C', 'SolidWorks', 'Project Management', 'Project Documentation'],
-        url: '',
-        slides: [
-          { img: 'photos/rotary1.png', caption: 'Full machine assembly' },
-        ]
-      }
-    },
-    {
-      icon: '>_',
-      name: 'Dungeon Doom Terminal',
-      desc: 'Intro to Engineering Programming Concepts final project.',
-      modal: {
-        about: 'A terminal-based dungeon crawler written in C for the Intro to Engineering Programming Concepts final. Navigate procedural rooms, fight enemies, and manage limited stamina through the command line.',
-        tags: ['C', 'Terminal / CLI'],
-        url: 'https://wethands.itch.io/dungeon-doom-terminal-demake',
-        slides: [
-          { emoji: '>_', bg: '#0a0a1a', caption: 'Main game loop in the terminal' },
-        ]
-      }
-    },
-    {
-      icon: '🔋',
-      name: 'EV Car Battery Box',
-      desc: 'Constructed a battery enclosure for an electric vehicle platform.',
-      modal: {
-        about: 'Constructed and documented a battery enclosure for an Electric Vehicle platform. Focused on safety clearances and thermal management considerations.',
-        tags: ['Project Documentation', 'Multimeter'],
-        url: 'https://sites.google.com/smcps.org/switch-ev-24-25/electrical-build-1-balancing-the-pack/balancing-the-pack',
-        slides: [
-          { img: 'photos/batterybox1.jpg', caption: 'My teammate Matthew and I' },
-          { img: 'photos/batterybox2.jpg', caption: 'Batteries inside the EV that I installed' },
-        ]
-      }
-    },
-    {
-      icon: '🚀',
-      name: 'CoGRU',
-      desc: 'Center of Gravity Redirection Unit — my first engineering project.',
-      modal: {
-        about: 'The Center of Gravity Redirection Unit (CoGRU) was my first engineering project. The concept: control which direction a rocket faces during cargo drops by actively shifting its center of gravity, maintaining balance without traditional fins.',
-        tags: ['Arduino', 'C', 'SolidWorks', 'Project Documentation'],
-        url: '',
-        slides: [
-          { img: 'photos/cogru1.jpg', caption: 'CoGRU prototype' },
-        ]
-      }
-    },
-    {
-      icon: '📝',
-      name: 'Homework Machine',
-      desc: 'CNC pen plotter that solves and handwrites homework answers via LLM.',
-      modal: {
-        about: 'A prototype CNC machine that drives a pen to mimic handwriting. The user inputs a homework question; an LLM generates an answer; the machine writes it out. Combines mechanical CNC control with an LLM API integration.',
-        tags: ['gdScript', 'Python', 'LLM API'],
-        url: '',
-        slides: [
-          { emoji: '📝', bg: '#2a1a00', caption: 'Pen mechanism on gantry' },
-        ]
-      }
-    },
-    {
-      icon: '🚁',
-      name: 'Quadcopter Drop Mechanism',
-      desc: 'Mechanical drop system for a drone — 3 bottles on 3 targets.',
-      modal: {
-        about: 'Designed, fabricated, and field-tested a mechanical release system mounted to a quadcopter. The mechanism drops three water bottles sequentially onto three ground targets.',
-        tags: ['SolidWorks', 'Mechanical Design'],
-        url: 'https://sites.google.com/view/salty-dogs-drones25/home',
-        slides: [
-          { emoji: '🚁', bg: '#1a2a2a', caption: 'Mechanism mounted to frame' },
-        ]
-      }
-    },
-    {
-      icon: '🗡️',
-      name: 'Dungeon Doom',
-      desc: 'Retro-styled dungeon crawler. SkillsUSA 2024 submission.',
-      modal: {
-        about: 'A retro-styled top-down dungeon crawler made in Godot. Built and submitted for SkillsUSA Maryland 2024 Game Design competition. The aim of the game is to collect 1-3 keys to escape each floor of the locked dungeon. Along the way the player will have dangerous encounters with skeletons and goblins! ',
-        tags: ['Godot', 'gdScript', 'Krita'],
-        url: 'https://wethands.itch.io/dungeon-doom-alpha',
-        slides: [
-          { img: 'photos/dungeondoom1.png', caption: 'Game Art' },
-        ]
-      }
-    },
-    {
-      icon: '👽',
-      name: 'Jimmy Rings',
-      desc: 'Half-Life inspired multiplayer shooter. SkillsUSA 2025 submission.',
-      modal: {
-        about: 'A Half-Life inspired multiplayer first-person shooter built in Godot for SkillsUSA Maryland 2025. Features networked multiplayer, custom weapon mechanics, and level design based on classic philosophies and tools.',
-        tags: ['Godot', 'gdScript', 'Git', 'Multiplayer Networking', 'Blender'],
-        url: 'https://wethands.itch.io/jimmy-rings-indev',
-        slides: [
-          { img: 'photos/jr1.png', caption: 'Game Art' },
-        ]
-      }
-    },
-    {
-      icon: '🦖',
-      name: 'Maintenance at DinoLand',
-      desc: 'Retro-styled sit-and-survive horror. Godot Wild Jam submission.',
-      modal: {
-        about: 'A retro-styled "sit and survive" horror game submitted to the Godot Wild Jam. The player has been contracted to head down to the main DinoLand facility to investigate the power outage. The player must restore the power by using the time-consuming software on your computer before it is too late..',
-        tags: ['Godot', 'gdScript', 'Git', 'Blender'],
-        url: 'https://wethands.itch.io/dinoland',
-        slides: [
-          { img: 'photos/dino1.png', caption: 'Game Art' },
-          { img: 'photos/dino2.png', caption: 'In-game Computer Mini-game' },
-          { img: 'photos/dino3.png', caption: 'Dinosaur peeking around the corner!' },
-        ]
-      }
-    },
-  ];
-
-  // Render project cards
-  const projContainer = document.getElementById('projects-container');
+  var projContainer = document.getElementById('projects-container');
   document.getElementById('projects-count').textContent = projects.length + ' object(s)';
-  projects.forEach(p => {
-    const card = document.createElement('div');
+  projects.forEach(function(p) {
+    var card = document.createElement('div');
     card.className = 'project-card';
     card.style.cursor = 'pointer';
-    card.addEventListener('click', () => openModal(p));
+    card.addEventListener('click', function() { openModal(p); });
     card.innerHTML =
       '<span class="project-icon">' + p.icon + '</span>' +
       '<div class="project-name">' + p.name + '</div>' +
       '<div class="project-desc">' + p.desc + '</div>' +
-      '<span class="project-link-label">📂 View details</span>';
+      '<span class="project-link-label">&#128194; View details</span>';
     projContainer.appendChild(card);
   });
 
 
   // ══════════════════════════════════════════════════════════════════════════
-  // EDUCATION / EXPERIENCE
-  // Add entries as objects in this array.
-  // `tags` render as Win95 tag chips below the description.
+  // EDUCATION / EXPERIENCE  (data: experience — from data.js)
+  // Entries with a `modal` property become clickable cards.
   // ══════════════════════════════════════════════════════════════════════════
-  const experience = [
-    {
-      company: 'College of Southern Maryland',
-      role: 'Associates of Science in Electrical Engineering',
-      dates: '2025 – Present',
-      desc: 'At CSM I have been going for my Associates in Electrical Engineering. After about 3 years, I plan on transferring to the University of Maryland via the USMSM Transfer plan and taking classes here in Southern Maryland.',
-      tags: ['C', 'C++', 'MatLab', 'SolidWorks', 'Project Documentation']
-    },
-    {
-      company: 'James A. Forrest Career & Technology Center',
-      role: 'Certificate of Achievement in Engineering | Cybersecurity Elective',
-      dates: '2023 – 2025',
-      desc: 'The tech center strongly defined my secondary education. I applied in sophomore year for the Engineering program and was accepted. At the end of my first year, the IT teacher personally invited me into her Cybersecurity elective — giving me the best of both worlds.',
-      tags: ['C', 'Python', 'Soldering', 'Hand Drafting', 'AutoCAD', 'SolidWorks', 'Manufacturing', 'Inventory Management', 'Networking']
-    },
-    {
-      company: 'Leonardtown High School',
-      role: 'CTE Pathway | Diploma',
-      dates: '2021 – 2025',
-      desc: 'Took Computer Science classes, founded the Party Game Club, and ran Raidercraft — the school Minecraft server — through six seasons. Also ran an informal study group teaching peers basic programming and game development.',
-      tags: ['JavaScript', 'Java', 'Server Administration', 'Project Management']
-    },
-  ];
-
-  const expContainer = document.getElementById('experience-container');
-  experience.forEach((e, i) => {
+  var expContainer = document.getElementById('experience-container');
+  experience.forEach(function(e, i) {
     if (i > 0) {
-      const div = document.createElement('div');
+      var div = document.createElement('div');
       div.className = 'divider';
       expContainer.appendChild(div);
     }
-    const row = document.createElement('div');
+    var row = document.createElement('div');
     row.className = 'raised';
     row.style.marginBottom = '4px';
+    if (e.modal) {
+      row.style.cursor = 'pointer';
+      row.addEventListener('click', function() { openModal(e); });
+    }
     row.innerHTML =
       '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2px;">' +
         '<strong>' + e.role + '</strong>' +
-        '<span style="font-size:11px;color:#444;">' + e.dates + '</span>' +
+        '<span style="font-size:11px;color:#444;flex-shrink:0;margin-left:8px;">' + e.dates + '</span>' +
       '</div>' +
       '<div style="color:#000080;font-size:11px;margin-bottom:4px;">' + e.company + '</div>' +
       '<div style="font-size:11px;margin-bottom:6px;">' + e.desc + '</div>' +
       '<div style="display:flex;flex-wrap:wrap;gap:4px;">' +
-        e.tags.map(t => '<span class="modal-tag">' + t + '</span>').join('') +
-      '</div>';
+        e.tags.map(function(t) { return '<span class="modal-tag">' + t + '</span>'; }).join('') +
+      '</div>' +
+      (e.modal ? '<span style="font-size:10px;color:#000080;text-decoration:underline;display:block;margin-top:4px;">&#128194; View details</span>' : '');
     expContainer.appendChild(row);
   });
 
 
   // ══════════════════════════════════════════════════════════════════════════
-  // CERTIFICATIONS & AWARDS
-  // Add entries as objects in this array.
-  // img: path to a badge image file (optional) — falls back to emoji if omitted.
+  // CERTIFICATIONS  (data: certifications — from data.js)
+  // Cards with a `modal` property are fully clickable.
+  // Thumbnail images open the lightbox (with stopPropagation so they don't
+  // also trigger the modal on cards that have one).
   // ══════════════════════════════════════════════════════════════════════════
-  const certifications = [
-    {
-      emoji: '🥈',
-      // img: 'certs/skillsusa-silver-2025.png',
-      title: 'SkillsUSA State Silver Medal — Interactive Application and Game Design',
-      issuer: 'SkillsUSA Maryland',
-      date: 'March 2025',
-      desc: 'Second place in the Game Design competition at the Maryland SkillsUSA State Leadership & Skills Conference.'
-    },
-    {
-      img: 'photos/hardwarebasics.png',
-      title: 'Cisco Networking Academy - Computer Hardware Basics',
-      issuer: 'Cisco',
-      date: 'October 2024',
-      desc: 'Cisco verifies the earner of this badge successfully completed the Computer Hardware Basics course and achieved this student level credential. Earner has fundamentals knowledge of computers and mobile devices, how they work, as well as the basic concepts and skills needed to install components to build, repair, upgrade personal computers and and basic troubleshooting tools and techniques.'
-    },
-    {
-      img: 'photos/multimeter.png',
-      title: 'Snap-On Multimeter Certification',
-      issuer: 'Dr. James A. Forrest Career & Technology Center',
-      date: 'September 2024',
-      desc: 'This certification includes training on the problem-solving capabilities of Snap-on® digital multimeters — the same technology used by professionals in the workplace. Training ranges from basic applications to advanced troubleshooting.'
-    },
-    {
-      emoji: '🥇',
-      // img: 'certs/skillsusa-gold-2024.png',
-      title: 'SkillsUSA State Gold Medal — Interactive Application and Game Design',
-      issuer: 'SkillsUSA Maryland',
-      date: 'April 2024',
-      desc: 'First place in the Game Design competition at the Maryland SkillsUSA State Leadership & Skills Conference.'
-    },
-    {
-      img: 'photos/autocadcert.png',
-      title: 'Autodesk AutoCAD Certified User',
-      issuer: 'Certiport - A Pearson VUE Business',
-      date: 'March 2024',
-      desc: 'Autodesk AutoCAD Certified User badge confirms students have developed the foundational skills needed to effectively use AutoCAD software. Knowledge demonstrated includes creating or plotting drawings, editing objects, working with layouts, etc.'
-    }
-  ];
-
-  const certsContainer = document.getElementById('certs-container');
+  var certsContainer = document.getElementById('certs-container');
   document.getElementById('certs-count').textContent = certifications.length + ' object(s)';
-  certifications.forEach(c => {
-    const card = document.createElement('div');
-    card.className = 'cert-card';
-    const imgHTML = c.img
-      ? '<img src="' + c.img + '" alt="' + c.title + '">'
-      : c.emoji;
+  certifications.forEach(function(c) {
+    var card = document.createElement('div');
+    card.className = 'cert-card' + (c.modal ? ' has-modal' : '');
+    if (c.modal) {
+      card.addEventListener('click', function() { openModal(c); });
+    }
+
+    // Thumbnail: if img provided, make it lightbox-clickable (stop propagation
+    // so it doesn't also open the modal at the same time)
+    var thumbHTML;
+    if (c.img) {
+      thumbHTML = '<img src="' + c.img + '" alt="' + c.title + '"' +
+        ' onclick="openLightbox(this.src,this.alt);event.stopPropagation()"' +
+        ' onerror="this.style.display='none';this.nextSibling.style.display='flex'">' +
+        '<span style="display:none;align-items:center;justify-content:center;width:100%;height:100%;font-size:28px;">' +
+          (c.emoji || '&#127941;') + '</span>';
+    } else {
+      thumbHTML = c.emoji || '&#127941;';
+    }
+
     card.innerHTML =
-      '<div class="cert-img-wrap">' + imgHTML + '</div>' +
+      '<div class="cert-img-wrap">' + thumbHTML + '</div>' +
       '<div class="cert-info">' +
-        '<div class="cert-title">' + c.title + '</div>' +
-        '<div class="cert-meta">' +
-          '<span>🏢 ' + c.issuer + '</span>' +
-          '<span>📅 ' + c.date + '</span>' +
+        '<div style="display:flex;justify-content:space-between;align-items:baseline;">' +
+          '<div class="cert-title">' + c.title + '</div>' +
+          '<span style="font-size:10px;color:#444;flex-shrink:0;margin-left:8px;">' + c.date + '</span>' +
         '</div>' +
+        '<div class="cert-issuer">&#127970; ' + c.issuer + '</div>' +
         '<div class="cert-desc">' + c.desc + '</div>' +
+        (c.modal ? '<span class="cert-view-details">&#128194; View details</span>' : '') +
       '</div>';
     certsContainer.appendChild(card);
   });
 
 
   // ══════════════════════════════════════════════════════════════════════════
-  // MODAL
-  // openModal(project) — populates the single shared modal shell and opens it.
-  // loadSlides(slides) — rebuilds the carousel for the given project.
-  // closeModal()       — closes any open modal and restores scroll.
+  // MODAL  — shared popup for projects, certs, and experience entries.
+  //
+  // openModal(item)   — item must have (name or title) + item.modal
+  // loadSlides(slides) — builds carousel; supports img, emoji/bg, and pdf slides
+  // closeModal()       — closes popup and restores page scroll
   // ══════════════════════════════════════════════════════════════════════════
-  function openModal(project) {
-    // Populate title
-    document.getElementById('modal-title').textContent = project.name + ' — Project Details';
-
-    // Populate about text
-    document.getElementById('modal-about').textContent = project.modal.about;
-
-    // Populate tech-stack tags
+  function openModal(item) {
+    var displayName = item.name || item.title || 'Details';
+    document.getElementById('modal-title').textContent = displayName + ' — Details';
+    document.getElementById('modal-about').textContent = item.modal.about;
     document.getElementById('modal-tags').innerHTML =
-      project.modal.tags.map(t => '<span class="modal-tag">' + t + '</span>').join('');
+      item.modal.tags.map(function(t) { return '<span class="modal-tag">' + t + '</span>'; }).join('');
 
-    // Show or hide the Visit Site button depending on whether a URL exists
-    const urlBtn = document.getElementById('modal-url');
-    if (project.modal.url) {
-      urlBtn.href = project.modal.url;
+    // Show Visit/Verify button only when a URL is provided
+    var urlBtn = document.getElementById('modal-url');
+    if (item.modal.url) {
+      urlBtn.href = item.modal.url;
       urlBtn.style.display = 'inline-block';
     } else {
       urlBtn.style.display = 'none';
     }
 
-    // Build carousel slides
-    loadSlides(project.modal.slides);
-
-    // Open the modal
+    loadSlides(item.modal.slides);
     document.getElementById('project-modal').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
 
   function loadSlides(slides) {
     carouselIndex = 0;
-    const viewport = document.getElementById('carousel-viewport');
-    // Build each slide — real image if `img` provided, otherwise emoji placeholder
-    viewport.innerHTML = slides.map((s, i) => {
-      const inner = s.img
-        ? '<img src="' + s.img + '" alt="' + s.caption + '">'
-        : '<div class="slide-placeholder" style="background:' + (s.bg || '#1a1a2e') + '">' +
-            '<span style="font-size:48px">' + (s.emoji || '🖼') + '</span>' +
+    var viewport = document.getElementById('carousel-viewport');
+    viewport.innerHTML = slides.map(function(s, i) {
+      var inner;
+      if (s.pdf) {
+        // PDF slide: embedded iframe + button to open full PDF in new tab
+        inner =
+          '<div class="pdf-viewport">' +
+            '<iframe src="' + s.pdf + '" class="pdf-frame"></iframe>' +
+          '</div>' +
+          '<div class="pdf-open-bar">' +
+            '<a href="' + s.pdf + '" target="_blank" rel="noopener" class="pdf-open-btn"' +
+              ' onclick="event.stopPropagation()">&#128196; Open PDF in new tab &#x2197;</a>' +
+          '</div>';
+      } else if (s.img) {
+        // Photo slide: click opens lightbox
+        inner = '<img src="' + s.img + '" alt="' + s.caption + '"' +
+          ' onclick="openLightbox(this.src,this.alt)"' +
+          ' onerror="this.style.opacity=0.3">';
+      } else {
+        // Emoji/colour placeholder
+        inner =
+          '<div class="slide-placeholder" style="background:' + (s.bg || '#1a1a2e') + '">' +
+            '<span style="font-size:48px">' + (s.emoji || '&#128444;') + '</span>' +
             '<span style="font-size:12px;color:#ccc">Screenshot ' + (i + 1) + '</span>' +
           '</div>';
+      }
       return '<div class="carousel-slide' + (i === 0 ? ' active' : '') + '">' +
         inner + '<div class="slide-caption">' + s.caption + '</div></div>';
     }).join('');
@@ -641,49 +521,65 @@
     document.body.style.overflow = '';
   }
 
-  // Close when clicking the dark overlay behind the window
+  // Close on overlay click or Escape key
   document.getElementById('project-modal').addEventListener('click', function(e) {
     if (e.target === this) closeModal();
   });
-
-  // Close on Escape key
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') { closeLightbox(); closeModal(); }
+  });
 
 
   // ══════════════════════════════════════════════════════════════════════════
   // CAROUSEL
-  // carouselRender() — redraws slide visibility, counter, and dot indicators.
-  // carouselMove(dir) — advances (+1) or retreats (-1) one slide.
-  // Both are called from inline onclick= attributes so must stay at top scope.
+  // carouselRender() — redraws slide visibility, counter, and dots.
+  // carouselMove(dir) — moves +1 or -1 slides.
+  // Kept at top scope because they are called from inline onclick= attributes.
   // ══════════════════════════════════════════════════════════════════════════
-  let carouselIndex = 0;
+  var carouselIndex = 0;
 
   function carouselRender() {
-    const slides = document.querySelectorAll('#carousel-viewport .carousel-slide');
-    const total  = slides.length;
-    slides.forEach((s, i) => s.classList.toggle('active', i === carouselIndex));
+    var slides = document.querySelectorAll('#carousel-viewport .carousel-slide');
+    var total  = slides.length;
+    slides.forEach(function(s, i) { s.classList.toggle('active', i === carouselIndex); });
     document.getElementById('carousel-counter').textContent = (carouselIndex + 1) + ' / ' + total;
     document.getElementById('carousel-prev').disabled = (carouselIndex === 0);
     document.getElementById('carousel-next').disabled = (carouselIndex === total - 1);
-    // Rebuild dot indicators
-    const dots = document.getElementById('carousel-dots');
+    var dots = document.getElementById('carousel-dots');
     dots.innerHTML = '';
-    for (let i = 0; i < total; i++) {
-      const dot = document.createElement('div');
+    for (var i = 0; i < total; i++) {
+      var dot = document.createElement('div');
       dot.className = 'carousel-dot' + (i === carouselIndex ? ' active' : '');
-      dot.addEventListener('click', (function(idx) {
-        return function() { carouselIndex = idx; carouselRender(); };
-      })(i));
+      (function(idx) {
+        dot.addEventListener('click', function() { carouselIndex = idx; carouselRender(); });
+      })(i);
       dots.appendChild(dot);
     }
   }
 
   function carouselMove(dir) {
-    const total = document.querySelectorAll('#carousel-viewport .carousel-slide').length;
+    var total = document.querySelectorAll('#carousel-viewport .carousel-slide').length;
     carouselIndex = Math.max(0, Math.min(total - 1, carouselIndex + dir));
     carouselRender();
   }
 
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // LIGHTBOX — fullscreen image viewer.
+  // openLightbox(src, alt) — called by onclick on any clickable image.
+  // closeLightbox()        — called by overlay click, close button, or Escape.
+  // Kept at top scope because called from inline onclick= attributes.
+  // ══════════════════════════════════════════════════════════════════════════
+  function openLightbox(src, alt) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox-img').alt = alt || '';
+    document.getElementById('lightbox-caption').textContent = alt || '';
+    document.getElementById('lightbox').classList.add('open');
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+  }
 </script>
 </body>
 </html>
