@@ -228,137 +228,117 @@
     skillsContainer.appendChild(catEl);
   });
 
-  // ── PROJECTS ──────────────────────────────────────────────────────────────
-  // To add a new project popup, copy an existing object in this array.
-  // Use `slides: [{ emoji, bg, caption }]` for placeholders,
-  // or `slides: [{ img: 'path/to/img.png', caption }]` for real screenshots.
-  const projects = [
-    {
-      icon: '🛒',
-      name: 'ShopEasy',
-      desc: 'E-commerce platform built with React and Node.js. Handles 10k+ daily users.',
-      modal: {
-        about: 'ShopEasy is a full-featured e-commerce platform built to handle high traffic and optimise conversion. Includes product search, cart, checkout, and an admin dashboard.',
-        tags: ['React', 'Node.js', 'SQL', 'CSS / HTML'],
-        url: 'https://example.com/shopeasy',
-        slides: [
-          { emoji: '🛒', bg: '#1a2a3a', caption: 'Product listing page' },
-          { emoji: '💳', bg: '#1a3a2a', caption: 'Checkout flow' },
-        ]
-      }
-    },
-    {
-      icon: '📊',
-      name: 'DataDash',
-      desc: 'Real-time analytics dashboard. Visualizes data from multiple APIs.',
-      modal: {
-        about: 'DataDash pulls from multiple third-party APIs and renders live charts and KPI cards. Built for a marketing team needing a single view of campaign performance.',
-        tags: ['React', 'Python', 'SQL', 'CSS / HTML'],
-        url: 'https://example.com/datadash',
-        slides: [
-          { emoji: '📊', bg: '#2a1a3a', caption: 'Main dashboard view' },
-          { emoji: '📈', bg: '#3a2a1a', caption: 'Campaign performance chart' },
-        ]
-      }
-    },
-    {
-      icon: '✍️',
-      name: 'WritePath',
-      desc: 'Minimalist blogging tool with Markdown support and custom themes.',
-      modal: {
-        about: 'WritePath lets you focus on writing. Markdown-native with a live split-pane preview, six built-in colour themes, and one-click export to PDF, HTML, or plain text. No account required.',
-        tags: ['JavaScript', 'Node.js', 'CSS / HTML', 'Marked.js', 'Electron', 'Figma'],
-        url: 'https://example.com/writepath',
-        slides: [
-          { emoji: '✍️', bg: '#1a1a2e', caption: 'Home screen — clean editor interface' },
-          { emoji: '🎨', bg: '#0a2a1a', caption: 'Theme customiser — 6 built-in colour schemes' },
-          { emoji: '📝', bg: '#2a1a0a', caption: 'Markdown preview — live split-pane rendering' },
-          { emoji: '📦', bg: '#1a0a2a', caption: 'Export options — PDF, HTML, and plain text' },
-        ]
-      }
-    },
-  ];
- 
+  // Projects data
+const projects = [
+  {
+  icon: '🗺',
+  name: 'MyNewProject',
+  desc: 'One-line description shown on the card.',
+  modal: {
+    about: 'Longer description shown in the popup.',
+    tags: ['React', 'Node.js'],
+    url: 'https://yoursite.com',
+    slides: [
+      { emoji: '🗺', bg: '#1a2a1a', caption: 'Main screen' },
+    ]
+  }
+},
+  {
+  icon: '🗺',
+  name: 'MyNewProject',
+  desc: 'One-line description shown on the card.',
+  modal: {
+    about: 'Longer description shown in the popup.',
+    tags: ['React', 'Node.js'],
+    url: 'https://yoursite.com',
+    slides: [
+      { emoji: '🗺', bg: '#1a2a1a', caption: 'Main screen' },
+    ]
+  }
+},
+];
+
   const projContainer = document.getElementById('projects-container');
   projects.forEach(p => {
-    const card = document.createElement('div');
-    card.className = 'project-card';
-    card.style.cursor = 'pointer';
-    card.addEventListener('click', () => openModal(p));
-    card.innerHTML =
-      '<span class="project-icon">' + p.icon + '</span>' +
-      '<div class="project-name">' + p.name + '</div>' +
-      '<div class="project-desc">' + p.desc + '</div>' +
-      '<span class="project-link-label">📂 View details</span>';
+    let card;
+    if (p.modal) {
+      card = document.createElement('div');
+      card.className = 'project-card';
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', () => openModal(p));
+      card.innerHTML = `
+        <span class="project-icon">${p.icon}</span>
+        <div class="project-name">${p.name}</div>
+        <div class="project-desc">${p.desc}</div>
+        <span class="project-link-label">📂 View details</span>
+      `;
+    } else {
+      card = document.createElement('a');
+      card.className = 'project-card';
+      card.href = p.url;
+      card.target = '_blank';
+      card.rel = 'noopener noreferrer';
+      card.innerHTML = `
+        <span class="project-icon">${p.icon}</span>
+        <div class="project-name">${p.name}</div>
+        <div class="project-desc">${p.desc}</div>
+        <span class="project-link-label">🌐 Open project ↗</span>
+      `;
+    }
     projContainer.appendChild(card);
   });
- 
-  // ── MODAL ──────────────────────────────────────────────────────────────────
+
+  // Modal
   function openModal(project) {
-    document.getElementById('modal-title').textContent = project.name + ' — Project Details';
-    document.getElementById('modal-about').textContent = project.modal.about;
-    document.getElementById('modal-url').href = project.modal.url;
-    document.getElementById('modal-tags').innerHTML = project.modal.tags
-      .map(function(t) { return '<span class="modal-tag">' + t + '</span>'; }).join('');
-    loadSlides(project.modal.slides);
-    document.getElementById('project-modal').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
- 
-  function loadSlides(slides) {
-    carouselIndex = 0;
-    var viewport = document.getElementById('carousel-viewport');
-    viewport.innerHTML = slides.map(function(s, i) {
-      var inner = s.img
-        ? '<img src="' + s.img + '" alt="' + s.caption + '">'
-        : '<div class="slide-placeholder" style="background:' + (s.bg || '#1a1a2e') + '">' +
-            '<span style="font-size:48px">' + (s.emoji || '🖼') + '</span>' +
-            '<span style="font-size:12px;color:#ccc">Screenshot ' + (i + 1) + '</span>' +
-          '</div>';
-      return '<div class="carousel-slide' + (i === 0 ? ' active' : '') + '">' +
-        inner +
-        '<div class="slide-caption">' + s.caption + '</div>' +
-      '</div>';
-    }).join('');
-    carouselRender();
-  }
- 
+  document.getElementById('modal-title').textContent = project.name;
+  document.getElementById('modal-about').innerHTML = project.modal.about;
+  document.getElementById('modal-url').href = project.modal.url;
+
+  const tagsEl = document.getElementById('modal-tags');
+  tagsEl.innerHTML = project.modal.tags
+    .map(t => `<span class="modal-tag">${t}</span>`)
+    .join('');
+
+  // load slides into carousel...
+  loadSlides(project.modal.slides);
+
+  document.getElementById('project-modal').classList.add('open');
+}
   function closeModal() {
-    document.getElementById('project-modal').classList.remove('open');
+    document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('open'));
     document.body.style.overflow = '';
   }
-  document.getElementById('project-modal').addEventListener('click', function(e) {
-    if (e.target === document.getElementById('project-modal')) closeModal();
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
   });
-  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
- 
-  // ── CAROUSEL ───────────────────────────────────────────────────────────────
-  var carouselIndex = 0;
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // Carousel
+  let carouselIndex = 0;
   function carouselRender() {
-    var slides = document.querySelectorAll('#carousel-viewport .carousel-slide');
-    var total  = slides.length;
-    slides.forEach(function(s, i) { s.classList.toggle('active', i === carouselIndex); });
-    document.getElementById('carousel-counter').textContent = (carouselIndex + 1) + ' / ' + total;
+    const slides = document.querySelectorAll('#carousel-viewport .carousel-slide');
+    const dots   = document.getElementById('carousel-dots');
+    const counter = document.getElementById('carousel-counter');
+    const total = slides.length;
+    slides.forEach((s, i) => s.classList.toggle('active', i === carouselIndex));
+    counter.textContent = `${carouselIndex + 1} / ${total}`;
     document.getElementById('carousel-prev').disabled = carouselIndex === 0;
     document.getElementById('carousel-next').disabled = carouselIndex === total - 1;
-    var dots = document.getElementById('carousel-dots');
+    // dots
     dots.innerHTML = '';
-    for (var i = 0; i < total; i++) {
-      var dot = document.createElement('div');
+    for (let i = 0; i < total; i++) {
+      const dot = document.createElement('div');
       dot.className = 'carousel-dot' + (i === carouselIndex ? ' active' : '');
-      (function(idx) {
-        dot.addEventListener('click', function() { carouselIndex = idx; carouselRender(); });
-      })(i);
+      dot.addEventListener('click', () => { carouselIndex = i; carouselRender(); });
       dots.appendChild(dot);
     }
   }
   function carouselMove(dir) {
-    var total = document.querySelectorAll('#carousel-viewport .carousel-slide').length;
+    const total = document.querySelectorAll('#carousel-viewport .carousel-slide').length;
     carouselIndex = Math.max(0, Math.min(total - 1, carouselIndex + dir));
     carouselRender();
   }
- 
- 
+
   // Experience data
 
 
@@ -385,9 +365,9 @@
     tags: ['JavaScript', 'Java', 'Server Administration', 'Project Management']
   },
 ];
- 
+
   const expContainer = document.getElementById('experience-container');
-  experience.forEach(function(e, i) {
+  experience.forEach((e, i) => {
     if (i > 0) {
       const div = document.createElement('div');
       div.className = 'divider';
@@ -396,55 +376,38 @@
     const row = document.createElement('div');
     row.className = 'raised';
     row.style.marginBottom = '4px';
-    row.innerHTML =
-      '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2px;">' +
-        '<strong>' + e.role + '</strong>' +
-        '<span style="font-size:11px;color:#444;">' + e.dates + '</span>' +
-      '</div>' +
-      '<div style="color:#000080;font-size:11px;margin-bottom:4px;">' + e.company + '</div>' +
-      '<div style="font-size:11px;margin-bottom:6px;">' + e.desc + '</div>' +
-      '<div style="display:flex;flex-wrap:wrap;gap:4px;">' +
-        e.tags.map(function(t) { return '<span class="modal-tag">' + t + '</span>'; }).join('') +
-      '</div>';
+    row.innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:2px;">
+        <strong>${e.role}</strong>
+        <span style="font-size:11px; color:#444;">${e.dates}</span>
+      </div>
+      <div style="color:#000080; font-size:11px; margin-bottom:4px;">${e.company}</div>
+      <div style="font-size:11px; margin-bottom:6px;">${e.desc}</div>
+      <div style="display:flex; flex-wrap:wrap; gap:4px;">
+        ${e.tags.map(t => `<span class="modal-tag">${t}</span>`).join('')}
+      </div>
+    `;
     expContainer.appendChild(row);
   });
- 
-  // Expose functions used in inline onclick= attributes
-  window.closeModal   = closeModal;
-  window.openModal    = openModal;
-  window.carouselMove = carouselMove;
-  window.carouselRender = carouselRender;
-  window.updateClock  = updateClock;
- 
-}); // end DOMContentLoaded
 </script>
- 
-<!-- Reusable Project Modal -->
+
 <div class="modal-overlay" id="project-modal">
   <div class="modal-window">
     <div class="title-bar">
       <div class="title-bar-left" id="modal-title">Project Details</div>
       <div class="title-bar-buttons">
-        <div class="win-btn" onclick="closeModal()">&#x2715;</div>
+        <div class="win-btn" onclick="closeModal()">✕</div>
       </div>
     </div>
     <div class="modal-body">
-      <div class="carousel">
-        <div class="carousel-viewport" id="carousel-viewport"></div>
-        <div class="carousel-controls">
-          <button class="carousel-btn" id="carousel-prev" onclick="carouselMove(-1)">&#9664; Prev</button>
-          <div class="carousel-dots" id="carousel-dots"></div>
-          <span class="carousel-counter" id="carousel-counter">1 / 1</span>
-          <button class="carousel-btn" id="carousel-next" onclick="carouselMove(1)">Next &#9654;</button>
-        </div>
-      </div>
-      <div class="modal-section-title">&#128196; About</div>
+      <div class="carousel"> ... </div>
+      <div class="modal-section-title">📄 About</div>
       <div class="modal-text" id="modal-about"></div>
-      <div class="modal-section-title">&#128295; Built with</div>
+      <div class="modal-section-title">🔧 Built with</div>
       <div class="modal-tags" id="modal-tags"></div>
     </div>
     <div class="modal-footer">
-      <a class="modal-action-btn" id="modal-url" href="#" target="_blank" rel="noopener">&#127760; Visit Site</a>
+      <a class="modal-action-btn" id="modal-url" href="#" target="_blank">🌐 Visit Site</a>
       <button class="modal-action-btn" onclick="closeModal()">Close</button>
     </div>
   </div>
