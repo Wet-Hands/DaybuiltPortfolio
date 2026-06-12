@@ -74,7 +74,8 @@ const projects = [
       tags: ['C', 'Terminal / CLI'],
       url: 'https://wethands.itch.io/dungeon-doom-terminal-demake',
       slides: [
-        { emoji: '>_', bg: '#0a0a1a', caption: 'Main game loop in the terminal' },
+        { img: 'photos/projects/ddt1.png', caption: 'Title Screen' },
+        { img: 'photos/projects/ddt2.png', caption: 'Level 1 Gameplay' },
       ]
     }
   },
@@ -114,20 +115,22 @@ const projects = [
       tags: ['gdScript', 'Python', 'LLM API'],
       url: '',
       slides: [
-        { emoji: '📝', bg: '#2a1a00', caption: 'Pen mechanism on gantry' },
+        { img: 'photos/projects/hw-1.png', caption: 'Virtual Prototype built in Godot' },
       ]
     }
   },
   {
     icon: '🚁',
     name: 'Quadcopter Drop Mechanism',
-    desc: 'Mechanical drop system for a drone — 3 bottles on 3 targets.',
+    desc: 'Mechanical drop system for a drone, 3 bottles on 3 targets.',
     modal: {
       about: 'Designed, fabricated, and field-tested a mechanical release system mounted to a quadcopter. Drops three water bottles sequentially onto three ground targets.',
       tags: ['SolidWorks', 'Mechanical Design'],
       url: 'https://sites.google.com/view/salty-dogs-drones25/home',
       slides: [
-        { emoji: '🚁', bg: '#1a2a2a', caption: 'Mechanism mounted to frame' },
+        { img: 'photos/projects/drone1.jpg', caption: 'Group Photo with Drone' },
+        { img: 'photos/projects/drone2.png', caption: 'Mounting Plate for Dropping Mechanism' },
+        { img: 'photos/projects/drone3.jpg', caption: 'Landing Gear Installed on Drone' },
       ]
     }
   },
@@ -315,9 +318,9 @@ const certifications = [
     date: 'December 2023',
     desc: 'The Slide Caliper Measurement Module specifically certifies the ability to handle, calibrate, and read both dial and digital calipers with accuracy.',
     modal: {
-      about: 'Training on the problem-solving capabilities of Snap-on® digital multimeters — the same technology used by professionals. Ranges from basic voltage/current measurement to advanced circuit troubleshooting techniques.',
-      tags: ['Multimeter', 'Electrical Measurement', 'Troubleshooting', 'DC/AC Circuits'],
-      url: 'file:///home/iand/Projects/Website/DaybuiltPortfolio/pdfs/caliper-cert.pdf',
+      about: 'The Snap-on Precision Measuring Instruments Certification enables graduates to demonstrate a solid understanding of thefundamentals of working with precision measurement instruments.',
+      tags: ['Caliper', 'Precision Measurement', 'Troubleshooting'],
+      url: 'portfolio.daybuilt.net/pdfs/caliper-cert.pdf',
       slides: [
         { img: 'photos/awards/PMI_2.png', caption: 'PMI Caliper Measurement Certification badge' },
       ]
