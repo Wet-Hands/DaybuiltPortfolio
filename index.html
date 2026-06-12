@@ -6,7 +6,7 @@
 <title>Day-Portfolio.exe</title>
 <link rel="stylesheet" href="main.css">
 <style>
-  /* Certifications */
+  /* ── CERTIFICATIONS ────────────────────────────────────────────────────── */
   .cert-card {
     display: flex;
     gap: 10px;
@@ -20,58 +20,32 @@
     margin-bottom: 8px;
   }
   .cert-card:last-child { margin-bottom: 0; }
-
   .cert-img-wrap {
-    width: 64px;
-    height: 64px;
+    width: 64px; height: 64px;
     flex-shrink: 0;
     background: #fff;
     border-top: 2px solid #404040;
     border-left: 2px solid #404040;
     border-right: 2px solid #fff;
     border-bottom: 2px solid #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    font-size: 28px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; font-size: 28px;
   }
-  .cert-img-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-
+  .cert-img-wrap img { width: 100%; height: 100%; object-fit: contain; }
   .cert-info { flex: 1; min-width: 0; }
-
-  .cert-title {
-    font-weight: bold;
-    font-size: 12px;
-    margin-bottom: 2px;
-  }
-
+  .cert-title { font-weight: bold; font-size: 12px; margin-bottom: 2px; }
   .cert-meta {
-    display: flex;
-    gap: 10px;
-    font-size: 10px;
-    color: #000080;
-    font-weight: bold;
-    margin-bottom: 4px;
+    display: flex; gap: 10px;
+    font-size: 10px; color: #000080; font-weight: bold; margin-bottom: 4px;
   }
-
-  .cert-desc {
-    font-size: 11px;
-    line-height: 1.5;
-    color: #333;
-  }
+  .cert-desc { font-size: 11px; line-height: 1.5; color: #333; }
 </style>
-
 </head>
 <body>
 
 <div class="desktop">
 
-  <!-- Header Window -->
+  <!-- ── HEADER ─────────────────────────────────────────────────────────── -->
   <div class="window">
     <div class="title-bar">
       <div class="title-bar-left">
@@ -79,9 +53,7 @@
         My Portfolio
       </div>
       <div class="title-bar-buttons">
-        <div class="win-btn">_</div>
-        <div class="win-btn">□</div>
-        <div class="win-btn">✕</div>
+        <div class="win-btn">_</div><div class="win-btn">□</div><div class="win-btn">✕</div>
       </div>
     </div>
     <div class="window-content">
@@ -89,8 +61,8 @@
         <div class="avatar">👤</div>
         <div>
           <h1>Ian Day</h1>
-          <div style="color:#000080; font-weight:bold; margin-bottom:4px;">Student at the College of Southern Maryland</div>
-          <div class="inset" style="padding:6px 10px; font-size:11px; line-height:1.5;">
+          <div style="color:#000080;font-weight:bold;margin-bottom:4px;">Student at the College of Southern Maryland</div>
+          <div class="inset" style="padding:6px 10px;font-size:11px;line-height:1.5;">
             Hello World! 19m | (he/him)
           </div>
         </div>
@@ -104,7 +76,7 @@
 
   <div class="two-col">
 
-    <!-- About Window -->
+    <!-- ── README ───────────────────────────────────────────────────────── -->
     <div class="window">
       <div class="title-bar">
         <div class="title-bar-left">
@@ -112,9 +84,7 @@
           README.txt
         </div>
         <div class="title-bar-buttons">
-          <div class="win-btn">_</div>
-          <div class="win-btn">□</div>
-          <div class="win-btn">✕</div>
+          <div class="win-btn">_</div><div class="win-btn">□</div><div class="win-btn">✕</div>
         </div>
       </div>
       <div class="window-content">
@@ -126,7 +96,7 @@
       </div>
     </div>
 
-    <!-- Skills Window -->
+    <!-- ── SKILLS ────────────────────────────────────────────────────────── -->
     <div class="window">
       <div class="title-bar">
         <div class="title-bar-left">
@@ -134,9 +104,7 @@
           Skills.exe
         </div>
         <div class="title-bar-buttons">
-          <div class="win-btn">_</div>
-          <div class="win-btn">□</div>
-          <div class="win-btn">✕</div>
+          <div class="win-btn">_</div><div class="win-btn">□</div><div class="win-btn">✕</div>
         </div>
       </div>
       <div class="window-content">
@@ -146,7 +114,7 @@
 
   </div>
 
-  <!-- Projects Window -->
+  <!-- ── PROJECTS ──────────────────────────────────────────────────────────── -->
   <div class="window">
     <div class="title-bar">
       <div class="title-bar-left">
@@ -154,20 +122,18 @@
         Projects
       </div>
       <div class="title-bar-buttons">
-        <div class="win-btn">_</div>
-        <div class="win-btn">□</div>
-        <div class="win-btn">✕</div>
+        <div class="win-btn">_</div><div class="win-btn">□</div><div class="win-btn">✕</div>
       </div>
     </div>
     <div class="window-content">
       <div class="three-col" id="projects-container"></div>
     </div>
     <div class="status-bar">
-      <div class="status-panel">9 object(s)</div>
+      <div class="status-panel" id="projects-count">0 object(s)</div>
     </div>
   </div>
 
-  <!-- Experience Window -->
+  <!-- ── EDUCATION HISTORY ─────────────────────────────────────────────────── -->
   <div class="window">
     <div class="title-bar">
       <div class="title-bar-left">
@@ -175,9 +141,7 @@
         Education History
       </div>
       <div class="title-bar-buttons">
-        <div class="win-btn">_</div>
-        <div class="win-btn">□</div>
-        <div class="win-btn">✕</div>
+        <div class="win-btn">_</div><div class="win-btn">□</div><div class="win-btn">✕</div>
       </div>
     </div>
     <div class="window-content">
@@ -188,17 +152,15 @@
     </div>
   </div>
 
-    <!-- Certifications Window -->
+  <!-- ── CERTIFICATIONS & AWARDS ───────────────────────────────────────────── -->
   <div class="window">
     <div class="title-bar">
       <div class="title-bar-left">
-        <svg class="title-icon" viewBox="0 0 16 16"><circle cx="8" cy="7" r="5" fill="none" stroke="#fff" stroke-width="1.5"/><polyline points="5,13 8,11 11,13" fill="none" stroke="#fff" stroke-width="1.5"/><line x1="8" y1="4" x2="8" y2="7" stroke="#fff" stroke-width="1.5"/><line x1="8" y1="7" x2="10" y2="9" stroke="#fff" stroke-width="1.5"/></svg>
-        Certifications & Awards
+        <svg class="title-icon" viewBox="0 0 16 16"><circle cx="8" cy="7" r="5" fill="none" stroke="#fff" stroke-width="1.5"/><polyline points="5,13 8,11 11,13" fill="none" stroke="#fff" stroke-width="1.5"/></svg>
+        Certifications &amp; Awards
       </div>
       <div class="title-bar-buttons">
-        <div class="win-btn">_</div>
-        <div class="win-btn">□</div>
-        <div class="win-btn">✕</div>
+        <div class="win-btn">_</div><div class="win-btn">□</div><div class="win-btn">✕</div>
       </div>
     </div>
     <div class="window-content">
@@ -209,8 +171,7 @@
     </div>
   </div>
 
-
-  <!-- Contact Window -->
+  <!-- ── CONTACT ───────────────────────────────────────────────────────────── -->
   <div class="window">
     <div class="title-bar">
       <div class="title-bar-left">
@@ -218,9 +179,7 @@
         Contact
       </div>
       <div class="title-bar-buttons">
-        <div class="win-btn">_</div>
-        <div class="win-btn">□</div>
-        <div class="win-btn">✕</div>
+        <div class="win-btn">_</div><div class="win-btn">□</div><div class="win-btn">✕</div>
       </div>
     </div>
     <div class="window-content">
@@ -236,9 +195,9 @@
     </div>
   </div>
 
-</div>
+</div><!-- /.desktop -->
 
-<!-- Taskbar -->
+<!-- ── TASKBAR ────────────────────────────────────────────────────────────── -->
 <div class="taskbar">
   <button class="start-btn">
     <svg width="16" height="16" viewBox="0 0 16 16"><rect x="1" y="1" width="6" height="6" fill="#f00"/><rect x="9" y="1" width="6" height="6" fill="#0f0"/><rect x="1" y="9" width="6" height="6" fill="#00f"/><rect x="9" y="9" width="6" height="6" fill="#ff0"/></svg>
@@ -249,180 +208,293 @@
   <div class="taskbar-clock" id="clock">00:00</div>
 </div>
 
+<!-- ══════════════════════════════════════════════════════════════════════════
+     MODULAR PROJECT MODAL — one shell, populated dynamically by openModal().
+     All project content lives in the `projects` array in the script below.
+     Never add per-project modal HTML here; add a new object to `projects`.
+     ══════════════════════════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="project-modal">
+  <div class="modal-window">
+    <div class="title-bar">
+      <div class="title-bar-left" id="modal-title">Project Details</div>
+      <div class="title-bar-buttons">
+        <div class="win-btn" onclick="closeModal()">✕</div>
+      </div>
+    </div>
+    <div class="modal-body">
+
+      <!-- Carousel — slides are injected by loadSlides() -->
+      <div class="carousel">
+        <div class="carousel-viewport" id="carousel-viewport"></div>
+        <div class="carousel-controls">
+          <button class="carousel-btn" id="carousel-prev" onclick="carouselMove(-1)">&#9664; Prev</button>
+          <div class="carousel-dots" id="carousel-dots"></div>
+          <span class="carousel-counter" id="carousel-counter">1 / 1</span>
+          <button class="carousel-btn" id="carousel-next" onclick="carouselMove(1)">Next &#9654;</button>
+        </div>
+      </div>
+
+      <div class="modal-section-title">📄 About</div>
+      <div class="modal-text" id="modal-about"></div>
+
+      <div class="modal-section-title">🔧 Built with</div>
+      <div class="modal-tags" id="modal-tags"></div>
+
+    </div>
+    <div class="modal-footer">
+      <!-- Visit Site button is hidden when a project has no URL -->
+      <a class="modal-action-btn" id="modal-url" href="#" target="_blank" rel="noopener">🌐 Visit Site</a>
+      <button class="modal-action-btn" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+</div>
+
 <script>
-  // Clock
+  // ══════════════════════════════════════════════════════════════════════════
+  // CLOCK
+  // ══════════════════════════════════════════════════════════════════════════
   function updateClock() {
     const now = new Date();
-    const h = String(now.getHours()).padStart(2, '0');
-    const m = String(now.getMinutes()).padStart(2, '0');
-    document.getElementById('clock').textContent = h + ':' + m;
+    document.getElementById('clock').textContent =
+      String(now.getHours()).padStart(2, '0') + ':' +
+      String(now.getMinutes()).padStart(2, '0');
   }
   updateClock();
   setInterval(updateClock, 10000);
 
-  // Skills — grouped by category; bars = number of projects this skill appears in
-  // Each skill lists which project(s) it was used in
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // SKILLS
+  // Bars show how many projects each skill was used in — no self-rating.
+  // Add a skill by adding its name and the projects array it belongs to.
+  // `totalProjects` sets the maximum bar width (update when you add projects).
+  // ══════════════════════════════════════════════════════════════════════════
+  const totalProjects = 9;
+
   const skillCategories = [
     {
       label: '🖥 Programming',
       skills: [
-        { name: 'C / C++',     projects: ['Rotary Cube Sorter', 'DD Terminal'] },
-        { name: 'Python',      projects: ['Rotary Cube Sorter'] },
-        { name: 'gdScript',    projects: ['Dungeon Doom', 'Jimmy Rings', 'DinoLand'] },
+        { name: 'C / C++',   projects: ['Rotary Cube Sorter', 'DD Terminal'] },
+        { name: 'Python',    projects: ['Rotary Cube Sorter'] },
+        { name: 'gdScript',  projects: ['Dungeon Doom', 'Jimmy Rings', 'DinoLand'] },
       ]
     },
     {
       label: '⚙ CAD',
       skills: [
-        { name: 'SolidWorks',   projects: ['CoGRU', 'Quadcopter', 'Rotary Cube Sorter'] },
-        { name: 'AutoCAD',      projects: ['HW Machine'] },
+        { name: 'SolidWorks', projects: ['CoGRU', 'Quadcopter', 'Rotary Cube Sorter'] },
+        { name: 'AutoCAD',    projects: ['Homework Machine'] },
       ]
     },
     {
       label: '🔧 Tools',
       skills: [
-        { name: 'Git',         projects: ['Jimmy Rings', 'DinoLand', 'DD Terminal'] },
+        { name: 'Git', projects: ['Jimmy Rings', 'DinoLand', 'DD Terminal'] },
       ]
     },
   ];
-
-  // Total number of projects (for bar scale)
-  const totalProjects = 3;
 
   const skillsContainer = document.getElementById('skills-container');
   skillCategories.forEach(cat => {
     const catEl = document.createElement('div');
     catEl.className = 'skill-category';
-    catEl.innerHTML = `<div class="skill-category-label">${cat.label}</div>`;
-
+    catEl.innerHTML = '<div class="skill-category-label">' + cat.label + '</div>';
     cat.skills.forEach(s => {
       const count = s.projects.length;
-      const blocks = Array.from({ length: count }, () =>
-        `<div class="progress-block"></div>`).join('');
-      const usedIn = s.projects.join(', ');
+      const blocks = Array.from({ length: count }, () => '<div class="progress-block"></div>').join('');
       const row = document.createElement('div');
       row.className = 'skill-row';
-      row.innerHTML = `
-        <span class="skill-label">${s.name}</span>
-        <div class="progress-track" title="Used in ${count} of ${totalProjects} projects" style="width:${totalProjects * 14}px">${blocks}</div>
-        <span class="skill-used-in">${usedIn}</span>
-      `;
+      row.innerHTML =
+        '<span class="skill-label">' + s.name + '</span>' +
+        '<div class="progress-track" title="Used in ' + count + ' of ' + totalProjects + ' projects"' +
+          ' style="width:' + (totalProjects * 14) + 'px">' + blocks + '</div>' +
+        '<span class="skill-used-in">' + s.projects.join(', ') + '</span>';
       catEl.appendChild(row);
     });
-
     skillsContainer.appendChild(catEl);
   });
 
-  // Projects data
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // PROJECTS
+  // To add a new project, copy one object and fill in your details.
+  // Every project opens the shared modal — no new HTML needed.
+  //
+  // slides: use { emoji, bg, caption } for a colour placeholder,
+  //         or  { img: 'path/to/file.png', caption } for a real screenshot.
+  // url:    optional — omit or set to '' to hide the Visit Site button.
+  // ══════════════════════════════════════════════════════════════════════════
   const projects = [
-    { icon: '📦', name: 'Rotary Cube Sorter', desc: 'Final Project for Intro. to Engineering. ', modal: 'rotary-cube-modal' },
-    { icon: '>_', name: 'Dungeon Doom Terminal', desc: 'The Intro to Engineering Programming Concepts Final Project.', modal: 'dd-terminal-modal' },
-    { icon: '🔋', name: 'EV Car Battery Box', desc: 'Minimalist blogging tool with Markdown support and custom themes.', modal: 'battery-modal' },
-    { icon: '🚀', name: 'CoGRU', desc: 'The Center of Gravity Redirection Unit was my first Engineering project. The idea was to control the direction a rocket faces to balance the dropping of cargo.', modal: 'dino-modal' },
-    { icon: '📝', name: 'Homework Machine', desc: 'Prototype for a CNC machine that controls a pen to mimic handwriting to solve homework question(s) inputted and output answers using an LLM. ', modal: 'dino-modal' },
-    { icon: '🚁', name: 'Quadcopter Dropping Mechanism', desc: 'Designed, installed, and tested a mechanical system on a drone to drop 3 water bottles on 3 respective targets in a field.', modal: 'dino-modal' },
-    { icon: '🗡️', name: 'Dungeon Doom', desc: 'Retro-Styled Dungeon Crawler. Submission for SkillsUSA 2024.', modal: 'doom-modal' },
-    { icon: '👽', name: 'Jimmy Rings', desc: 'Half-Life Inspired Multiplayer Shooter. Submission for SkillsUSA 2025.', modal: 'jr-modal' },
-    { icon: '🦖', name: 'Maintainence at DinoLand', desc: 'Retro-Styled Sit and Survive Horror. Submission to Godot Wild Jam.', modal: 'dino-modal' },
+    {
+      icon: '📦',
+      name: 'Rotary Cube Sorter',
+      desc: 'Final project for Intro to Engineering.',
+      modal: {
+        about: 'Our team automated the quality assurance of 2-inch wood blocks. The sorter identifies and bins cubes that fail size or color specs, then sorts passing cubes by color (green, yellow, or orange). Built around a rotating base with three main components: the frame, sensor subassembly, and sorting bins.',
+        tags: ['Arduino', 'C', 'SolidWorks', 'Project Management', 'Project Documentation'],
+        url: '',
+        slides: [
+          { img: 'photos/rotary1.png', caption: 'Full machine assembly' },
+        ]
+      }
+    },
+    {
+      icon: '>_',
+      name: 'Dungeon Doom Terminal',
+      desc: 'Intro to Engineering Programming Concepts final project.',
+      modal: {
+        about: 'A terminal-based dungeon crawler written in C for the Intro to Engineering Programming Concepts final. Navigate procedural rooms, fight enemies, and manage limited stamina through the command line.',
+        tags: ['C', 'Terminal / CLI'],
+        url: 'https://wethands.itch.io/dungeon-doom-terminal-demake',
+        slides: [
+          { emoji: '>_', bg: '#0a0a1a', caption: 'Main game loop in the terminal' },
+        ]
+      }
+    },
+    {
+      icon: '🔋',
+      name: 'EV Car Battery Box',
+      desc: 'Constructed a battery enclosure for an electric vehicle platform.',
+      modal: {
+        about: 'Constructed and documented a battery enclosure for an Electric Vehicle platform. Focused on safety clearances and thermal management considerations.',
+        tags: ['Project Documentation', 'Multimeter'],
+        url: 'https://sites.google.com/smcps.org/switch-ev-24-25/electrical-build-1-balancing-the-pack/balancing-the-pack',
+        slides: [
+          { img: 'photos/batterybox1.jpg', caption: 'My teammate Matthew and I' },
+          { img: 'photos/batterybox2.jpg', caption: 'Batteries inside the EV that I installed' },
+        ]
+      }
+    },
+    {
+      icon: '🚀',
+      name: 'CoGRU',
+      desc: 'Center of Gravity Redirection Unit — my first engineering project.',
+      modal: {
+        about: 'The Center of Gravity Redirection Unit (CoGRU) was my first engineering project. The concept: control which direction a rocket faces during cargo drops by actively shifting its center of gravity, maintaining balance without traditional fins.',
+        tags: ['Arduino', 'C', 'SolidWorks', 'Project Documentation'],
+        url: '',
+        slides: [
+          { img: 'photos/cogru1.jpg', caption: 'CoGRU prototype' },
+        ]
+      }
+    },
+    {
+      icon: '📝',
+      name: 'Homework Machine',
+      desc: 'CNC pen plotter that solves and handwrites homework answers via LLM.',
+      modal: {
+        about: 'A prototype CNC machine that drives a pen to mimic handwriting. The user inputs a homework question; an LLM generates an answer; the machine writes it out. Combines mechanical CNC control with an LLM API integration.',
+        tags: ['gdScript', 'Python', 'LLM API'],
+        url: '',
+        slides: [
+          { emoji: '📝', bg: '#2a1a00', caption: 'Pen mechanism on gantry' },
+        ]
+      }
+    },
+    {
+      icon: '🚁',
+      name: 'Quadcopter Drop Mechanism',
+      desc: 'Mechanical drop system for a drone — 3 bottles on 3 targets.',
+      modal: {
+        about: 'Designed, fabricated, and field-tested a mechanical release system mounted to a quadcopter. The mechanism drops three water bottles sequentially onto three ground targets.',
+        tags: ['SolidWorks', 'Mechanical Design'],
+        url: 'https://sites.google.com/view/salty-dogs-drones25/home',
+        slides: [
+          { emoji: '🚁', bg: '#1a2a2a', caption: 'Mechanism mounted to frame' },
+        ]
+      }
+    },
+    {
+      icon: '🗡️',
+      name: 'Dungeon Doom',
+      desc: 'Retro-styled dungeon crawler. SkillsUSA 2024 submission.',
+      modal: {
+        about: 'A retro-styled top-down dungeon crawler made in Godot. Built and submitted for SkillsUSA Maryland 2024 Game Design competition. The aim of the game is to collect 1-3 keys to escape each floor of the locked dungeon. Along the way the player will have dangerous encounters with skeletons and goblins! ',
+        tags: ['Godot', 'gdScript', 'Krita'],
+        url: 'https://wethands.itch.io/dungeon-doom-alpha',
+        slides: [
+          { emoji: '🗡️', bg: '#1a0a0a', caption: 'Dungeon level gameplay' },
+          { emoji: '👾', bg: '#0a0a1a', caption: 'Enemy encounter' },
+        ]
+      }
+    },
+    {
+      icon: '👽',
+      name: 'Jimmy Rings',
+      desc: 'Half-Life inspired multiplayer shooter. SkillsUSA 2025 submission.',
+      modal: {
+        about: 'A Half-Life inspired multiplayer first-person shooter built in Godot for SkillsUSA Maryland 2025. Features networked multiplayer, custom weapon mechanics, and level design based on classic philosophies and tools.',
+        tags: ['Godot', 'gdScript', 'Git', 'Multiplayer Networking', 'Blender'],
+        url: 'https://wethands.itch.io/jimmy-rings-indev',
+        slides: [
+          { emoji: '👽', bg: '#0a1a0a', caption: 'Multiplayer lobby' },
+          { emoji: '🔫', bg: '#1a1a0a', caption: 'In-match gameplay' },
+        ]
+      }
+    },
+    {
+      icon: '🦖',
+      name: 'Maintenance at DinoLand',
+      desc: 'Retro-styled sit-and-survive horror. Godot Wild Jam submission.',
+      modal: {
+        about: 'A retro-styled "sit and survive" horror game submitted to the Godot Wild Jam. The player has been contracted to head down to the main DinoLand facility to investigate the power outage. The player must restore the power by using the time-consuming software on your computer before it is too late..',
+        tags: ['Godot', 'gdScript', 'Git', 'Blender'],
+        url: 'https://wethands.itch.io/dinoland',
+        slides: [
+          { img: 'photos/dino1.png', caption: 'Game Art' },
+          { img: 'photos/dino2.png', caption: 'In-game Computer Mini-game' },
+          { img: 'photos/dino3.png', caption: 'Dinosaur peeking around the corner!' },
+        ]
+      }
+    },
   ];
 
+  // Render project cards
   const projContainer = document.getElementById('projects-container');
+  document.getElementById('projects-count').textContent = projects.length + ' object(s)';
   projects.forEach(p => {
-    let card;
-    if (p.modal) {
-      card = document.createElement('div');
-      card.className = 'project-card';
-      card.style.cursor = 'pointer';
-      card.addEventListener('click', () => openModal(p.modal));
-      card.innerHTML = `
-        <span class="project-icon">${p.icon}</span>
-        <div class="project-name">${p.name}</div>
-        <div class="project-desc">${p.desc}</div>
-        <span class="project-link-label">📂 View details</span>
-      `;
-    } else {
-      card = document.createElement('a');
-      card.className = 'project-card';
-      card.href = p.url;
-      card.target = '_blank';
-      card.rel = 'noopener noreferrer';
-      card.innerHTML = `
-        <span class="project-icon">${p.icon}</span>
-        <div class="project-name">${p.name}</div>
-        <div class="project-desc">${p.desc}</div>
-        <span class="project-link-label">🌐 Open project ↗</span>
-      `;
-    }
+    const card = document.createElement('div');
+    card.className = 'project-card';
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', () => openModal(p));
+    card.innerHTML =
+      '<span class="project-icon">' + p.icon + '</span>' +
+      '<div class="project-name">' + p.name + '</div>' +
+      '<div class="project-desc">' + p.desc + '</div>' +
+      '<span class="project-link-label">📂 View details</span>';
     projContainer.appendChild(card);
   });
 
-  // Modal
-  function openModal(id) {
-    document.getElementById(id).classList.add('open');
-    document.body.style.overflow = 'hidden';
-    carouselRender();
-  }
-  function closeModal() {
-    document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('open'));
-    document.body.style.overflow = '';
-  }
-  document.querySelectorAll('.modal-overlay').forEach(overlay => {
-    overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
-  });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-  // Carousel
-  let carouselIndex = 0;
-  function carouselRender() {
-    const slides = document.querySelectorAll('#carousel-viewport .carousel-slide');
-    const dots   = document.getElementById('carousel-dots');
-    const counter = document.getElementById('carousel-counter');
-    const total = slides.length;
-    slides.forEach((s, i) => s.classList.toggle('active', i === carouselIndex));
-    counter.textContent = `${carouselIndex + 1} / ${total}`;
-    document.getElementById('carousel-prev').disabled = carouselIndex === 0;
-    document.getElementById('carousel-next').disabled = carouselIndex === total - 1;
-    // dots
-    dots.innerHTML = '';
-    for (let i = 0; i < total; i++) {
-      const dot = document.createElement('div');
-      dot.className = 'carousel-dot' + (i === carouselIndex ? ' active' : '');
-      dot.addEventListener('click', () => { carouselIndex = i; carouselRender(); });
-      dots.appendChild(dot);
-    }
-  }
-  function carouselMove(dir) {
-    const total = document.querySelectorAll('#carousel-viewport .carousel-slide').length;
-    carouselIndex = Math.max(0, Math.min(total - 1, carouselIndex + dir));
-    carouselRender();
-  }
-
-  // Experience data
-
-
+  // ══════════════════════════════════════════════════════════════════════════
+  // EDUCATION / EXPERIENCE
+  // Add entries as objects in this array.
+  // `tags` render as Win95 tag chips below the description.
+  // ══════════════════════════════════════════════════════════════════════════
   const experience = [
-  {
-    company: 'College of Southern Maryland',
-    role: 'Associates of Science in Electrical Engineering',
-    dates: '2025 – Present',
-    desc: 'At CSM I have been going for my Associates in Electrical Engineering. After about 3 years, I plan on transferring to the University of Maryland via the USMSM Transfer plan and taking classes here in Southern Maryland.',
-    tags: ['C', 'C++', 'MatLab', 'SolidWorks', 'Project Documentation']
-  },
-  {
-    company: 'James A. Forrest Career & Technology Center',
-    role: 'Certificate of Achievement in Engineering | Cybersecurity Elective',
-    dates: '2023 – 2025',
-    desc: 'The tech center strongly defined my secondary education. I first applied in my freshmen year for the very competitive IT Networking academy and I got rejected despite my previous experience. In my sophomore year I applied and got accepted to the also competitive Engineering program. At the end of my first year of Engineering and competing in SkillsUSA with the IT teacher she personally invited me to be in her Cybersecurity elective class (Also known as the IT Networking Year 3, meaning I got the best of both worlds).',
-    tags: ['C', 'Python', 'Soldering', 'Hand Drafting', 'AutoCAD', 'SolidWorks', 'Manufacturing', 'Inventory Management', 'Networking']
-  },
-  {
-    company: 'Leonardtown High School',
-    role: 'CTE Pathway | Diploma',
-    dates: '2021 – 2025',
-    desc: 'At Leonardtown High School is where I took my Computer Science classes. During my time, I founded the Party Game Club and ran the schools Minecraft server called Raidercraft through six seasons of new gameplay. I also started a small group of my peers where I taught them simple programming concepts and game development skills.',
-    tags: ['JavaScript', 'Java', 'Server Administration', 'Project Management']
-  },
-];
+    {
+      company: 'College of Southern Maryland',
+      role: 'Associates of Science in Electrical Engineering',
+      dates: '2025 – Present',
+      desc: 'At CSM I have been going for my Associates in Electrical Engineering. After about 3 years, I plan on transferring to the University of Maryland via the USMSM Transfer plan and taking classes here in Southern Maryland.',
+      tags: ['C', 'C++', 'MatLab', 'SolidWorks', 'Project Documentation']
+    },
+    {
+      company: 'James A. Forrest Career & Technology Center',
+      role: 'Certificate of Achievement in Engineering | Cybersecurity Elective',
+      dates: '2023 – 2025',
+      desc: 'The tech center strongly defined my secondary education. I applied in sophomore year for the Engineering program and was accepted. At the end of my first year, the IT teacher personally invited me into her Cybersecurity elective — giving me the best of both worlds.',
+      tags: ['C', 'Python', 'Soldering', 'Hand Drafting', 'AutoCAD', 'SolidWorks', 'Manufacturing', 'Inventory Management', 'Networking']
+    },
+    {
+      company: 'Leonardtown High School',
+      role: 'CTE Pathway | Diploma',
+      dates: '2021 – 2025',
+      desc: 'Took Computer Science classes, founded the Party Game Club, and ran Raidercraft — the school Minecraft server — through six seasons. Also ran an informal study group teaching peers basic programming and game development.',
+      tags: ['JavaScript', 'Java', 'Server Administration', 'Project Management']
+    },
+  ];
 
   const expContainer = document.getElementById('experience-container');
   experience.forEach((e, i) => {
@@ -434,197 +506,41 @@
     const row = document.createElement('div');
     row.className = 'raised';
     row.style.marginBottom = '4px';
-    row.innerHTML = `
-      <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:2px;">
-        <strong>${e.role}</strong>
-        <span style="font-size:11px; color:#444;">${e.dates}</span>
-      </div>
-      <div style="color:#000080; font-size:11px; margin-bottom:4px;">${e.company}</div>
-      <div style="font-size:11px; margin-bottom:6px;">${e.desc}</div>
-      <div style="display:flex; flex-wrap:wrap; gap:4px;">
-        ${e.tags.map(t => `<span class="modal-tag">${t}</span>`).join('')}
-      </div>
-    `;
+    row.innerHTML =
+      '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2px;">' +
+        '<strong>' + e.role + '</strong>' +
+        '<span style="font-size:11px;color:#444;">' + e.dates + '</span>' +
+      '</div>' +
+      '<div style="color:#000080;font-size:11px;margin-bottom:4px;">' + e.company + '</div>' +
+      '<div style="font-size:11px;margin-bottom:6px;">' + e.desc + '</div>' +
+      '<div style="display:flex;flex-wrap:wrap;gap:4px;">' +
+        e.tags.map(t => '<span class="modal-tag">' + t + '</span>').join('') +
+      '</div>';
     expContainer.appendChild(row);
   });
-</script>
 
-<!-- WritePath Modal -->
-<div class="modal-overlay" id="writepath-modal">
-  <div class="modal-window">
-    <div class="title-bar">
-      <div class="title-bar-left">
-        <svg class="title-icon" viewBox="0 0 16 16"><rect x="1" y="4" width="14" height="10" fill="none" stroke="#fff" stroke-width="1.5"/><polyline points="1,4 5,1 11,1 15,4" fill="none" stroke="#fff" stroke-width="1.5"/></svg>
-        WritePath — Project Details
-      </div>
-      <div class="title-bar-buttons">
-        <div class="win-btn" onclick="closeModal()">✕</div>
-      </div>
-    </div>
-    <div class="modal-body">
 
-      <!-- Carousel -->
-      <div class="carousel">
-        <div class="carousel-viewport" id="carousel-viewport">
-          <div class="carousel-slide active">
-            <div class="slide-placeholder">
-              ✍️
-              <span style="font-size:12px;">Screenshot 1</span>
-            </div>
-            <div class="slide-caption">Home screen — clean editor interface</div>
-          </div>
-          <div class="carousel-slide">
-            <div class="slide-placeholder" style="background:#0a2a1a;">
-              🎨
-              <span style="font-size:12px;">Screenshot 2</span>
-            </div>
-            <div class="slide-caption">Theme customiser — 6 built-in colour schemes</div>
-          </div>
-          <div class="carousel-slide">
-            <div class="slide-placeholder" style="background:#2a1a0a;">
-              📝
-              <span style="font-size:12px;">Screenshot 3</span>
-            </div>
-            <div class="slide-caption">Markdown preview — live split-pane rendering</div>
-          </div>
-          <div class="carousel-slide">
-            <div class="slide-placeholder" style="background:#1a0a2a;">
-              📦
-              <span style="font-size:12px;">Screenshot 4</span>
-            </div>
-            <div class="slide-caption">Export options — PDF, HTML, and plain text</div>
-          </div>
-        </div>
-        <div class="carousel-controls">
-          <button class="carousel-btn" id="carousel-prev" onclick="carouselMove(-1)">◀ Prev</button>
-          <div class="carousel-dots" id="carousel-dots"></div>
-          <span class="carousel-counter" id="carousel-counter">1 / 4</span>
-          <button class="carousel-btn" id="carousel-next" onclick="carouselMove(1)">Next ▶</button>
-        </div>
-      </div>
-
-      <!-- About -->
-      <div class="modal-section-title">📄 About</div>
-      <div class="modal-text">
-        WritePath is a minimalist blogging and writing tool built for people who want to focus on words, not configuration. It supports Markdown natively, renders a live preview as you type, and lets you export finished pieces as PDF, clean HTML, or plain text.<br><br>
-        Themes can be swapped in one click — no CSS knowledge needed. Everything is stored locally; no account required to get started.
-      </div>
-
-      <!-- Tech stack tags -->
-      <div class="modal-section-title">🔧 Built with</div>
-      <div class="modal-tags">
-        <span class="modal-tag">JavaScript</span>
-        <span class="modal-tag">Node.js</span>
-        <span class="modal-tag">CSS / HTML</span>
-        <span class="modal-tag">Marked.js</span>
-        <span class="modal-tag">Electron</span>
-        <span class="modal-tag">Figma</span>
-      </div>
-
-    </div>
-    <div class="modal-footer">
-      <a class="modal-action-btn" href="https://example.com/writepath" target="_blank" rel="noopener">🌐 Visit Site</a>
-      <button class="modal-action-btn" onclick="closeModal()">Close</button>
-    </div>
-  </div>
-</div>
-
-<!-- Rotary Modal -->
-<div class="modal-overlay" id="rotary-modal">
-  <div class="modal-window">
-    <div class="title-bar">
-      <div class="title-bar-left">
-        <svg class="title-icon" viewBox="0 0 16 16"><rect x="1" y="4" width="14" height="10" fill="none" stroke="#fff" stroke-width="1.5"/><polyline points="1,4 5,1 11,1 15,4" fill="none" stroke="#fff" stroke-width="1.5"/></svg>
-        Rotary Based Cube Sorter — Project Details
-      </div>
-      <div class="title-bar-buttons">
-        <div class="win-btn" onclick="closeModal()">✕</div>
-      </div>
-    </div>
-    <div class="modal-body">
-
-      <!-- Carousel -->
-      <div class="carousel">
-        <div class="carousel-viewport" id="carousel-viewport">
-          <div class="carousel-slide active">
-            <div class="slide-placeholder">
-              ✍️
-              <span style="font-size:12px;">Screenshot 1</span>
-            </div>
-            <div class="slide-caption">Home screen — clean editor interface</div>
-          </div>
-          <div class="carousel-slide">
-            <div class="slide-placeholder" style="background:#0a2a1a;">
-              🎨
-              <span style="font-size:12px;">Screenshot 2</span>
-            </div>
-            <div class="slide-caption">Theme customiser — 6 built-in colour schemes</div>
-          </div>
-          <div class="carousel-slide">
-            <div class="slide-placeholder" style="background:#2a1a0a;">
-              📝
-              <span style="font-size:12px;">Screenshot 3</span>
-            </div>
-            <div class="slide-caption">Markdown preview — live split-pane rendering</div>
-          </div>
-          <div class="carousel-slide">
-            <div class="slide-placeholder" style="background:#1a0a2a;">
-              📦
-              <span style="font-size:12px;">Screenshot 4</span>
-            </div>
-            <div class="slide-caption">Export options — PDF, HTML, and plain text</div>
-          </div>
-        </div>
-        <div class="carousel-controls">
-          <button class="carousel-btn" id="carousel-prev" onclick="carouselMove(-1)">◀ Prev</button>
-          <div class="carousel-dots" id="carousel-dots"></div>
-          <span class="carousel-counter" id="carousel-counter">1 / 4</span>
-          <button class="carousel-btn" id="carousel-next" onclick="carouselMove(1)">Next ▶</button>
-        </div>
-      </div>
-
-      <!-- About -->
-      <div class="modal-section-title">📄 About</div>
-      <div class="modal-text">
-        Our team was presented with the need to automate the quality assurance of 2-inch wood blocks they produce. The following requirements for the sorting process identifies and bins cubes that do not meet the size specification, identifies and bins cubes that meet the size specification but not the color specification, sorts and bins cubes that meet both specifications by color. Also providing the following cube specifications, a cube measurement of 2.00” ± 0.10” and that the cube color is green, yellow, or orange. 
-To accomplish this task, our team presented an automated cube sorting machine based on a rotating base design. Made of three main components: the frame, sensor subassembly, and sorting bins mounted on a rotating base.
-      </div>
-
-      <!-- Tech stack tags -->
-      <div class="modal-section-title">🔧 Built with</div>
-      <div class="modal-tags">
-        <span class="modal-tag">Arduino</span>
-        <span class="modal-tag">C</span>
-        <span class="modal-tag">SolidWorks</span>
-        <span class="modal-tag">Project Management</span>
-        <span class="modal-tag">Project Documentation</span>
-      </div>
-
-    </div>
-    <div class="modal-footer">
-      <button class="modal-action-btn" onclick="closeModal()">Close</button>
-    </div>
-  </div>
-</div>
-
-  // ── CERTIFICATIONS ─────────────────────────────────────────────────────────
-  // img: path to badge image, or omit to show the emoji fallback
+  // ══════════════════════════════════════════════════════════════════════════
+  // CERTIFICATIONS & AWARDS
+  // Add entries as objects in this array.
+  // img: path to a badge image file (optional) — falls back to emoji if omitted.
+  // ══════════════════════════════════════════════════════════════════════════
   const certifications = [
     {
-      emoji: '🏅',
-      // img: 'certs/comptia-a-plus.png',
-      title: 'CompTIA A+',
-      issuer: 'CompTIA',
-      date: 'Jan 2025',
-      desc: 'Covers IT operational roles and technical support skills including hardware, networking, and troubleshooting.'
+      emoji: '🥇',
+      // img: 'certs/skillsusa-gold-2024.png',
+      title: 'SkillsUSA State Gold Medal — Interactive Application and Game Design',
+      issuer: 'SkillsUSA Maryland',
+      date: 'April 2024',
+      desc: 'First place in the Game Design competition at the Maryland SkillsUSA State Leadership & Skills Conference.'
     },
     {
-      emoji: '🎖️',
-      // img: 'certs/skillsusa.png',
-      title: 'SkillsUSA Gold Medal — Game Design',
+      emoji: '🥈',
+      // img: 'certs/skillsusa-silver-2025.png',
+      title: 'SkillsUSA State Silver Medal — Interactive Application and Game Design',
       issuer: 'SkillsUSA Maryland',
-      date: 'Apr 2024',
-      desc: 'First place in the Game Design competition at the Maryland SkillsUSA State Leadership & Skills Conference.'
+      date: 'March 2025',
+      desc: 'Second place in the Game Design competition at the Maryland SkillsUSA State Leadership & Skills Conference.'
     },
   ];
 
@@ -649,8 +565,106 @@ To accomplish this task, our team presented an automated cube sorting machine ba
     certsContainer.appendChild(card);
   });
 
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // MODAL
+  // openModal(project) — populates the single shared modal shell and opens it.
+  // loadSlides(slides) — rebuilds the carousel for the given project.
+  // closeModal()       — closes any open modal and restores scroll.
+  // ══════════════════════════════════════════════════════════════════════════
+  function openModal(project) {
+    // Populate title
+    document.getElementById('modal-title').textContent = project.name + ' — Project Details';
+
+    // Populate about text
+    document.getElementById('modal-about').textContent = project.modal.about;
+
+    // Populate tech-stack tags
+    document.getElementById('modal-tags').innerHTML =
+      project.modal.tags.map(t => '<span class="modal-tag">' + t + '</span>').join('');
+
+    // Show or hide the Visit Site button depending on whether a URL exists
+    const urlBtn = document.getElementById('modal-url');
+    if (project.modal.url) {
+      urlBtn.href = project.modal.url;
+      urlBtn.style.display = 'inline-block';
+    } else {
+      urlBtn.style.display = 'none';
+    }
+
+    // Build carousel slides
+    loadSlides(project.modal.slides);
+
+    // Open the modal
+    document.getElementById('project-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function loadSlides(slides) {
+    carouselIndex = 0;
+    const viewport = document.getElementById('carousel-viewport');
+    // Build each slide — real image if `img` provided, otherwise emoji placeholder
+    viewport.innerHTML = slides.map((s, i) => {
+      const inner = s.img
+        ? '<img src="' + s.img + '" alt="' + s.caption + '">'
+        : '<div class="slide-placeholder" style="background:' + (s.bg || '#1a1a2e') + '">' +
+            '<span style="font-size:48px">' + (s.emoji || '🖼') + '</span>' +
+            '<span style="font-size:12px;color:#ccc">Screenshot ' + (i + 1) + '</span>' +
+          '</div>';
+      return '<div class="carousel-slide' + (i === 0 ? ' active' : '') + '">' +
+        inner + '<div class="slide-caption">' + s.caption + '</div></div>';
+    }).join('');
+    carouselRender();
+  }
+
+  function closeModal() {
+    document.getElementById('project-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Close when clicking the dark overlay behind the window
+  document.getElementById('project-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // CAROUSEL
+  // carouselRender() — redraws slide visibility, counter, and dot indicators.
+  // carouselMove(dir) — advances (+1) or retreats (-1) one slide.
+  // Both are called from inline onclick= attributes so must stay at top scope.
+  // ══════════════════════════════════════════════════════════════════════════
+  let carouselIndex = 0;
+
+  function carouselRender() {
+    const slides = document.querySelectorAll('#carousel-viewport .carousel-slide');
+    const total  = slides.length;
+    slides.forEach((s, i) => s.classList.toggle('active', i === carouselIndex));
+    document.getElementById('carousel-counter').textContent = (carouselIndex + 1) + ' / ' + total;
+    document.getElementById('carousel-prev').disabled = (carouselIndex === 0);
+    document.getElementById('carousel-next').disabled = (carouselIndex === total - 1);
+    // Rebuild dot indicators
+    const dots = document.getElementById('carousel-dots');
+    dots.innerHTML = '';
+    for (let i = 0; i < total; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'carousel-dot' + (i === carouselIndex ? ' active' : '');
+      dot.addEventListener('click', (function(idx) {
+        return function() { carouselIndex = idx; carouselRender(); };
+      })(i));
+      dots.appendChild(dot);
+    }
+  }
+
+  function carouselMove(dir) {
+    const total = document.querySelectorAll('#carousel-viewport .carousel-slide').length;
+    carouselIndex = Math.max(0, Math.min(total - 1, carouselIndex + dir));
+    carouselRender();
+  }
+
 </script>
-
-
 </body>
 </html>
