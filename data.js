@@ -61,7 +61,7 @@ const projects = [
       tags: ['Arduino', 'C', 'SolidWorks', 'Project Management', 'Project Documentation'],
       url: '',
       slides: [
-        { img: 'photos/rotary1.png', caption: 'Full machine assembly' },
+        { img: 'photos/projects/rotary1.png', caption: 'Full machine assembly' },
       ]
     }
   },
@@ -87,8 +87,8 @@ const projects = [
       tags: ['Project Documentation', 'Multimeter'],
       url: 'https://sites.google.com/smcps.org/switch-ev-24-25/electrical-build-1-balancing-the-pack/balancing-the-pack',
       slides: [
-        { img: 'photos/batterybox1.jpg', caption: 'My teammate Matthew and I' },
-        { img: 'photos/batterybox2.jpg', caption: 'Batteries inside the EV that I installed' },
+        { img: 'photos/projects/batterybox1.jpg', caption: 'My teammate Matthew and I' },
+        { img: 'photos/projects/batterybox2.jpg', caption: 'Batteries inside the EV that I installed' },
       ]
     }
   },
@@ -101,7 +101,7 @@ const projects = [
       tags: ['Arduino', 'C', 'SolidWorks', 'Project Documentation'],
       url: '',
       slides: [
-        { img: 'photos/cogru1.jpg', caption: 'CoGRU prototype' },
+        { img: 'photos/projects/cogru1.jpg', caption: 'CoGRU prototype' },
       ]
     }
   },
@@ -140,7 +140,7 @@ const projects = [
       tags: ['Godot', 'gdScript', 'Krita'],
       url: 'https://wethands.itch.io/dungeon-doom-alpha',
       slides: [
-        { img: 'photos/dungeondoom1.png', caption: 'Game Art' },
+        { img: 'photos/projects/dungeondoom1.png', caption: 'Game Art' },
       ]
     }
   },
@@ -153,7 +153,7 @@ const projects = [
       tags: ['Godot', 'gdScript', 'Git', 'Multiplayer Networking', 'Blender'],
       url: 'https://wethands.itch.io/jimmy-rings-indev',
       slides: [
-        { img: 'photos/jr1.png', caption: 'Game Art' },
+        { img: 'photos/projects/jr1.png', caption: 'Game Art' },
       ]
     }
   },
@@ -166,9 +166,9 @@ const projects = [
       tags: ['Godot', 'gdScript', 'Git', 'Blender'],
       url: 'https://wethands.itch.io/dinoland',
       slides: [
-        { img: 'photos/dino1.png',  caption: 'Game Art' },
-        { img: 'photos/dino2.png',  caption: 'In-game computer mini-game' },
-        { img: 'photos/dino3.png',  caption: 'Dinosaur peeking around the corner!' },
+        { img: 'photos/projects/dino1.png',  caption: 'Game Art' },
+        { img: 'photos/projects/dino2.png',  caption: 'In-game computer mini-game' },
+        { img: 'photos/projects/dino3.png',  caption: 'Dinosaur peeking around the corner!' },
       ]
     }
   },
@@ -214,37 +214,37 @@ const experience = [
 const certifications = [
   {
     emoji: '🥈',
-    title: 'SkillsUSA State Silver Medal — Interactive Application and Game Design',
+    title: 'SkillsUSA State Silver Medal - Interactive Application and Game Design',
     issuer: 'SkillsUSA Maryland',
     date: 'March 2025',
     desc: 'Second place in the Game Design competition at the Maryland SkillsUSA State Leadership & Skills Conference.',
     modal: {
-      about: 'Submitted Jimmy Rings — a Half-Life inspired multiplayer FPS built in Godot — for SkillsUSA Maryland 2025, placing second in the state.',
+      about: 'Submitted Jimmy Rings, a Half-Life inspired multiplayer FPS built in Godot, for SkillsUSA Maryland 2025. Competition was very fierce this year, placing second in the state.',
       tags: ['Game Design', 'Godot', 'gdScript', 'Blender', 'Multiplayer Networking'],
       url: '',
       slides: [
-        { img: 'photos/jr1.png', caption: 'Jimmy Rings — submitted game' },
+        { img: 'photos/awards/skills25-1.jpg', caption: 'Vincent Churilla and I standing infront of our poster' },
         // { pdf: 'certs/skillsusa-silver-2025.pdf', caption: 'Certificate PDF' },
       ]
     }
   },
   {
-    img: 'photos/hardwarebasics.png',
-    title: 'Cisco Networking Academy — Computer Hardware Basics',
+    img: 'photos/awards/hardwarebasics.png',
+    title: 'Cisco Networking Academy - Computer Hardware Basics',
     issuer: 'Cisco',
     date: 'October 2024',
     desc: 'Fundamentals of computers and mobile devices, component installation, building and repairing PCs, and basic troubleshooting.',
     modal: {
       about: 'Cisco verifies successful completion of the Computer Hardware Basics course. Covers fundamentals of computers and mobile devices, component installation, building and repairing personal computers, and basic troubleshooting tools and techniques.',
       tags: ['Computer Hardware', 'Troubleshooting', 'PC Building'],
-      url: '',
+      url: 'https://www.credly.com/earner/earned/badge/4b90ca94-2a40-462c-859d-e191ec99354d',
       slides: [
-        { img: 'photos/hardwarebasics.png', caption: 'Cisco badge' },
+        { img: 'photos/awards/hardwarebasics.png', caption: 'Cisco badge' },
       ]
     }
   },
   {
-    img: 'photos/multimeter.png',
+    img: 'photos/awards/multimeter.png',
     title: 'Snap-On Multimeter Certification',
     issuer: 'Dr. James A. Forrest Career & Technology Center',
     date: 'September 2024',
@@ -252,30 +252,32 @@ const certifications = [
     modal: {
       about: 'Training on the problem-solving capabilities of Snap-on® digital multimeters — the same technology used by professionals. Ranges from basic voltage/current measurement to advanced circuit troubleshooting techniques.',
       tags: ['Multimeter', 'Electrical Measurement', 'Troubleshooting', 'DC/AC Circuits'],
-      url: '',
+      url: 'file:///home/iand/Projects/Website/DaybuiltPortfolio/pdfs/meter-cert.pdf',
       slides: [
-        { img: 'photos/multimeter.png', caption: 'Snap-On multimeter certification badge' },
+        { img: 'photos/awards/multimeter.png', caption: 'Snap-On multimeter certification badge' },
+        //{ pdf: 'pdfs/meter-cert.pdf', caption: 'Certificate PDF' },
       ]
     }
   },
   {
     emoji: '🥇',
-    title: 'SkillsUSA State Gold Medal — Interactive Application and Game Design',
+    title: 'SkillsUSA State Gold Medal - Interactive Application and Game Design',
     issuer: 'SkillsUSA Maryland',
     date: 'April 2024',
     desc: 'First place in the Game Design competition at the Maryland SkillsUSA State Leadership & Skills Conference.',
     modal: {
-      about: 'Submitted Dungeon Doom — a retro top-down dungeon crawler built in Godot — for SkillsUSA Maryland 2024, placing first in the state.',
+      about: 'Submitted Dungeon Doom, a retro top-down dungeon crawler built in Godot, for SkillsUSA Maryland 2024, placing first in the state. I later went on to compete at SkillsUSA National Leadership & Skills Conference',
       tags: ['Game Design', 'Godot', 'gdScript', 'Krita'],
       url: '',
       slides: [
-        { img: 'photos/dungeondoom1.png', caption: 'Dungeon Doom — submitted game' },
+        { img: 'photos/awards/skills24-1.jpg', caption: 'All the Competitors Together, with Dave the Skeleton' },
+        { img: 'photos/examples/skills24nat.jpg', caption: 'Photo with my friends in Atlanta repping our state.' },
         // { pdf: 'certs/skillsusa-gold-2024.pdf', caption: 'Certificate PDF' },
       ]
     }
   },
   {
-    img: 'photos/autocadcert.png',
+    img: 'photos/awards/autocadcert.png',
     title: 'Autodesk AutoCAD Certified User',
     issuer: 'Certiport — A Pearson VUE Business',
     date: 'March 2024',
@@ -283,10 +285,25 @@ const certifications = [
     modal: {
       about: 'The Autodesk AutoCAD Certified User credential confirms foundational skills in AutoCAD. Topics include creating and plotting drawings, editing objects, working with layouts, dimensioning, and annotation.',
       tags: ['AutoCAD', 'CAD', '2D Drafting', 'Technical Drawing'],
-      url: '',
+      url: 'https://www.credly.com/badges/f874e741-cef4-484d-a8b1-18554e603ade/public_url',
       slides: [
-        { img: 'photos/autocadcert.png', caption: 'AutoCAD Certified User badge' },
-        // { pdf: 'certs/autocad-cert.pdf', caption: 'Certificate PDF' },
+        { img: 'photos/awards/autocadcert.png', caption: 'AutoCAD Certified User badge' },
+        { img: 'photos/examples/TrekCAD.PNG', caption: 'Example of using AutoCAD, this was sent to a CNC Plasma Cutter' },
+      ]
+    }
+  },
+  {
+    img: 'photos/awards/PMI_2.png',
+    title: 'Precision Measurement Instruments - Caliper Measurement Certification',
+    issuer: 'Dr. James A. Forrest Career & Technology Center',
+    date: 'December 2023',
+    desc: 'The Slide Caliper Measurement Module specifically certifies the ability to handle, calibrate, and read both dial and digital calipers with accuracy.',
+    modal: {
+      about: 'Training on the problem-solving capabilities of Snap-on® digital multimeters — the same technology used by professionals. Ranges from basic voltage/current measurement to advanced circuit troubleshooting techniques.',
+      tags: ['Multimeter', 'Electrical Measurement', 'Troubleshooting', 'DC/AC Circuits'],
+      url: 'file:///home/iand/Projects/Website/DaybuiltPortfolio/pdfs/caliper-cert.pdf',
+      slides: [
+        { img: 'photos/awards/PMI_2.png', caption: 'PMI Caliper Measurement Certification badge' },
       ]
     }
   },
