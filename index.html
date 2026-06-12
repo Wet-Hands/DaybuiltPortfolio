@@ -5,6 +5,67 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Day-Portfolio.exe</title>
 <link rel="stylesheet" href="main.css">
+<style>
+  /* Certifications */
+  .cert-card {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 8px;
+    background: #c0c0c0;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+    margin-bottom: 8px;
+  }
+  .cert-card:last-child { margin-bottom: 0; }
+
+  .cert-img-wrap {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    background: #fff;
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-size: 28px;
+  }
+  .cert-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .cert-info { flex: 1; min-width: 0; }
+
+  .cert-title {
+    font-weight: bold;
+    font-size: 12px;
+    margin-bottom: 2px;
+  }
+
+  .cert-meta {
+    display: flex;
+    gap: 10px;
+    font-size: 10px;
+    color: #000080;
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+
+  .cert-desc {
+    font-size: 11px;
+    line-height: 1.5;
+    color: #333;
+  }
+</style>
+
 </head>
 <body>
 
@@ -126,6 +187,28 @@
       <div class="status-panel">3 object(s)</div>
     </div>
   </div>
+
+    <!-- Certifications Window -->
+  <div class="window">
+    <div class="title-bar">
+      <div class="title-bar-left">
+        <svg class="title-icon" viewBox="0 0 16 16"><circle cx="8" cy="7" r="5" fill="none" stroke="#fff" stroke-width="1.5"/><polyline points="5,13 8,11 11,13" fill="none" stroke="#fff" stroke-width="1.5"/><line x1="8" y1="4" x2="8" y2="7" stroke="#fff" stroke-width="1.5"/><line x1="8" y1="7" x2="10" y2="9" stroke="#fff" stroke-width="1.5"/></svg>
+        Certifications & Awards
+      </div>
+      <div class="title-bar-buttons">
+        <div class="win-btn">_</div>
+        <div class="win-btn">□</div>
+        <div class="win-btn">✕</div>
+      </div>
+    </div>
+    <div class="window-content">
+      <div id="certs-container"></div>
+    </div>
+    <div class="status-bar">
+      <div class="status-panel" id="certs-count">0 object(s)</div>
+    </div>
+  </div>
+
 
   <!-- Contact Window -->
   <div class="window">
@@ -523,6 +606,51 @@ To accomplish this task, our team presented an automated cube sorting machine ba
     </div>
   </div>
 </div>
+
+  // ── CERTIFICATIONS ─────────────────────────────────────────────────────────
+  // img: path to badge image, or omit to show the emoji fallback
+  const certifications = [
+    {
+      emoji: '🏅',
+      // img: 'certs/comptia-a-plus.png',
+      title: 'CompTIA A+',
+      issuer: 'CompTIA',
+      date: 'Jan 2025',
+      desc: 'Covers IT operational roles and technical support skills including hardware, networking, and troubleshooting.'
+    },
+    {
+      emoji: '🎖️',
+      // img: 'certs/skillsusa.png',
+      title: 'SkillsUSA Gold Medal — Game Design',
+      issuer: 'SkillsUSA Maryland',
+      date: 'Apr 2024',
+      desc: 'First place in the Game Design competition at the Maryland SkillsUSA State Leadership & Skills Conference.'
+    },
+  ];
+
+  const certsContainer = document.getElementById('certs-container');
+  document.getElementById('certs-count').textContent = certifications.length + ' object(s)';
+  certifications.forEach(c => {
+    const card = document.createElement('div');
+    card.className = 'cert-card';
+    const imgHTML = c.img
+      ? '<img src="' + c.img + '" alt="' + c.title + '">'
+      : c.emoji;
+    card.innerHTML =
+      '<div class="cert-img-wrap">' + imgHTML + '</div>' +
+      '<div class="cert-info">' +
+        '<div class="cert-title">' + c.title + '</div>' +
+        '<div class="cert-meta">' +
+          '<span>🏢 ' + c.issuer + '</span>' +
+          '<span>📅 ' + c.date + '</span>' +
+        '</div>' +
+        '<div class="cert-desc">' + c.desc + '</div>' +
+      '</div>';
+    certsContainer.appendChild(card);
+  });
+
+</script>
+
 
 </body>
 </html>
