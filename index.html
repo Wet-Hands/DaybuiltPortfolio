@@ -229,14 +229,36 @@
   });
 
   // Projects data
-  const projects = [
-    { icon: '✍️', name: 'Rotary Cube Sorter', desc: 'Final Project for Intro. to Engineering', modal: 'rotary-modal' },
-    { icon: '📊', name: 'DataDash', desc: 'Real-time analytics dashboard. Visualizes data from multiple APIs.', url: 'https://example.com/datadash' },
-    { icon: '✍️', name: 'WritePath', desc: 'Minimalist blogging tool with Markdown support and custom themes.', modal: 'writepath-modal' },
-    { icon: '✍️', name: 'WritePath', desc: 'Minimalist blogging tool with Markdown support and custom themes.', modal: 'writepath-modal' },
-    { icon: '✍️', name: 'WritePath', desc: 'Minimalist blogging tool with Markdown support and custom themes.', modal: 'writepath-modal' },
-    { icon: '✍️', name: 'WritePath', desc: 'Minimalist blogging tool with Markdown support and custom themes.', modal: 'writepath-modal' },
-  ];
+const projects = [
+  {
+    icon: '🛒',
+    name: 'ShopEasy',
+    desc: 'E-commerce platform built with React and Node.js.',
+    modal: {
+      about: 'ShopEasy is a full-featured e-commerce platform handling 10k+ daily users. Built with a focus on performance and conversion.',
+      tags: ['React', 'Node.js', 'SQL', 'CSS / HTML'],
+      url: 'https://example.com/shopeasy',
+      slides: [
+        { caption: 'Product listing page' },
+        { caption: 'Checkout flow' },
+      ]
+    }
+  },
+  {
+    icon: '✍️',
+    name: 'WritePath',
+    desc: 'Minimalist blogging tool with Markdown support.',
+    modal: {
+      about: 'WritePath lets you focus on writing. Markdown-native with live preview and one-click themes.',
+      tags: ['JavaScript', 'Node.js', 'CSS / HTML', 'Figma'],
+      url: 'https://example.com/writepath',
+      slides: [
+        { caption: 'Editor interface' },
+        { caption: 'Theme customiser' },
+      ]
+    }
+  },
+];
 
   const projContainer = document.getElementById('projects-container');
   projects.forEach(p => {
@@ -245,7 +267,7 @@
       card = document.createElement('div');
       card.className = 'project-card';
       card.style.cursor = 'pointer';
-      card.addEventListener('click', () => openModal(p.modal));
+      card.addEventListener('click', () => openModal(p));
       card.innerHTML = `
         <span class="project-icon">${p.icon}</span>
         <div class="project-name">${p.name}</div>
@@ -269,11 +291,21 @@
   });
 
   // Modal
-  function openModal(id) {
-    document.getElementById(id).classList.add('open');
-    document.body.style.overflow = 'hidden';
-    carouselRender();
-  }
+  function openModal(project) {
+  document.getElementById('modal-title').textContent = project.name;
+  document.getElementById('modal-about').innerHTML = project.modal.about;
+  document.getElementById('modal-url').href = project.modal.url;
+
+  const tagsEl = document.getElementById('modal-tags');
+  tagsEl.innerHTML = project.modal.tags
+    .map(t => `<span class="modal-tag">${t}</span>`)
+    .join('');
+
+  // load slides into carousel...
+  loadSlides(project.modal.slides);
+
+  document.getElementById('project-modal').classList.add('open');
+}
   function closeModal() {
     document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('open'));
     document.body.style.overflow = '';
@@ -361,159 +393,23 @@
   });
 </script>
 
-<!-- WritePath Modal -->
-<div class="modal-overlay" id="writepath-modal">
+<div class="modal-overlay" id="project-modal">
   <div class="modal-window">
     <div class="title-bar">
-      <div class="title-bar-left">
-        <svg class="title-icon" viewBox="0 0 16 16"><rect x="1" y="4" width="14" height="10" fill="none" stroke="#fff" stroke-width="1.5"/><polyline points="1,4 5,1 11,1 15,4" fill="none" stroke="#fff" stroke-width="1.5"/></svg>
-        WritePath — Project Details
-      </div>
+      <div class="title-bar-left" id="modal-title">Project Details</div>
       <div class="title-bar-buttons">
         <div class="win-btn" onclick="closeModal()">✕</div>
       </div>
     </div>
     <div class="modal-body">
-
-      <!-- Carousel -->
-      <div class="carousel">
-        <div class="carousel-viewport" id="carousel-viewport">
-          <div class="carousel-slide active">
-            <div class="slide-placeholder">
-              ✍️
-              <span style="font-size:12px;">Screenshot 1</span>
-            </div>
-            <div class="slide-caption">Home screen — clean editor interface</div>
-          </div>
-          <div class="carousel-slide">
-            <div class="slide-placeholder" style="background:#0a2a1a;">
-              🎨
-              <span style="font-size:12px;">Screenshot 2</span>
-            </div>
-            <div class="slide-caption">Theme customiser — 6 built-in colour schemes</div>
-          </div>
-          <div class="carousel-slide">
-            <div class="slide-placeholder" style="background:#2a1a0a;">
-              📝
-              <span style="font-size:12px;">Screenshot 3</span>
-            </div>
-            <div class="slide-caption">Markdown preview — live split-pane rendering</div>
-          </div>
-          <div class="carousel-slide">
-            <div class="slide-placeholder" style="background:#1a0a2a;">
-              📦
-              <span style="font-size:12px;">Screenshot 4</span>
-            </div>
-            <div class="slide-caption">Export options — PDF, HTML, and plain text</div>
-          </div>
-        </div>
-        <div class="carousel-controls">
-          <button class="carousel-btn" id="carousel-prev" onclick="carouselMove(-1)">◀ Prev</button>
-          <div class="carousel-dots" id="carousel-dots"></div>
-          <span class="carousel-counter" id="carousel-counter">1 / 4</span>
-          <button class="carousel-btn" id="carousel-next" onclick="carouselMove(1)">Next ▶</button>
-        </div>
-      </div>
-
-      <!-- About -->
+      <div class="carousel"> ... </div>
       <div class="modal-section-title">📄 About</div>
-      <div class="modal-text">
-        WritePath is a minimalist blogging and writing tool built for people who want to focus on words, not configuration. It supports Markdown natively, renders a live preview as you type, and lets you export finished pieces as PDF, clean HTML, or plain text.<br><br>
-        Themes can be swapped in one click — no CSS knowledge needed. Everything is stored locally; no account required to get started.
-      </div>
-
-      <!-- Tech stack tags -->
+      <div class="modal-text" id="modal-about"></div>
       <div class="modal-section-title">🔧 Built with</div>
-      <div class="modal-tags">
-        <span class="modal-tag">JavaScript</span>
-        <span class="modal-tag">Node.js</span>
-        <span class="modal-tag">CSS / HTML</span>
-        <span class="modal-tag">Marked.js</span>
-        <span class="modal-tag">Electron</span>
-        <span class="modal-tag">Figma</span>
-      </div>
-
+      <div class="modal-tags" id="modal-tags"></div>
     </div>
     <div class="modal-footer">
-      <a class="modal-action-btn" href="https://example.com/writepath" target="_blank" rel="noopener">🌐 Visit Site</a>
-      <button class="modal-action-btn" onclick="closeModal()">Close</button>
-    </div>
-  </div>
-</div>
-
-<!-- Rotary Modal -->
-<div class="modal-overlay" id="rotary-modal">
-  <div class="modal-window">
-    <div class="title-bar">
-      <div class="title-bar-left">
-        <svg class="title-icon" viewBox="0 0 16 16"><rect x="1" y="4" width="14" height="10" fill="none" stroke="#fff" stroke-width="1.5"/><polyline points="1,4 5,1 11,1 15,4" fill="none" stroke="#fff" stroke-width="1.5"/></svg>
-        Rotary Based Cube Sorter — Project Details
-      </div>
-      <div class="title-bar-buttons">
-        <div class="win-btn" onclick="closeModal()">✕</div>
-      </div>
-    </div>
-    <div class="modal-body">
-
-      <!-- Carousel -->
-      <div class="carousel">
-        <div class="carousel-viewport" id="carousel-viewport">
-          <div class="carousel-slide active">
-            <div class="slide-placeholder">
-              ✍️
-              <span style="font-size:12px;">Screenshot 1</span>
-            </div>
-            <div class="slide-caption">Home screen — clean editor interface</div>
-          </div>
-          <div class="carousel-slide">
-            <div class="slide-placeholder" style="background:#0a2a1a;">
-              🎨
-              <span style="font-size:12px;">Screenshot 2</span>
-            </div>
-            <div class="slide-caption">Theme customiser — 6 built-in colour schemes</div>
-          </div>
-          <div class="carousel-slide">
-            <div class="slide-placeholder" style="background:#2a1a0a;">
-              📝
-              <span style="font-size:12px;">Screenshot 3</span>
-            </div>
-            <div class="slide-caption">Markdown preview — live split-pane rendering</div>
-          </div>
-          <div class="carousel-slide">
-            <div class="slide-placeholder" style="background:#1a0a2a;">
-              📦
-              <span style="font-size:12px;">Screenshot 4</span>
-            </div>
-            <div class="slide-caption">Export options — PDF, HTML, and plain text</div>
-          </div>
-        </div>
-        <div class="carousel-controls">
-          <button class="carousel-btn" id="carousel-prev" onclick="carouselMove(-1)">◀ Prev</button>
-          <div class="carousel-dots" id="carousel-dots"></div>
-          <span class="carousel-counter" id="carousel-counter">1 / 4</span>
-          <button class="carousel-btn" id="carousel-next" onclick="carouselMove(1)">Next ▶</button>
-        </div>
-      </div>
-
-      <!-- About -->
-      <div class="modal-section-title">📄 About</div>
-      <div class="modal-text">
-        Our team was presented with the need to automate the quality assurance of 2-inch wood blocks they produce. The following requirements for the sorting process identifies and bins cubes that do not meet the size specification, identifies and bins cubes that meet the size specification but not the color specification, sorts and bins cubes that meet both specifications by color. Also providing the following cube specifications, a cube measurement of 2.00” ± 0.10” and that the cube color is green, yellow, or orange. 
-To accomplish this task, our team presented an automated cube sorting machine based on a rotating base design. Made of three main components: the frame, sensor subassembly, and sorting bins mounted on a rotating base.
-      </div>
-
-      <!-- Tech stack tags -->
-      <div class="modal-section-title">🔧 Built with</div>
-      <div class="modal-tags">
-        <span class="modal-tag">Arduino</span>
-        <span class="modal-tag">C</span>
-        <span class="modal-tag">SolidWorks</span>
-        <span class="modal-tag">Project Management</span>
-        <span class="modal-tag">Project Documentation</span>
-      </div>
-
-    </div>
-    <div class="modal-footer">
+      <a class="modal-action-btn" id="modal-url" href="#" target="_blank">🌐 Visit Site</a>
       <button class="modal-action-btn" onclick="closeModal()">Close</button>
     </div>
   </div>
