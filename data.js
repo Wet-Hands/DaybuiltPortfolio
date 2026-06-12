@@ -59,7 +59,7 @@ const projects = [
     modal: {
       about: 'Our team automated the quality assurance of 2-inch wood blocks. The sorter identifies and bins cubes that fail size or color specs, then sorts passing cubes by color (green, yellow, or orange). Built around a rotating base with three main components: the frame, sensor subassembly, and sorting bins.',
       tags: ['Arduino', 'C', 'SolidWorks', 'Project Management', 'Project Documentation'],
-      url: '',
+      url: 'pdfs/rotary.pdf',
       slides: [
         { img: 'photos/projects/rotary1.png', caption: 'Full machine assembly' },
       ]
@@ -271,7 +271,7 @@ const certifications = [
     modal: {
       about: 'Training on the problem-solving capabilities of Snap-on® digital multimeters — the same technology used by professionals. Ranges from basic voltage/current measurement to advanced circuit troubleshooting techniques.',
       tags: ['Multimeter', 'Electrical Measurement', 'Troubleshooting', 'DC/AC Circuits'],
-      url: 'file:///home/iand/Projects/Website/DaybuiltPortfolio/pdfs/meter-cert.pdf',
+      url: 'pdfs/meter-cert.pdf',
       slides: [
         { img: 'photos/awards/multimeter.png', caption: 'Snap-On multimeter certification badge' },
         //{ pdf: 'pdfs/meter-cert.pdf', caption: 'Certificate PDF' },
@@ -320,7 +320,7 @@ const certifications = [
     modal: {
       about: 'The Snap-on Precision Measuring Instruments Certification enables graduates to demonstrate a solid understanding of thefundamentals of working with precision measurement instruments.',
       tags: ['Caliper', 'Precision Measurement', 'Troubleshooting'],
-      url: 'portfolio.daybuilt.net/pdfs/caliper-cert.pdf',
+      url: 'pdfs/caliper-cert.pdf',
       slides: [
         { img: 'photos/awards/PMI_2.png', caption: 'PMI Caliper Measurement Certification badge' },
       ]
