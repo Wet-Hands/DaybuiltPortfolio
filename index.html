@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Portfolio - Windows 95</title>
+<link rel="stylesheet" href="portfolio-win95.css">
+</head>
+<body>
+
+<div class="desktop">
+
+  <!-- Header Window -->
+  <div class="window">
+    <div class="title-bar">
+      <div class="title-bar-left">
+        <svg class="title-icon" viewBox="0 0 16 16"><rect x="1" y="1" width="6" height="6" fill="#fff"/><rect x="9" y="1" width="6" height="6" fill="#fff"/><rect x="1" y="9" width="6" height="6" fill="#fff"/><rect x="9" y="9" width="6" height="6" fill="#fff"/></svg>
+        My Portfolio
+      </div>
+      <div class="title-bar-buttons">
+        <div class="win-btn">_</div>
+        <div class="win-btn">□</div>
+        <div class="win-btn">✕</div>
+      </div>
+    </div>
+    <div class="window-content">
+      <div class="profile-row">
+        <div class="avatar">👤</div>
+        <div>
+          <h1>Alex Rivera</h1>
+          <div style="color:#000080; font-weight:bold; margin-bottom:4px;">Full-Stack Developer &amp; Designer</div>
+          <div class="inset" style="padding:6px 10px; font-size:11px; line-height:1.5;">
+            Hello! I build things for the web. Currently open to new opportunities.
+          </div>
+        </div>
+      </div>
+      <div class="status-bar" style="margin-top:8px;">
+        <div class="status-panel">📍 San Francisco, CA</div>
+        <div class="status-panel">🎓 B.S. Computer Science, 2021</div>
+        <div class="status-panel">💼 3 years experience</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="two-col">
+
+    <!-- About Window -->
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-left">
+          <svg class="title-icon" viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12" fill="none" stroke="#fff" stroke-width="1.5"/><line x1="5" y1="6" x2="11" y2="6" stroke="#fff" stroke-width="1.5"/><line x1="5" y1="9" x2="9" y2="9" stroke="#fff" stroke-width="1.5"/></svg>
+          README.txt
+        </div>
+        <div class="title-bar-buttons">
+          <div class="win-btn">_</div>
+          <div class="win-btn">□</div>
+          <div class="win-btn">✕</div>
+        </div>
+      </div>
+      <div class="window-content">
+        <div class="inset">
+          <p>I'm a developer who loves clean code and thoughtful design. I've worked on everything from small business websites to large-scale web apps.</p>
+          <p>Outside of work, I contribute to open source and write about software on my blog.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skills Window -->
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-left">
+          <svg class="title-icon" viewBox="0 0 16 16"><polygon points="8,2 14,14 2,14" fill="none" stroke="#fff" stroke-width="1.5"/></svg>
+          Skills.exe
+        </div>
+        <div class="title-bar-buttons">
+          <div class="win-btn">_</div>
+          <div class="win-btn">□</div>
+          <div class="win-btn">✕</div>
+        </div>
+      </div>
+      <div class="window-content">
+        <div id="skills-container"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Projects Window -->
+  <div class="window">
+    <div class="title-bar">
+      <div class="title-bar-left">
+        <svg class="title-icon" viewBox="0 0 16 16"><rect x="1" y="4" width="14" height="10" fill="none" stroke="#fff" stroke-width="1.5"/><polyline points="1,4 5,1 11,1 15,4" fill="none" stroke="#fff" stroke-width="1.5"/></svg>
+        Projects
+      </div>
+      <div class="title-bar-buttons">
+        <div class="win-btn">_</div>
+        <div class="win-btn">□</div>
+        <div class="win-btn">✕</div>
+      </div>
+    </div>
+    <div class="window-content">
+      <div class="three-col" id="projects-container"></div>
+    </div>
+    <div class="status-bar">
+      <div class="status-panel">3 object(s)</div>
+    </div>
+  </div>
+
+  <!-- Experience Window -->
+  <div class="window">
+    <div class="title-bar">
+      <div class="title-bar-left">
+        <svg class="title-icon" viewBox="0 0 16 16"><rect x="2" y="5" width="12" height="9" fill="none" stroke="#fff" stroke-width="1.5"/><path d="M5 5V3h6v2" fill="none" stroke="#fff" stroke-width="1.5"/></svg>
+        Work History
+      </div>
+      <div class="title-bar-buttons">
+        <div class="win-btn">_</div>
+        <div class="win-btn">□</div>
+        <div class="win-btn">✕</div>
+      </div>
+    </div>
+    <div class="window-content">
+      <div id="experience-container"></div>
+    </div>
+  </div>
+
+  <!-- Contact Window -->
+  <div class="window">
+    <div class="title-bar">
+      <div class="title-bar-left">
+        <svg class="title-icon" viewBox="0 0 16 16"><rect x="1" y="3" width="14" height="10" fill="none" stroke="#fff" stroke-width="1.5"/><polyline points="1,3 8,9 15,3" fill="none" stroke="#fff" stroke-width="1.5"/></svg>
+        Contact
+      </div>
+      <div class="title-bar-buttons">
+        <div class="win-btn">_</div>
+        <div class="win-btn">□</div>
+        <div class="win-btn">✕</div>
+      </div>
+    </div>
+    <div class="window-content">
+      <div class="contact-row">
+        <a class="contact-chip" href="mailto:alex@example.com">✉ alex@example.com</a>
+        <a class="contact-chip" href="#">🔗 linkedin.com/in/alexrivera</a>
+        <a class="contact-chip" href="#">🐙 github.com/alexrivera</a>
+        <a class="contact-chip" href="#">🌐 alexrivera.dev</a>
+      </div>
+    </div>
+    <div class="status-bar">
+      <div class="status-panel">Ready</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Taskbar -->
+<div class="taskbar">
+  <button class="start-btn">
+    <svg width="16" height="16" viewBox="0 0 16 16"><rect x="1" y="1" width="6" height="6" fill="#f00"/><rect x="9" y="1" width="6" height="6" fill="#0f0"/><rect x="1" y="9" width="6" height="6" fill="#00f"/><rect x="9" y="9" width="6" height="6" fill="#ff0"/></svg>
+    Start
+  </button>
+  <div class="taskbar-divider"></div>
+  <div class="taskbar-item">📄 My Portfolio</div>
+  <div class="taskbar-clock" id="clock">00:00</div>
+</div>
+
+<script>
+  // Clock
+  function updateClock() {
+    const now = new Date();
+    const h = String(now.getHours()).padStart(2, '0');
+    const m = String(now.getMinutes()).padStart(2, '0');
+    document.getElementById('clock').textContent = h + ':' + m;
+  }
+  updateClock();
+  setInterval(updateClock, 10000);
+
+  // Skills — grouped by category; bars = number of projects this skill appears in
+  // Each skill lists which project(s) it was used in
+  const skillCategories = [
+    {
+      label: '🖥 Frontend',
+      skills: [
+        { name: 'React',       projects: ['ShopEasy', 'DataDash'] },
+        { name: 'CSS / HTML',  projects: ['ShopEasy', 'WritePath', 'DataDash'] },
+        { name: 'JavaScript',  projects: ['ShopEasy', 'WritePath', 'DataDash'] },
+      ]
+    },
+    {
+      label: '⚙ Backend',
+      skills: [
+        { name: 'Node.js',     projects: ['ShopEasy', 'WritePath'] },
+        { name: 'Python',      projects: ['DataDash'] },
+        { name: 'SQL',         projects: ['ShopEasy', 'DataDash'] },
+      ]
+    },
+    {
+      label: '🔧 Tools',
+      skills: [
+        { name: 'Git',         projects: ['ShopEasy', 'DataDash', 'WritePath'] },
+        { name: 'Docker',      projects: ['ShopEasy'] },
+        { name: 'Figma',       projects: ['WritePath', 'DataDash'] },
+      ]
+    },
+  ];
+
+  // Total number of projects (for bar scale)
+  const totalProjects = 3;
+
+  const skillsContainer = document.getElementById('skills-container');
+  skillCategories.forEach(cat => {
+    const catEl = document.createElement('div');
+    catEl.className = 'skill-category';
+    catEl.innerHTML = `<div class="skill-category-label">${cat.label}</div>`;
+
+    cat.skills.forEach(s => {
+      const count = s.projects.length;
+      const blocks = Array.from({ length: count }, () =>
+        `<div class="progress-block"></div>`).join('');
+      const usedIn = s.projects.join(', ');
+      const row = document.createElement('div');
+      row.className = 'skill-row';
+      row.innerHTML = `
+        <span class="skill-label">${s.name}</span>
+        <div class="progress-track" title="Used in ${count} of ${totalProjects} projects" style="width:${totalProjects * 14}px">${blocks}</div>
+        <span class="skill-used-in">${usedIn}</span>
+      `;
+      catEl.appendChild(row);
+    });
+
+    skillsContainer.appendChild(catEl);
+  });
+
+  // Projects data
+  const projects = [
+    { icon: '🛒', name: 'ShopEasy', desc: 'E-commerce platform built with React and Node.js. Handles 10k+ daily users.', url: 'https://example.com/shopeasy' },
+    { icon: '📊', name: 'DataDash', desc: 'Real-time analytics dashboard. Visualizes data from multiple APIs.', url: 'https://example.com/datadash' },
+    { icon: '✍️', name: 'WritePath', desc: 'Minimalist blogging tool with Markdown support and custom themes.', modal: 'writepath-modal' },
+  ];
+
+  const projContainer = document.getElementById('projects-container');
+  projects.forEach(p => {
+    let card;
+    if (p.modal) {
+      card = document.createElement('div');
+      card.className = 'project-card';
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', () => openModal(p.modal));
+      card.innerHTML = `
+        <span class="project-icon">${p.icon}</span>
+        <div class="project-name">${p.name}</div>
+        <div class="project-desc">${p.desc}</div>
+        <span class="project-link-label">📂 View details</span>
+      `;
+    } else {
+      card = document.createElement('a');
+      card.className = 'project-card';
+      card.href = p.url;
+      card.target = '_blank';
+      card.rel = 'noopener noreferrer';
+      card.innerHTML = `
+        <span class="project-icon">${p.icon}</span>
+        <div class="project-name">${p.name}</div>
+        <div class="project-desc">${p.desc}</div>
+        <span class="project-link-label">🌐 Open project ↗</span>
+      `;
+    }
+    projContainer.appendChild(card);
+  });
+
+  // Modal
+  function openModal(id) {
+    document.getElementById(id).classList.add('open');
+    document.body.style.overflow = 'hidden';
+    carouselRender();
+  }
+  function closeModal() {
+    document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('open'));
+    document.body.style.overflow = '';
+  }
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // Carousel
+  let carouselIndex = 0;
+  function carouselRender() {
+    const slides = document.querySelectorAll('#carousel-viewport .carousel-slide');
+    const dots   = document.getElementById('carousel-dots');
+    const counter = document.getElementById('carousel-counter');
+    const total = slides.length;
+    slides.forEach((s, i) => s.classList.toggle('active', i === carouselIndex));
+    counter.textContent = `${carouselIndex + 1} / ${total}`;
+    document.getElementById('carousel-prev').disabled = carouselIndex === 0;
+    document.getElementById('carousel-next').disabled = carouselIndex === total - 1;
+    // dots
+    dots.innerHTML = '';
+    for (let i = 0; i < total; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'carousel-dot' + (i === carouselIndex ? ' active' : '');
+      dot.addEventListener('click', () => { carouselIndex = i; carouselRender(); });
+      dots.appendChild(dot);
+    }
+  }
+  function carouselMove(dir) {
+    const total = document.querySelectorAll('#carousel-viewport .carousel-slide').length;
+    carouselIndex = Math.max(0, Math.min(total - 1, carouselIndex + dir));
+    carouselRender();
+  }
+
+  // Experience data
+  const experience = [
+    { company: 'Acme Corp', role: 'Senior Frontend Developer', dates: 'Jan 2023 – Present', desc: 'Led UI redesign that improved conversion by 22%. Mentored two junior engineers.' },
+    { company: 'Startup XYZ', role: 'Full-Stack Developer', dates: 'Jun 2021 – Dec 2022', desc: 'Built and shipped three core product features. Stack: React, Python, PostgreSQL.' },
+  ];
+
+  const expContainer = document.getElementById('experience-container');
+  experience.forEach((e, i) => {
+    if (i > 0) {
+      const div = document.createElement('div');
+      div.className = 'divider';
+      expContainer.appendChild(div);
+    }
+    const row = document.createElement('div');
+    row.className = 'raised';
+    row.style.marginBottom = '4px';
+    row.innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:2px;">
+        <strong>${e.role}</strong>
+        <span style="font-size:11px; color:#444;">${e.dates}</span>
+      </div>
+      <div style="color:#000080; font-size:11px; margin-bottom:4px;">${e.company}</div>
+      <div style="font-size:11px;">${e.desc}</div>
+    `;
+    expContainer.appendChild(row);
+  });
+</script>
+
+<!-- WritePath Modal -->
+<div class="modal-overlay" id="writepath-modal">
+  <div class="modal-window">
+    <div class="title-bar">
+      <div class="title-bar-left">
+        <svg class="title-icon" viewBox="0 0 16 16"><rect x="1" y="4" width="14" height="10" fill="none" stroke="#fff" stroke-width="1.5"/><polyline points="1,4 5,1 11,1 15,4" fill="none" stroke="#fff" stroke-width="1.5"/></svg>
+        WritePath — Project Details
+      </div>
+      <div class="title-bar-buttons">
+        <div class="win-btn" onclick="closeModal()">✕</div>
+      </div>
+    </div>
+    <div class="modal-body">
+
+      <!-- Carousel -->
+      <div class="carousel">
+        <div class="carousel-viewport" id="carousel-viewport">
+          <div class="carousel-slide active">
+            <div class="slide-placeholder">
+              ✍️
+              <span style="font-size:12px;">Screenshot 1</span>
+            </div>
+            <div class="slide-caption">Home screen — clean editor interface</div>
+          </div>
+          <div class="carousel-slide">
+            <div class="slide-placeholder" style="background:#0a2a1a;">
+              🎨
+              <span style="font-size:12px;">Screenshot 2</span>
+            </div>
+            <div class="slide-caption">Theme customiser — 6 built-in colour schemes</div>
+          </div>
+          <div class="carousel-slide">
+            <div class="slide-placeholder" style="background:#2a1a0a;">
+              📝
+              <span style="font-size:12px;">Screenshot 3</span>
+            </div>
+            <div class="slide-caption">Markdown preview — live split-pane rendering</div>
+          </div>
+          <div class="carousel-slide">
+            <div class="slide-placeholder" style="background:#1a0a2a;">
+              📦
+              <span style="font-size:12px;">Screenshot 4</span>
+            </div>
+            <div class="slide-caption">Export options — PDF, HTML, and plain text</div>
+          </div>
+        </div>
+        <div class="carousel-controls">
+          <button class="carousel-btn" id="carousel-prev" onclick="carouselMove(-1)">◀ Prev</button>
+          <div class="carousel-dots" id="carousel-dots"></div>
+          <span class="carousel-counter" id="carousel-counter">1 / 4</span>
+          <button class="carousel-btn" id="carousel-next" onclick="carouselMove(1)">Next ▶</button>
+        </div>
+      </div>
+
+      <!-- About -->
+      <div class="modal-section-title">📄 About</div>
+      <div class="modal-text">
+        WritePath is a minimalist blogging and writing tool built for people who want to focus on words, not configuration. It supports Markdown natively, renders a live preview as you type, and lets you export finished pieces as PDF, clean HTML, or plain text.<br><br>
+        Themes can be swapped in one click — no CSS knowledge needed. Everything is stored locally; no account required to get started.
+      </div>
+
+      <!-- Tech stack tags -->
+      <div class="modal-section-title">🔧 Built with</div>
+      <div class="modal-tags">
+        <span class="modal-tag">JavaScript</span>
+        <span class="modal-tag">Node.js</span>
+        <span class="modal-tag">CSS / HTML</span>
+        <span class="modal-tag">Marked.js</span>
+        <span class="modal-tag">Electron</span>
+        <span class="modal-tag">Figma</span>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <a class="modal-action-btn" href="https://example.com/writepath" target="_blank" rel="noopener">🌐 Visit Site</a>
+      <button class="modal-action-btn" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

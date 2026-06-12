@@ -1,0 +1,593 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: #008080;
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    color: #000;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  /* Window component */
+  .window {
+    background: #c0c0c0;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+    margin-bottom: 16px;
+    box-shadow: 2px 2px 0 #000;
+  }
+
+  .title-bar {
+    background: linear-gradient(to right, #000080, #1084d0);
+    color: #fff;
+    padding: 3px 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 12px;
+    user-select: none;
+  }
+
+  .title-bar-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .title-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .title-bar-buttons {
+    display: flex;
+    gap: 2px;
+  }
+
+  .win-btn {
+    width: 16px;
+    height: 14px;
+    background: #c0c0c0;
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #404040;
+    border-bottom: 1px solid #404040;
+    font-size: 9px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    color: #000;
+  }
+
+  .win-btn:active {
+    border-top: 1px solid #404040;
+    border-left: 1px solid #404040;
+    border-right: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+  }
+
+  .window-content {
+    padding: 12px;
+  }
+
+  /* Inset panel */
+  .inset {
+    background: #fff;
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    padding: 10px;
+  }
+
+  /* Outset / raised */
+  .raised {
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+    padding: 6px 10px;
+    background: #c0c0c0;
+  }
+
+  /* Divider */
+  .divider {
+    border-top: 1px solid #808080;
+    border-bottom: 1px solid #fff;
+    margin: 8px 0;
+  }
+
+  /* Layout */
+  .desktop {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .three-col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  /* Header profile */
+  .profile-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .avatar {
+    width: 64px;
+    height: 64px;
+    background: #000080;
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    flex-shrink: 0;
+  }
+
+  h1 { font-size: 18px; font-weight: bold; margin-bottom: 2px; }
+  h2 { font-size: 13px; font-weight: bold; margin-bottom: 8px; }
+  p  { line-height: 1.5; margin-bottom: 6px; }
+  p:last-child { margin-bottom: 0; }
+
+  /* Skills — category + project context */
+  .skill-category {
+    margin-bottom: 10px;
+  }
+
+  .skill-category-label {
+    font-weight: bold;
+    font-size: 11px;
+    color: #fff;
+    background: #000080;
+    padding: 1px 6px;
+    display: inline-block;
+    margin-bottom: 5px;
+  }
+
+  .skill-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 5px;
+  }
+
+  .skill-label {
+    width: 86px;
+    font-size: 11px;
+    flex-shrink: 0;
+  }
+
+  .progress-track {
+    height: 14px;
+    background: #fff;
+    border-top: 1px solid #404040;
+    border-left: 1px solid #404040;
+    border-right: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    overflow: hidden;
+    display: flex;
+    gap: 2px;
+    padding: 2px;
+    flex-shrink: 0;
+  }
+
+  .progress-block {
+    height: 10px;
+    width: 10px;
+    background: #000080;
+    flex-shrink: 0;
+  }
+
+  .skill-used-in {
+    font-size: 10px;
+    color: #444;
+    font-style: italic;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Project cards */
+  .project-card {
+    background: #c0c0c0;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+    padding: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #000;
+    display: block;
+  }
+
+  .project-card:hover {
+    background: #d0d0d0;
+  }
+
+  .project-card:active {
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+  }
+
+  .project-icon {
+    font-size: 28px;
+    display: block;
+    margin-bottom: 4px;
+    text-align: center;
+  }
+
+  .project-name {
+    font-weight: bold;
+    font-size: 11px;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+
+  .project-desc {
+    font-size: 11px;
+    color: #333;
+    margin-bottom: 6px;
+  }
+
+  .project-link-label {
+    display: block;
+    text-align: center;
+    font-size: 10px;
+    color: #000080;
+    text-decoration: underline;
+  }
+
+  /* Status bar */
+  .status-bar {
+    display: flex;
+    gap: 4px;
+    padding: 4px 6px 2px;
+    border-top: 1px solid #808080;
+  }
+
+  .status-panel {
+    flex: 1;
+    background: #c0c0c0;
+    border-top: 1px solid #404040;
+    border-left: 1px solid #404040;
+    border-right: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    padding: 1px 6px;
+    font-size: 11px;
+  }
+
+  /* Taskbar */
+  .taskbar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: 32px;
+    background: #c0c0c0;
+    border-top: 2px solid #fff;
+    display: flex;
+    align-items: center;
+    padding: 0 4px;
+    gap: 4px;
+    z-index: 100;
+  }
+
+  .start-btn {
+    height: 24px;
+    padding: 0 10px;
+    background: #c0c0c0;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+    font-weight: bold;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .start-btn:active {
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+  }
+
+  .taskbar-divider {
+    width: 1px;
+    height: 24px;
+    background: #808080;
+    box-shadow: 1px 0 0 #fff;
+  }
+
+  .taskbar-clock {
+    margin-left: auto;
+    border-top: 1px solid #404040;
+    border-left: 1px solid #404040;
+    border-right: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    padding: 2px 8px;
+    font-size: 12px;
+    min-width: 60px;
+    text-align: center;
+  }
+
+  .taskbar-item {
+    height: 24px;
+    padding: 0 8px;
+    background: #c0c0c0;
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Contact row */
+  .contact-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .contact-chip {
+    background: #c0c0c0;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+    padding: 3px 10px;
+    font-size: 11px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #000;
+  }
+
+  .contact-chip:hover {
+    background: #000080;
+    color: #fff;
+  }
+
+  /* Bottom padding for taskbar */
+  .desktop { padding-bottom: 48px; }
+
+  @media (max-width: 600px) {
+    .two-col, .three-col { grid-template-columns: 1fr; }
+    body { padding: 8px; }
+  }
+
+  /* Modal overlay */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+
+  /* Modal window */
+  .modal-window {
+    background: #c0c0c0;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+    box-shadow: 4px 4px 0 #000;
+    width: 520px;
+    max-width: 95vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal-body {
+    padding: 12px;
+    overflow-y: auto;
+    flex: 1;
+  }
+
+  /* Carousel */
+  .carousel {
+    position: relative;
+    margin-bottom: 12px;
+  }
+
+  .carousel-viewport {
+    background: #000;
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    overflow: hidden;
+    height: 220px;
+    position: relative;
+  }
+
+  .carousel-slide {
+    display: none;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .carousel-slide.active { display: flex; }
+
+  .carousel-slide img {
+    max-width: 100%;
+    max-height: 180px;
+    object-fit: contain;
+    display: block;
+  }
+
+  .carousel-slide .slide-placeholder {
+    width: 100%;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    background: #1a1a2e;
+    color: #fff;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .slide-caption {
+    font-size: 10px;
+    color: #ccc;
+    text-align: center;
+    padding: 4px;
+    background: #111;
+    width: 100%;
+  }
+
+  .carousel-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 6px;
+  }
+
+  .carousel-btn {
+    background: #c0c0c0;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+    padding: 2px 12px;
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  .carousel-btn:active {
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+  }
+  .carousel-btn:disabled {
+    color: #808080;
+    cursor: default;
+  }
+
+  .carousel-counter {
+    font-size: 11px;
+    color: #444;
+  }
+
+  .carousel-dots {
+    display: flex;
+    gap: 4px;
+  }
+  .carousel-dot {
+    width: 8px; height: 8px;
+    background: #808080;
+    border-top: 1px solid #404040;
+    border-left: 1px solid #404040;
+    border-right: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    cursor: pointer;
+  }
+  .carousel-dot.active {
+    background: #000080;
+  }
+
+  /* Modal text content */
+  .modal-section-title {
+    font-weight: bold;
+    font-size: 12px;
+    background: #000080;
+    color: #fff;
+    padding: 2px 6px;
+    margin-bottom: 6px;
+    display: inline-block;
+  }
+
+  .modal-text {
+    font-size: 11px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+    padding: 8px;
+    background: #fff;
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+  }
+
+  .modal-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 10px;
+  }
+
+  .modal-tag {
+    background: #c0c0c0;
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #404040;
+    border-bottom: 1px solid #404040;
+    padding: 1px 6px;
+    font-size: 10px;
+  }
+
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 6px;
+    padding: 8px 12px;
+    border-top: 1px solid #808080;
+    box-shadow: 0 -1px 0 #fff;
+  }
+
+  .modal-action-btn {
+    background: #c0c0c0;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+    padding: 3px 16px;
+    font-size: 12px;
+    cursor: pointer;
+    min-width: 75px;
+    text-align: center;
+    text-decoration: none;
+    color: #000;
+    display: inline-block;
+  }
+  .modal-action-btn:active {
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+  }
