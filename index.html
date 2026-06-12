@@ -307,11 +307,24 @@
   }
 
   // Experience data
+
+
   const experience = [
-    { company: 'College of Southern Maryland', role: 'Electrical Engineering', dates: '2025 – Present', desc: 'At CSM I have been going for my Associates in Electrical Engineering. After about 3 years, I plan on transferring to the University of Maryland via the USMSM Transfer plan and taking classes here in Southern Maryland. Skills: C, C++, Soldering.' },
-    { company: 'James A. Forrest Career & Technology Center', role: 'Engineering | Cybersecurity', dates: '2023 – 2025', desc: 'The Dr. James A. Forrest Career and Technology Center strongly defined my secondary education. I first applied in my freshmen year for the very competitive IT Networking academy and I got rejected despite my previous experience. In my sophomore year I applied and got accepted to the also competitive Engineering program. At the end of my first year of Engineering and competing in SkillsUSA with the IT teacher she personally invited me to be in her Cybersecurity elective class (Also known as the IT Networking Year 3, meaning I got the best of both worlds). Skills: C, Python, AutoCAD, SolidWorks, Project Documentation, Inventory Management, Networking, Cybersecurity Practices.' },
-    { company: 'Leonardtown High School', role: 'CTE Pathway | Diploma', dates: '2021 – 2025', desc: 'At Leonardtown High School is where I took my Computer Science classes. During my time, I founded the Party Game Club and ran the schools Minecraft server called Raidercraft through six seasons of new gameplay. I also started a small group of my peers where I taught them simple programming concepts and game development skills. Skills: JavaScript, Java, Server Administration, Project Management.' },
-  ];
+  {
+    company: 'Acme Corp',
+    role: 'Senior Frontend Developer',
+    dates: 'Jan 2023 – Present',
+    desc: 'Led UI redesign that improved conversion by 22%. Mentored two junior engineers.',
+    tags: ['React', 'CSS / HTML', 'JavaScript', 'Figma']
+  },
+  {
+    company: 'Startup XYZ',
+    role: 'Full-Stack Developer',
+    dates: 'Jun 2021 – Dec 2022',
+    desc: 'Built and shipped three core product features. Stack: React, Python, PostgreSQL.',
+    tags: ['React', 'Python', 'SQL', 'Node.js']
+  },
+];
 
   const expContainer = document.getElementById('experience-container');
   experience.forEach((e, i) => {
@@ -329,7 +342,10 @@
         <span style="font-size:11px; color:#444;">${e.dates}</span>
       </div>
       <div style="color:#000080; font-size:11px; margin-bottom:4px;">${e.company}</div>
-      <div style="font-size:11px;">${e.desc}</div>
+      <div style="font-size:11px; margin-bottom:6px;">${e.desc}</div>
+      <div style="display:flex; flex-wrap:wrap; gap:4px;">
+        ${e.tags.map(t => `<span class="modal-tag">${t}</span>`).join('')}
+      </div>
     `;
     expContainer.appendChild(row);
   });
