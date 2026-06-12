@@ -230,8 +230,11 @@
 
   // Projects data
   const projects = [
-    { icon: '🛒', name: 'ShopEasy', desc: 'E-commerce platform built with React and Node.js. Handles 10k+ daily users.', url: 'https://example.com/shopeasy' },
+    { icon: '✍️', name: 'Rotary Cube Sorter', desc: 'Final Project for Intro. to Engineering', modal: 'rotary-modal' },
     { icon: '📊', name: 'DataDash', desc: 'Real-time analytics dashboard. Visualizes data from multiple APIs.', url: 'https://example.com/datadash' },
+    { icon: '✍️', name: 'WritePath', desc: 'Minimalist blogging tool with Markdown support and custom themes.', modal: 'writepath-modal' },
+    { icon: '✍️', name: 'WritePath', desc: 'Minimalist blogging tool with Markdown support and custom themes.', modal: 'writepath-modal' },
+    { icon: '✍️', name: 'WritePath', desc: 'Minimalist blogging tool with Markdown support and custom themes.', modal: 'writepath-modal' },
     { icon: '✍️', name: 'WritePath', desc: 'Minimalist blogging tool with Markdown support and custom themes.', modal: 'writepath-modal' },
   ];
 
@@ -433,6 +436,84 @@
     </div>
     <div class="modal-footer">
       <a class="modal-action-btn" href="https://example.com/writepath" target="_blank" rel="noopener">🌐 Visit Site</a>
+      <button class="modal-action-btn" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Rotary Modal -->
+<div class="modal-overlay" id="rotary-modal">
+  <div class="modal-window">
+    <div class="title-bar">
+      <div class="title-bar-left">
+        <svg class="title-icon" viewBox="0 0 16 16"><rect x="1" y="4" width="14" height="10" fill="none" stroke="#fff" stroke-width="1.5"/><polyline points="1,4 5,1 11,1 15,4" fill="none" stroke="#fff" stroke-width="1.5"/></svg>
+        Rotary Based Cube Sorter — Project Details
+      </div>
+      <div class="title-bar-buttons">
+        <div class="win-btn" onclick="closeModal()">✕</div>
+      </div>
+    </div>
+    <div class="modal-body">
+
+      <!-- Carousel -->
+      <div class="carousel">
+        <div class="carousel-viewport" id="carousel-viewport">
+          <div class="carousel-slide active">
+            <div class="slide-placeholder">
+              ✍️
+              <span style="font-size:12px;">Screenshot 1</span>
+            </div>
+            <div class="slide-caption">Home screen — clean editor interface</div>
+          </div>
+          <div class="carousel-slide">
+            <div class="slide-placeholder" style="background:#0a2a1a;">
+              🎨
+              <span style="font-size:12px;">Screenshot 2</span>
+            </div>
+            <div class="slide-caption">Theme customiser — 6 built-in colour schemes</div>
+          </div>
+          <div class="carousel-slide">
+            <div class="slide-placeholder" style="background:#2a1a0a;">
+              📝
+              <span style="font-size:12px;">Screenshot 3</span>
+            </div>
+            <div class="slide-caption">Markdown preview — live split-pane rendering</div>
+          </div>
+          <div class="carousel-slide">
+            <div class="slide-placeholder" style="background:#1a0a2a;">
+              📦
+              <span style="font-size:12px;">Screenshot 4</span>
+            </div>
+            <div class="slide-caption">Export options — PDF, HTML, and plain text</div>
+          </div>
+        </div>
+        <div class="carousel-controls">
+          <button class="carousel-btn" id="carousel-prev" onclick="carouselMove(-1)">◀ Prev</button>
+          <div class="carousel-dots" id="carousel-dots"></div>
+          <span class="carousel-counter" id="carousel-counter">1 / 4</span>
+          <button class="carousel-btn" id="carousel-next" onclick="carouselMove(1)">Next ▶</button>
+        </div>
+      </div>
+
+      <!-- About -->
+      <div class="modal-section-title">📄 About</div>
+      <div class="modal-text">
+        WritePath is a minimalist blogging and writing tool built for people who want to focus on words, not configuration. It supports Markdown natively, renders a live preview as you type, and lets you export finished pieces as PDF, clean HTML, or plain text.<br><br>
+        Themes can be swapped in one click — no CSS knowledge needed. Everything is stored locally; no account required to get started.
+      </div>
+
+      <!-- Tech stack tags -->
+      <div class="modal-section-title">🔧 Built with</div>
+      <div class="modal-tags">
+        <span class="modal-tag">Arduino</span>
+        <span class="modal-tag">C</span>
+        <span class="modal-tag">SolidWorks</span>
+        <span class="modal-tag">Project Management</span>
+        <span class="modal-tag">Project Documentation</span>
+      </div>
+
+    </div>
+    <div class="modal-footer">
       <button class="modal-action-btn" onclick="closeModal()">Close</button>
     </div>
   </div>
