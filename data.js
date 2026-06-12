@@ -272,7 +272,7 @@ const certifications = [
       slides: [
         { img: 'photos/awards/skills24-1.jpg', caption: 'All the Competitors Together, with Dave the Skeleton' },
         { img: 'photos/examples/skills24nat.jpg', caption: 'Photo with my friends in Atlanta repping our state.' },
-        // { pdf: 'certs/skillsusa-gold-2024.pdf', caption: 'Certificate PDF' },
+        // { pdf: 'certs/skillsusa-gold-2024.pdf', caption: 'Certificate PDF' }, Test Push
       ]
     }
   },
