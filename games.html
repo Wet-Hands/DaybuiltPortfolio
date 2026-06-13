@@ -170,9 +170,16 @@
   // ══════════════════════════════════════════════════════════════════════════
   var games = [
     {
-      icon: '&#x1F47D;',
+      icon: '&#x1F5E1;',
+      name: 'Dungeon Doom',
+      desc: 'Retro top-down dungeon crawler. Collect keys, fight skeletons and goblins. SkillsUSA States 2024 Gold Medal.',
+      path: 'games/dungeon-doom/index.html',
+      itchio: 'https://wethands.itch.io/dungeon-doom-alpha',
+    },
+    {
+      icon: '&#x1F996;',
       name: 'Stinkys Cheese Adventure',
-      desc: 'Game made in 24 hours for the DMV Jam.',
+      desc: 'Sit-and-survive horror. DMV Jam entry made in less than 24 hours.',
       path: 'games/stinky_cheese_adventure/index.html',
       itchio: 'https://wethands.itch.io/stinkys-cheese-adventure-dmv',
     },
@@ -186,8 +193,16 @@
     card.className = 'game-card';
 
     var launchBtn = g.path
-      ? '<button class="modal-action-btn" onclick="launchGame('' + g.path + '','' + g.name.replace(/'/g,"\'") + '')">&#127918; Launch</button>'
-      : '<button class="modal-action-btn" disabled style="color:#808080;" title="No local export configured">&#127918; Launch</button>';
+  ? `<button class="modal-action-btn"
+       onclick="launchGame('${g.path}','${g.name.replace(/'/g, "\\'")}')">
+       &#127918; Launch
+     </button>`
+  : `<button class="modal-action-btn"
+       disabled
+       style="color:#808080;"
+       title="No local export configured">
+       &#127918; Launch
+     </button>`;
 
     var itchBtn = g.itchio
       ? '<a class="modal-action-btn" href="' + g.itchio + '" target="_blank" rel="noopener">itch.io &#x2197;</a>'
