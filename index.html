@@ -352,7 +352,7 @@
         '<span class="skill-label">' + s.name + '</span>' +
         '<div class="progress-track" title="Used in ' + count + ' of ' + totalProjects + ' projects"' +
           ' style="width:' + (totalProjects * 14) + 'px">' + blocks + '</div>' +
-        '<span class="skill-used-in">' + s.projects.join(', ') + '</span>';
+        '<span class="skill-used-in">' + s.projects.join(' ') + '</span>'; //'<span class="skill-used-in">' + s.projects.join(', ') + '</span>';
       catEl.appendChild(row);
     });
     skillsContainer.appendChild(catEl);

@@ -112,7 +112,7 @@
 
   .two-col {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.7fr 0.5fr;
     gap: 16px;
   }
 
@@ -150,6 +150,7 @@
   p:last-child { margin-bottom: 0; }
 
   /* Skills — category + project context */
+
   .skill-category {
     margin-bottom: 10px;
   }
@@ -172,7 +173,7 @@
   }
 
   .skill-label {
-    width: 86px;
+    width: 65px;
     font-size: 11px;
     flex-shrink: 0;
   }
@@ -189,6 +190,7 @@
     gap: 2px;
     padding: 2px;
     flex-shrink: 0;
+    max-width: 120px;
   }
 
   .progress-block {

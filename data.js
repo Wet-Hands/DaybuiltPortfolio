@@ -28,22 +28,23 @@ const skillCategories = [
   {
     label: '🖥 Programming',
     skills: [
-      { name: 'C / C++',  projects: ['Rotary Cube Sorter', 'DD Terminal'] },
-      { name: 'Python',   projects: ['Rotary Cube Sorter'] },
-      { name: 'gdScript', projects: ['Dungeon Doom', 'Jimmy Rings', 'DinoLand'] },
+      { name: 'C / C++',  projects: [' ', ' ', ' ', ' '] },
+      { name: 'Python',   projects: [' ', ' '] },
+      { name: 'Godot', projects: [' ', ' ', ' ', ' '] },
     ]
   },
   {
     label: '⚙ CAD',
     skills: [
-      { name: 'SolidWorks', projects: ['CoGRU', 'Quadcopter', 'Rotary Cube Sorter'] },
-      { name: 'AutoCAD',    projects: ['Homework Machine'] },
+      { name: 'SolidWorks', projects: [' ', ' ', ' '] },
+      { name: 'AutoCAD',    projects: [' ', ' '] },
     ]
   },
   {
     label: '🔧 Tools',
     skills: [
-      { name: 'Git', projects: ['Jimmy Rings', 'DinoLand', 'DD Terminal'] },
+      { name: 'Multimeter', projects: [' ', ' ', ' '] },
+      { name: 'Precision Measuring', projects: [' ', ' ', ' '] },
     ]
   },
 ];
@@ -216,7 +217,7 @@ const experience = [
 //        url in modal = verification/credential link (shown as "🔗 Verify" button)
 const certifications = [
   {
-    emoji: '🥈',
+    img: 'photos/awards/skillsmaryland.jpg',
     title: 'SkillsUSA State Silver Medal - Interactive Application and Game Design',
     issuer: 'SkillsUSA Maryland',
     date: 'March 2025',
@@ -227,7 +228,21 @@ const certifications = [
       url: '',
       slides: [
         { img: 'photos/awards/skills25-1.jpg', caption: 'Vincent Churilla and I standing infront of our poster' },
-        // { pdf: 'certs/skillsusa-silver-2025.pdf', caption: 'Certificate PDF' },
+      ]
+    }
+  },
+  {
+    img: 'photos/awards/solidworks.png',
+    title: 'Dassault Systèmes - SOLIDWORKS Additive Manufacturing Associate',
+    issuer: 'Dr. James A. Forrest Career & Technology Center',
+    date: 'November 2024',
+    desc: 'Fundamentals of computers and mobile devices, component installation, building and repairing PCs, and basic troubleshooting.',
+    modal: {
+      about: 'Cisco verifies successful completion of the Computer Hardware Basics course. Covers fundamentals of computers and mobile devices, component installation, building and repairing personal computers, and basic troubleshooting tools and techniques.',
+      tags: ['CAD', 'Troubleshooting', 'Manufacturing'],
+      url: 'https://www.credly.com/earner/earned/badge/4b90ca94-2a40-462c-859d-e191ec99354d',
+      slides: [
+        { img: 'photos/awards/solidworks.png', caption: 'SOLIDWORKS badge' },
       ]
     }
   },
@@ -247,7 +262,7 @@ const certifications = [
     }
   },
   {
-    emoji: '🇺🇸',
+    img: 'photos/awards/skillsflclogo.jpg',
     title: 'SkillsUSA Statesmen Award',
     issuer: 'SkillsUSA Maryland',
     date: 'October 2025',
@@ -258,7 +273,6 @@ const certifications = [
       url: '',
       slides: [
         { img: 'photos/awards/skillsflc.jpg', caption: 'We stopped at Crackerbarrel on the way to Ocean City' },
-        // { pdf: 'certs/skillsusa-silver-2025.pdf', caption: 'Certificate PDF' },
       ]
     }
   },
@@ -274,12 +288,11 @@ const certifications = [
       url: 'pdfs/meter-cert.pdf',
       slides: [
         { img: 'photos/awards/multimeter.png', caption: 'Snap-On multimeter certification badge' },
-        //{ pdf: 'pdfs/meter-cert.pdf', caption: 'Certificate PDF' },
       ]
     }
   },
   {
-    emoji: '🥇',
+    img: 'photos/awards/skillsmaryland.jpg',
     title: 'SkillsUSA State Gold Medal - Interactive Application and Game Design',
     issuer: 'SkillsUSA Maryland',
     date: 'April 2024',
@@ -291,7 +304,6 @@ const certifications = [
       slides: [
         { img: 'photos/awards/skills24-1.jpg', caption: 'All the Competitors Together, with Dave the Skeleton' },
         { img: 'photos/examples/skills24nat.jpg', caption: 'Photo with my friends in Atlanta repping our state.' },
-        // { pdf: 'certs/skillsusa-gold-2024.pdf', caption: 'Certificate PDF' }, Test Push
       ]
     }
   },
