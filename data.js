@@ -204,7 +204,7 @@ const experience = [
     company: 'Leonardtown High School',
     role: 'CTE Pathway | Diploma',
     dates: '2021 – 2025',
-    desc: 'Took Computer Science classes, founded the Party Game Club, and ran Raidercraft — the school Minecraft server — through six seasons. Also ran an informal study group teaching peers basic programming and game development.',
+    desc: 'Took Computer Science classes, founded the Party Game Club, and ran Raidercraft, the school Minecraft server, through six seasons. Also ran an informal study group teaching peers basic programming and game development.',
     tags: ['JavaScript', 'Java', 'Server Administration', 'Project Management'],
     // modal: { about: '...', tags: [...], url: '', slides: [...] }
   },
@@ -265,7 +265,7 @@ const certifications = [
     img: 'photos/awards/skillsflclogo.jpg',
     title: 'SkillsUSA Statesmen Award',
     issuer: 'SkillsUSA Maryland',
-    date: 'October 2025',
+    date: 'October 2024',
     desc: 'The SkillsUSA Statesman Award is the highest individual honor a member can earn at the state level.',
     modal: {
       about: 'The SkillsUSA Statesman Award is the highest individual honor a member can earn at the state level. It recognizes students who demonstrate exceptional civic awareness, mastery of SkillsUSA knowledge, and the ability to articulate their Career and Technical Education (CTE) experiences.',      

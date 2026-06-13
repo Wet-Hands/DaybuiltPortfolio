@@ -35,7 +35,7 @@
   .cert-info  { flex: 1; min-width: 0; }
   .cert-title { font-weight: bold; font-size: 12px; }
   .cert-issuer { font-size: 10px; color: #000080; font-weight: bold; margin-bottom: 4px; }
-  .cert-desc  { font-size: 11px; line-height: 1.5; color: #333; }
+  .cert-desc  { font-size: 12px; line-height: 1.5; color: #333; }
   .cert-view-details {
     display: block; font-size: 10px; color: #000080;
     text-decoration: underline; margin-top: 4px;
@@ -87,7 +87,7 @@
     background: #c0c0c0;
     border-top: 2px solid #fff; border-left: 2px solid #fff;
     border-right: 2px solid #404040; border-bottom: 2px solid #404040;
-    font-size: 11px; display: flex; align-items: center;
+    font-size: 13px; display: flex; align-items: center;
     text-decoration: none; color: #000; white-space: nowrap; cursor: pointer;
   }
   .taskbar-link:hover { background: #d0d0d0; }
@@ -116,8 +116,6 @@
     </div>
     <div class="window-content">
       <div class="profile-row">
-        <!-- Profile picture: place your photo at photos/profile.jpg
-             Falls back to the 👤 emoji if the file is missing.          -->
         <div class="avatar" id="profile-avatar">
           <img src="photos/pfp.jpg" alt="Ian Day"
                onclick="openLightbox(this.src, this.alt)"

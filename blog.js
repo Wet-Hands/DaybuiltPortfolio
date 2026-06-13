@@ -20,6 +20,18 @@
 const blogPosts = [
 
   {
+    id:      'dinoland-1',
+    title:   'Just Released Maintainence at DinoLand for the Godot Wild Jam',
+    date:    '2025-07-20',
+    tags:    ['game-dev', 'godot'],
+    summary: 'A recap of building DinoLand for the Godot Wild Jam #83.',
+    content: `
+      <p>This month I submitted <strong>Maintainence at DinoLand</strong>, a sit and survive horror survival game, to the 83rd Godot Wild Jam competition.</p>
+      <p>We didn't start on Day One so I only had 6 days to complete the full game. The Dinosaur's movement system was very easy for me since I had made something similar in the past. However the in-game computer was entirely 2D, which is a facet of Godot I haven't properly worked with before.</p>
+      <p>I was inspired to make a dinosaur horror game after watching Jurrassic World: Rebirth, as it always bothered me that they never did a legitimate horror film. The main gameplay was inspired by the Five Nights at Freddys series of games, specifically this one minigame in Help Wanted where Mangle is coming at your from four sides while you're trying to repair the A/C system.</p>
+    `,
+  },
+  {
     id:      'skillsusa-2025',
     title:   'SkillsUSA 2025 — Silver Medal with Jimmy Rings',
     date:    '2025-04-10',
