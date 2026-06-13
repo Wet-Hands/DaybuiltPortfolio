@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resume.pdf — Day</title>
+<link rel="stylesheet" href="main.css">
+<style>
+
+  /* ── CROSS-PAGE NAVIGATION ──────────────────────────────────────────────── */
+  .taskbar-link {
+    height: 24px; padding: 0 8px;
+    background: #c0c0c0;
+    border-top: 2px solid #fff; border-left: 2px solid #fff;
+    border-right: 2px solid #404040; border-bottom: 2px solid #404040;
+    font-size: 11px; display: flex; align-items: center;
+    text-decoration: none; color: #000; white-space: nowrap; cursor: pointer;
+  }
+  .taskbar-link:hover { background: #d0d0d0; }
+  .taskbar-link.active {
+    border-top: 2px solid #404040; border-left: 2px solid #404040;
+    border-right: 2px solid #fff; border-bottom: 2px solid #fff;
+    background: #b8b8b8;
+  }
+
+
+  /* ── RESUME PAGE ──────────────────────────────────────────────────────── */       */
+
+  .resume-toolbar {
+    display: flex; align-items: center; gap: 6px;
+    padding: 4px 8px; background: #c0c0c0;
+    border-bottom: 1px solid #808080;
+    box-shadow: 0 1px 0 #fff;
+  }
+  .resume-toolbar span {
+    font-size: 11px; color: #444; flex: 1;
+  }
+  .resume-embed-wrap {
+    background: #808080;
+    padding: 8px;
+    /* Fill viewport minus: taskbar(32) + title-bar(~24) + toolbar(~28) + status(~22) + body padding(40) */
+    height: calc(100vh - 180px);
+    min-height: 300px;
+  }
+  .resume-frame {
+    width: 100%; height: 100%;
+    border: none; display: block;
+    background: #fff;
+  }
+  /* Fallback shown if the browser can't embed the PDF */
+  .resume-fallback {
+    display: none;
+    flex-direction: column; align-items: center; justify-content: center;
+    height: 100%; gap: 10px; color: #fff; font-size: 13px; text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="desktop">
+
+  <!-- ── RESUME VIEWER ─────────────────────────────────────────────────── -->
+  <div class="window">
+    <div class="title-bar">
+      <div class="title-bar-left">
+        <svg class="title-icon" viewBox="0 0 16 16">
+          <rect x="3" y="1" width="10" height="14" fill="none" stroke="#fff" stroke-width="1.5"/>
+          <line x1="5" y1="5"  x2="11" y2="5"  stroke="#fff" stroke-width="1"/>
+          <line x1="5" y1="8"  x2="11" y2="8"  stroke="#fff" stroke-width="1"/>
+          <line x1="5" y1="11" x2="9"  y2="11" stroke="#fff" stroke-width="1"/>
+        </svg>
+        resume.pdf — PDF Viewer
+      </div>
+      <div class="title-bar-buttons">
+        <div class="win-btn">_</div>
+        <div class="win-btn">&#9633;</div>
+        <div class="win-btn">&#x2715;</div>
+      </div>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="resume-toolbar">
+      <button class="modal-action-btn"
+              onclick="window.open('resume.pdf','_blank')"
+              title="Open PDF in a new browser tab">
+        &#128196; Open in New Tab &#x2197;
+      </button>
+      <span>resume.pdf &nbsp;|&nbsp; Place your resume at <strong>resume.pdf</strong> in this folder.</span>
+    </div>
+
+    <!-- PDF embed -->
+    <div class="resume-embed-wrap">
+      <iframe class="resume-frame" id="resume-frame"
+              src="resume.pdf"
+              onerror="document.getElementById('resume-fallback').style.display='flex'">
+      </iframe>
+      <!-- Shown if iframe fails (e.g. file not found) -->
+      <div class="resume-fallback" id="resume-fallback">
+        <span style="font-size:48px">&#128196;</span>
+        <span>resume.pdf not found.</span>
+        <span style="font-size:11px;color:#ccc;">Place your resume at <strong>resume.pdf</strong> in this folder.</span>
+      </div>
+    </div>
+
+    <div class="status-bar">
+      <div class="status-panel">resume.pdf</div>
+      <div class="status-panel" style="flex:0;white-space:nowrap;">
+        <a href="resume.pdf" target="_blank"
+           style="color:#000080;text-decoration:underline;font-size:11px;">
+          &#128196; Open in new tab &#x2197;
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /.desktop -->
+
+<!-- ── TASKBAR ──────────────────────────────────────────────────────────── -->
+<div class="taskbar">
+  <button class="start-btn">
+    <svg width="16" height="16" viewBox="0 0 16 16"><rect x="1" y="1" width="6" height="6" fill="#f00"/><rect x="9" y="1" width="6" height="6" fill="#0f0"/><rect x="1" y="9" width="6" height="6" fill="#00f"/><rect x="9" y="9" width="6" height="6" fill="#ff0"/></svg>
+    Start
+  </button>
+  <div class="taskbar-divider"></div>
+  <a class="taskbar-link" href="index.html">&#128196; My Portfolio</a>
+  <a class="taskbar-link active" href="resume.html">&#128196; Resume.pdf</a>
+  <a class="taskbar-link" href="games.html">&#127918; Games.exe</a>
+  <a class="taskbar-link" href="blog.html">&#128221; Blog.exe</a>
+  <div class="taskbar-clock" id="clock">00:00</div>
+</div>
+
+<script>
+
+  function updateClock() {
+    var now = new Date();
+    document.getElementById('clock').textContent =
+      String(now.getHours()).padStart(2,'0') + ':' +
+      String(now.getMinutes()).padStart(2,'0');
+  }
+  updateClock();
+  setInterval(updateClock, 10000);
+
+</script>
+</body>
+</html>

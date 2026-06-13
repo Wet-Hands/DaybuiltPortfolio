@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog.exe — Day</title>
+<link rel="stylesheet" href="main.css">
+<style>
+
+  /* ── CROSS-PAGE NAVIGATION ──────────────────────────────────────────────── */
+  .taskbar-link {
+    height: 24px; padding: 0 8px;
+    background: #c0c0c0;
+    border-top: 2px solid #fff; border-left: 2px solid #fff;
+    border-right: 2px solid #404040; border-bottom: 2px solid #404040;
+    font-size: 11px; display: flex; align-items: center;
+    text-decoration: none; color: #000; white-space: nowrap; cursor: pointer;
+  }
+  .taskbar-link:hover { background: #d0d0d0; }
+  .taskbar-link.active {
+    border-top: 2px solid #404040; border-left: 2px solid #404040;
+    border-right: 2px solid #fff; border-bottom: 2px solid #fff;
+    background: #b8b8b8;
+  }
+
+
+  /* ── BLOG PAGE ────────────────────────────────────────────────────────── */
+
+  /* Two-pane layout: post list left, reading pane right                     */
+  .blog-panes {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 0;
+    /* Fill viewport minus taskbar + title-bar + status-bar + page padding   */
+    height: calc(100vh - 150px);
+    min-height: 300px;
+  }
+
+  /* ── POST LIST (left pane) ──────────────────────────────────────────────── */
+  .blog-list-pane {
+    border-right: 1px solid #808080;
+    box-shadow: 1px 0 0 #fff;
+    overflow-y: auto;
+    background: #fff;
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+  }
+
+  /* Column header bar */
+  .blog-list-header {
+    display: grid;
+    grid-template-columns: 1fr 80px;
+    background: #c0c0c0;
+    border-bottom: 2px solid #404040;
+    font-weight: bold; font-size: 11px;
+    user-select: none; position: sticky; top: 0;
+  }
+  .blog-list-header div {
+    padding: 2px 6px;
+    border-right: 1px solid #808080;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+  }
+  .blog-list-header div:last-child { border-right: none; }
+
+  /* Individual post row */
+  .blog-post-row {
+    display: grid;
+    grid-template-columns: 1fr 80px;
+    border-bottom: 1px solid #c0c0c0;
+    cursor: pointer; font-size: 11px;
+  }
+  .blog-post-row:hover   { background: #000080; color: #fff; }
+  .blog-post-row.selected { background: #000080; color: #fff; }
+  .blog-post-row > div  { padding: 4px 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .blog-post-row .post-date-col { font-size: 10px; text-align: right; opacity: 0.8; }
+
+  /* ── READING PANE (right pane) ──────────────────────────────────────────── */
+  .blog-reading-pane {
+    overflow-y: auto;
+    background: #fff;
+    border-top: 2px solid #404040;
+    border-right: 2px solid #fff;
+  }
+
+  /* Empty state */
+  .blog-empty-state {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    height: 100%; color: #808080; font-size: 12px; gap: 8px;
+  }
+
+  /* Post header inside reading pane */
+  .post-header {
+    padding: 10px 12px 6px;
+    border-bottom: 1px solid #c0c0c0;
+    background: #f0f0f0;
+  }
+  .post-header h2 { font-size: 15px; font-weight: bold; margin-bottom: 4px; }
+  .post-meta {
+    display: flex; gap: 12px; font-size: 10px; color: #444;
+    align-items: center; flex-wrap: wrap;
+  }
+  .post-content {
+    padding: 12px;
+    font-size: 12px;
+    line-height: 1.7;
+  }
+  .post-content p   { margin-bottom: 10px; }
+  .post-content p:last-child { margin-bottom: 0; }
+  .post-content h3  { font-size: 13px; font-weight: bold; margin: 12px 0 6px; }
+  .post-content ul  { margin: 0 0 10px 18px; }
+  .post-content li  { margin-bottom: 4px; }
+  .post-content code {
+    background: #e8e8e8; padding: 1px 4px;
+    font-family: monospace; font-size: 11px;
+  }
+  .post-content pre {
+    background: #1a1a2e; color: #e0e0ff;
+    padding: 8px; font-family: monospace; font-size: 11px;
+    overflow-x: auto; margin-bottom: 10px;
+  }
+
+  /* Tags in reading pane */
+  .post-tag {
+    background: #c0c0c0;
+    border-top: 1px solid #fff; border-left: 1px solid #fff;
+    border-right: 1px solid #404040; border-bottom: 1px solid #404040;
+    padding: 1px 6px; font-size: 10px;
+  }
+
+  @media (max-width: 600px) {
+    .blog-panes { grid-template-columns: 1fr; height: auto; }
+    .blog-list-pane { height: 200px; border-right: none; border-bottom: 1px solid #808080; }
+    .blog-reading-pane { height: 400px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="desktop">
+
+  <!-- ── BLOG WINDOW ───────────────────────────────────────────────────── -->
+  <div class="window">
+    <div class="title-bar">
+      <div class="title-bar-left">
+        <svg class="title-icon" viewBox="0 0 16 16">
+          <rect x="2" y="1" width="12" height="14" fill="none" stroke="#fff" stroke-width="1.5"/>
+          <line x1="4" y1="5"  x2="12" y2="5"  stroke="#fff" stroke-width="1"/>
+          <line x1="4" y1="8"  x2="12" y2="8"  stroke="#fff" stroke-width="1"/>
+          <line x1="4" y1="11" x2="8"  y2="11" stroke="#fff" stroke-width="1"/>
+        </svg>
+        Blog.exe
+      </div>
+      <div class="title-bar-buttons">
+        <div class="win-btn">_</div>
+        <div class="win-btn">&#9633;</div>
+        <div class="win-btn">&#x2715;</div>
+      </div>
+    </div>
+
+    <!-- Two-pane layout -->
+    <div class="blog-panes">
+
+      <!-- Left: post list -->
+      <div class="blog-list-pane">
+        <div class="blog-list-header">
+          <div>Title</div>
+          <div>Date</div>
+        </div>
+        <div id="post-list"></div>
+      </div>
+
+      <!-- Right: reading pane -->
+      <div class="blog-reading-pane" id="reading-pane">
+        <div class="blog-empty-state" id="empty-state">
+          <span style="font-size:32px;">&#128221;</span>
+          <span>Select a post to read</span>
+        </div>
+        <div id="post-content-area" style="display:none;"></div>
+      </div>
+
+    </div>
+
+    <div class="status-bar">
+      <div class="status-panel" id="blog-count">0 post(s)</div>
+      <div class="status-panel" id="blog-selected">No file selected</div>
+    </div>
+  </div>
+
+</div><!-- /.desktop -->
+
+<!-- ── TASKBAR ──────────────────────────────────────────────────────────── -->
+<div class="taskbar">
+  <button class="start-btn">
+    <svg width="16" height="16" viewBox="0 0 16 16"><rect x="1" y="1" width="6" height="6" fill="#f00"/><rect x="9" y="1" width="6" height="6" fill="#0f0"/><rect x="1" y="9" width="6" height="6" fill="#00f"/><rect x="9" y="9" width="6" height="6" fill="#ff0"/></svg>
+    Start
+  </button>
+  <div class="taskbar-divider"></div>
+  <a class="taskbar-link" href="index.html">&#128196; My Portfolio</a>
+  <a class="taskbar-link" href="resume.html">&#128196; Resume.pdf</a>
+  <a class="taskbar-link" href="games.html">&#127918; Games.exe</a>
+  <a class="taskbar-link active" href="blog.html">&#128221; Blog.exe</a>
+  <div class="taskbar-clock" id="clock">00:00</div>
+</div>
+
+<!-- blog.js defines the blogPosts array — add new posts there -->
+<script src="blog.js"></script>
+<script>
+
+  function updateClock() {
+    var now = new Date();
+    document.getElementById('clock').textContent =
+      String(now.getHours()).padStart(2,'0') + ':' +
+      String(now.getMinutes()).padStart(2,'0');
+  }
+  updateClock();
+  setInterval(updateClock, 10000);
+
+
+  // Sort newest first
+  var posts = blogPosts.slice().sort(function(a, b) {
+    return new Date(b.date) - new Date(a.date);
+  });
+
+  document.getElementById('blog-count').textContent = posts.length + ' post(s)';
+
+  // Format date for display: '2025-06-01' → 'Jun 01'
+  function fmtDate(iso) {
+    var d = new Date(iso + 'T00:00:00');
+    return d.toLocaleDateString('en-US', { month: 'short', day: '2-digit' });
+  }
+
+  function fmtDateFull(iso) {
+    var d = new Date(iso + 'T00:00:00');
+    return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  }
+
+  // Render post list
+  var listEl = document.getElementById('post-list');
+  var selectedRow = null;
+
+  posts.forEach(function(post, i) {
+    var row = document.createElement('div');
+    row.className = 'blog-post-row';
+    row.innerHTML =
+      '<div>&#128196; ' + post.title + '</div>' +
+      '<div class="post-date-col">' + fmtDate(post.date) + '</div>';
+    row.addEventListener('click', function() {
+      if (selectedRow) selectedRow.classList.remove('selected');
+      selectedRow = row;
+      row.classList.add('selected');
+      openPost(post);
+    });
+    listEl.appendChild(row);
+  });
+
+  // Open a post in the reading pane
+  function openPost(post) {
+    document.getElementById('empty-state').style.display = 'none';
+    document.getElementById('blog-selected').textContent = post.title;
+
+    var area = document.getElementById('post-content-area');
+    area.style.display = 'block';
+    area.innerHTML =
+      '<div class="post-header">' +
+        '<h2>' + post.title + '</h2>' +
+        '<div class="post-meta">' +
+          '<span>&#128197; ' + fmtDateFull(post.date) + '</span>' +
+          '<span style="display:flex;gap:4px;flex-wrap:wrap;">' +
+            post.tags.map(function(t) { return '<span class="post-tag">' + t + '</span>'; }).join('') +
+          '</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="post-content">' + post.content + '</div>';
+
+    // Scroll reading pane to top
+    document.getElementById('reading-pane').scrollTop = 0;
+  }
+
+  // Open first post by default if there are any
+  if (posts.length > 0) {
+    listEl.firstChild.classList.add('selected');
+    selectedRow = listEl.firstChild;
+    openPost(posts[0]);
+  }
+</script>
+</body>
+</html>

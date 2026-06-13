@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Games.exe — Day</title>
+<link rel="stylesheet" href="main.css">
+<style>
+
+  /* ── CROSS-PAGE NAVIGATION ──────────────────────────────────────────────── */
+  .taskbar-link {
+    height: 24px; padding: 0 8px;
+    background: #c0c0c0;
+    border-top: 2px solid #fff; border-left: 2px solid #fff;
+    border-right: 2px solid #404040; border-bottom: 2px solid #404040;
+    font-size: 11px; display: flex; align-items: center;
+    text-decoration: none; color: #000; white-space: nowrap; cursor: pointer;
+  }
+  .taskbar-link:hover { background: #d0d0d0; }
+  .taskbar-link.active {
+    border-top: 2px solid #404040; border-left: 2px solid #404040;
+    border-right: 2px solid #fff; border-bottom: 2px solid #fff;
+    background: #b8b8b8;
+  }
+
+
+  /* ── GAMES PAGE ───────────────────────────────────────────────────────── */
+
+  /* Game cards — same feel as project cards but slightly taller */
+  .game-card {
+    background: #c0c0c0;
+    border-top: 2px solid #fff; border-left: 2px solid #fff;
+    border-right: 2px solid #404040; border-bottom: 2px solid #404040;
+    padding: 10px; display: flex; flex-direction: column; gap: 6px;
+  }
+  .game-icon  { font-size: 32px; text-align: center; display: block; }
+  .game-name  { font-weight: bold; font-size: 12px; text-align: center; }
+  .game-desc  { font-size: 11px; color: #333; flex: 1; }
+  .game-btns  { display: flex; gap: 4px; }
+  .game-btns .modal-action-btn { flex: 1; font-size: 11px; padding: 3px 4px; }
+
+  /* Warning bar shown when a game path is not configured */
+  .game-warn {
+    font-size: 10px; color: #800000; text-align: center;
+    background: #ffffc0;
+    border-top: 1px solid #808080; border-bottom: 1px solid #fff;
+    padding: 2px 6px;
+  }
+
+  /* ── FULLSCREEN GAME OVERLAY ──────────────────────────────────────────── */
+  /* Covers the entire viewport when a game is running.                      */
+  /* NOTE: Godot 4 exports need SharedArrayBuffer, which requires the server */
+  /* to send Cross-Origin-Opener-Policy and Cross-Origin-Embedder-Policy     */
+  /* headers. This works on most hosting providers but NOT via file://.      */
+  .game-overlay {
+    display: none; position: fixed; inset: 0; z-index: 500;
+    flex-direction: column; background: #000;
+  }
+  .game-overlay.open { display: flex; }
+  .game-overlay .title-bar { flex-shrink: 0; }
+  .game-overlay-body {
+    flex: 1; position: relative; overflow: hidden;
+  }
+  .game-frame {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%; border: none;
+  }
+  .game-overlay-status {
+    flex-shrink: 0;
+    display: flex; gap: 4px;
+    padding: 3px 6px 2px;
+    border-top: 1px solid #808080;
+    background: #c0c0c0;
+  }
+</style>
+</head>
+<body>
+
+<div class="desktop">
+
+  <!-- ── GAME LIBRARY ──────────────────────────────────────────────────── -->
+  <div class="window">
+    <div class="title-bar">
+      <div class="title-bar-left">
+        <svg class="title-icon" viewBox="0 0 16 16">
+          <rect x="1" y="4" width="14" height="9" rx="2" fill="none" stroke="#fff" stroke-width="1.5"/>
+          <line x1="8" y1="1" x2="8" y2="4" stroke="#fff" stroke-width="1.5"/>
+          <circle cx="5" cy="8.5" r="1" fill="#fff"/>
+          <circle cx="11" cy="8.5" r="1" fill="#fff"/>
+          <line x1="8" y1="7" x2="8" y2="10" stroke="#fff" stroke-width="1.5"/>
+          <line x1="6.5" y1="8.5" x2="9.5" y2="8.5" stroke="#fff" stroke-width="1.5"/>
+        </svg>
+        Games.exe — Game Launcher
+      </div>
+      <div class="title-bar-buttons">
+        <div class="win-btn">_</div>
+        <div class="win-btn">&#9633;</div>
+        <div class="win-btn">&#x2715;</div>
+      </div>
+    </div>
+    <div class="window-content">
+      <div class="inset" style="padding:6px 10px;font-size:11px;margin-bottom:10px;">
+        Click <strong>Launch</strong> to play a game in-browser using the local Godot web export.
+        If the game does not load, use <strong>itch.io &#x2197;</strong> to play online.
+        Godot 4 exports require a web server &mdash; they will not run via <code>file://</code>.
+      </div>
+      <div class="three-col" id="games-container"></div>
+    </div>
+    <div class="status-bar">
+      <div class="status-panel" id="games-count">0 object(s)</div>
+      <div class="status-panel">Double-click to launch</div>
+    </div>
+  </div>
+
+</div><!-- /.desktop -->
+
+<!-- ── FULLSCREEN GAME LAUNCHER OVERLAY ──────────────────────────────────── -->
+<!-- Appears over the whole page when a game is running.                      -->
+<div class="game-overlay" id="game-overlay">
+  <div class="title-bar">
+    <div class="title-bar-left" id="game-overlay-title">&#127918; Game</div>
+    <div class="title-bar-buttons">
+      <div class="win-btn" onclick="closeGame()" title="Exit game">&#x2715;</div>
+    </div>
+  </div>
+  <div class="game-overlay-body">
+    <iframe class="game-frame" id="game-frame" src="" allowfullscreen
+            allow="autoplay; fullscreen; gamepad"></iframe>
+  </div>
+  <div class="game-overlay-status">
+    <div class="status-panel" id="game-overlay-status">Running...</div>
+    <div class="status-panel" style="flex:0;white-space:nowrap;">
+      Press <strong>&#x2715;</strong> or <kbd>Esc</kbd> to exit
+    </div>
+  </div>
+</div>
+
+<!-- ── TASKBAR ──────────────────────────────────────────────────────────── -->
+<div class="taskbar">
+  <button class="start-btn">
+    <svg width="16" height="16" viewBox="0 0 16 16"><rect x="1" y="1" width="6" height="6" fill="#f00"/><rect x="9" y="1" width="6" height="6" fill="#0f0"/><rect x="1" y="9" width="6" height="6" fill="#00f"/><rect x="9" y="9" width="6" height="6" fill="#ff0"/></svg>
+    Start
+  </button>
+  <div class="taskbar-divider"></div>
+  <a class="taskbar-link" href="index.html">&#128196; My Portfolio</a>
+  <a class="taskbar-link" href="resume.html">&#128196; Resume.pdf</a>
+  <a class="taskbar-link active" href="games.html">&#127918; Games.exe</a>
+  <a class="taskbar-link" href="blog.html">&#128221; Blog.exe</a>
+  <div class="taskbar-clock" id="clock">00:00</div>
+</div>
+
+<script>
+
+  function updateClock() {
+    var now = new Date();
+    document.getElementById('clock').textContent =
+      String(now.getHours()).padStart(2,'0') + ':' +
+      String(now.getMinutes()).padStart(2,'0');
+  }
+  updateClock();
+  setInterval(updateClock, 10000);
+
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // GAMES DATA
+  // ── To add a game ────────────────────────────────────────────────────────
+  // 1. Export your Godot project for Web (Project → Export → Web)
+  // 2. Put the exported folder in games/<folder-name>/
+  // 3. Add an entry below with path: 'games/<folder-name>/index.html'
+  // 4. If you don't have a local export yet, set path: '' and use itchio only
+  // ══════════════════════════════════════════════════════════════════════════
+  var games = [
+    {
+      icon: '&#x1F47D;',
+      name: 'Stinkys Cheese Adventure',
+      desc: 'Game made in 24 hours for the DMV Jam.',
+      path: 'games/stinky-cheese-adventure/index.html',
+      itchio: 'https://wethands.itch.io/stinkys-cheese-adventure-dmv',
+    },
+  ];
+
+  // Render game cards
+  var gamesContainer = document.getElementById('games-container');
+  document.getElementById('games-count').textContent = games.length + ' object(s)';
+  games.forEach(function(g) {
+    var card = document.createElement('div');
+    card.className = 'game-card';
+
+    var launchBtn = g.path
+      ? '<button class="modal-action-btn" onclick="launchGame('' + g.path + '','' + g.name.replace(/'/g,"\'") + '')">&#127918; Launch</button>'
+      : '<button class="modal-action-btn" disabled style="color:#808080;" title="No local export configured">&#127918; Launch</button>';
+
+    var itchBtn = g.itchio
+      ? '<a class="modal-action-btn" href="' + g.itchio + '" target="_blank" rel="noopener">itch.io &#x2197;</a>'
+      : '';
+
+    card.innerHTML =
+      '<span class="game-icon">' + g.icon + '</span>' +
+      '<div class="game-name">' + g.name + '</div>' +
+      '<div class="game-desc">' + g.desc + '</div>' +
+      (!g.path ? '<div class="game-warn">No local export &mdash; use itch.io</div>' : '') +
+      '<div class="game-btns">' + launchBtn + itchBtn + '</div>';
+    gamesContainer.appendChild(card);
+  });
+
+  // ── Game overlay ─────────────────────────────────────────────────────────
+  function launchGame(path, name) {
+    document.getElementById('game-overlay-title').innerHTML = '&#127918; ' + name;
+    document.getElementById('game-overlay-status').textContent = name + ' — running';
+    document.getElementById('game-frame').src = path;
+    document.getElementById('game-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeGame() {
+    // Clear the src first to stop the game audio/loop before hiding
+    document.getElementById('game-frame').src = '';
+    document.getElementById('game-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeGame();
+  });
+</script>
+</body>
+</html>

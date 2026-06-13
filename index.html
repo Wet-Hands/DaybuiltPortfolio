@@ -80,6 +80,23 @@
 
   /* ── CLICKABLE CAROUSEL IMAGES ──────────────────────────────────────────── */
   .carousel-viewport img { cursor: zoom-in; display: block; }
+
+  /* ── CROSS-PAGE NAVIGATION ──────────────────────────────────────────────── */
+  .taskbar-link {
+    height: 24px; padding: 0 8px;
+    background: #c0c0c0;
+    border-top: 2px solid #fff; border-left: 2px solid #fff;
+    border-right: 2px solid #404040; border-bottom: 2px solid #404040;
+    font-size: 11px; display: flex; align-items: center;
+    text-decoration: none; color: #000; white-space: nowrap; cursor: pointer;
+  }
+  .taskbar-link:hover { background: #d0d0d0; }
+  .taskbar-link.active {
+    border-top: 2px solid #404040; border-left: 2px solid #404040;
+    border-right: 2px solid #fff; border-bottom: 2px solid #fff;
+    background: #b8b8b8;
+  }
+
 </style>
 </head>
 <body>
@@ -248,14 +265,17 @@
 
 </div><!-- /.desktop -->
 
-<!-- ── TASKBAR ────────────────────────────────────────────────────────────── -->
+<!-- ── TASKBAR ──────────────────────────────────────────────────────────── -->
 <div class="taskbar">
   <button class="start-btn">
     <svg width="16" height="16" viewBox="0 0 16 16"><rect x="1" y="1" width="6" height="6" fill="#f00"/><rect x="9" y="1" width="6" height="6" fill="#0f0"/><rect x="1" y="9" width="6" height="6" fill="#00f"/><rect x="9" y="9" width="6" height="6" fill="#ff0"/></svg>
     Start
   </button>
   <div class="taskbar-divider"></div>
-  <div class="taskbar-item">&#128196; My Portfolio</div>
+  <a class="taskbar-link active" href="index.html">&#128196; My Portfolio</a>
+  <a class="taskbar-link" href="resume.html">&#128196; Resume.pdf</a>
+  <a class="taskbar-link" href="games.html">&#127918; Games.exe</a>
+  <a class="taskbar-link" href="blog.html">&#128221; Blog.exe</a>
   <div class="taskbar-clock" id="clock">00:00</div>
 </div>
 
@@ -352,7 +372,7 @@
         '<span class="skill-label">' + s.name + '</span>' +
         '<div class="progress-track" title="Used in ' + count + ' of ' + totalProjects + ' projects"' +
           ' style="width:' + (totalProjects * 14) + 'px">' + blocks + '</div>' +
-        '<span class="skill-used-in">' + s.projects.join(' ') + '</span>'; //'<span class="skill-used-in">' + s.projects.join(', ') + '</span>';
+        '<span class="skill-used-in">' + s.projects.join('') + '</span>'; //'<span class="skill-used-in">' + s.projects.join(', ') + '</span>';
       catEl.appendChild(row);
     });
     skillsContainer.appendChild(catEl);
