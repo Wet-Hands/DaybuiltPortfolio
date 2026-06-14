@@ -186,8 +186,8 @@ const projects = [
 const experience = [
   {
     company: 'College of Southern Maryland',
-    role: 'Associates of Science in Electrical Engineering',
-    dates: '2025 – Present',
+    role: 'Associates of Science in Electrical Engineering [In Progress...]',
+    dates: '2025 – 2028',
     desc: 'At CSM I have been going for my Associates in Electrical Engineering. After about 3 years, I plan on transferring to the University of Maryland via the USMSM Transfer plan and taking classes here in Southern Maryland.',
     tags: ['C', 'C++', 'MatLab', 'SolidWorks', 'Project Documentation'],
     // modal: { about: '...', tags: [...], url: '', slides: [...] }
