@@ -41,9 +41,23 @@ const blogPosts = [
       <ul>
         <li>LibreDivers - Inspired by Arrowhead Studios' hit release, <a href="https://store.steampowered.com/app/553850/HELLDIVERS_2/">Helldivers: II</a>. The main idea would be that players could choose between different self-hosted galactic wars.</li>
         <li>LibreSurvivors - Inspired by the Survivors genre, popularized by games like <a href="https://store.steampowered.com/app/1794680/Vampire_Survivors/">Vampire Survivors</a> and <a href="https://store.steampowered.com/app/3405340/Megabonk/">Megabonk</a>. The heroes and enemy selection would be taken from the Public Domain; Featuring characters such as Thor, Winnie the Pooh, and the <a href="https://pdsh.fandom.com/wiki/Iron_Ace">Iron Ace</a>. </li>
-        <li>LibreFighters - In actuality, I believe my friend Vincent Churilla would like to lead development, but I would like to help out. A data-driven platform fighting game; Featuring Public Domain characters like in the previously mentioned 'LibreSurvivors'.</li>
+        <li>LibreFighters - In actuality, I believe my friend <a href="https://www.linkedin.com/in/vincent-churilla-9aaa65397/">Vincent Churilla</a> would like to lead development, but I would like to help out. A data-driven platform fighting game; Featuring Public Domain characters like in the previously mentioned 'LibreSurvivors'.</li>
       </ul>
       <p>All of these games would be built using FOSS such as the Godot Engine, Blender, Krita, Aseprite, and others. The only money gained would be from donations, whether that's individuals, organizations, and/or colleges. The money would go towards optional Official Servers and publishing fees. </p>
+      `,
+  },
+  {
+    id:      'egr1150',
+    title:   'Intro. to Engineering Final',
+    date:    '2025-12-12',
+    tags:    ['arduino', 'c', 'data', 'project-management', 'project-documentation'],
+    summary: 'A recap of the final project.',
+    content: `
+      <p>For my Introduction to Engineering class, we were put into groups and given the same engineering problem to solve. We had roughly two months to design a solution, implement the solution, and document the process in great detail. My team consisted of Austin Balcom, William Bowling, <a href="https://www.linkedin.com/in/mia-iampieri/">Mia Iampieri</a>, and I.</p>
+      <p>Our team was presented with the need to automate the quality assurance of 2-inch wood blocks they produce. The following requirements for the sorting process identifies and bins cubes that do not meet the size specification, identifies and bins cubes that meet the size specification but not the color specification, sorts and bins cubes that meet both specifications by color. Also providing the following cube specifications, a cube measurement of 2.00” ± 0.10” and that the cube color is green, yellow, or orange.</p>
+      <p>To accomplish this task, our team presented an automated cube sorting machine based on a rotating base design. Made of three main components: the frame, sensor subassembly, and sorting bins mounted on a rotating base.</p>
+      <p>It was my job to wire the all of the electrical components and program the logic via the Arduino in C. What made programming this very challenging was the low quality of the sensors, it wouldn't be uncommon to get a random spike in a certain color value. So what I did is I sampled the color value of the cube 10 times, then if a large majority were the same color it would choose that color. After that problem was solved, it came down to finding ways to speed up this process, as there was a four minute time limit that usually isn't a problem. </p>
+      <p>The extra care I put into data sanitization paid off big, not only did we ace the demo, but we were the only group to complete a demo without error. And amazingly during our demo, the machine worked at double the usual speed, interrupting me as I was explaining to the class how it worked.</p>
       `,
   },
   {

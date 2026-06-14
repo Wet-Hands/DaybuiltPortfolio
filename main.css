@@ -371,7 +371,7 @@ body {
     border-right: 2px solid #404040;
     border-bottom: 2px solid #404040;
     padding: 3px 10px;
-    font-size: 11px;
+    font-size: 13px;
     cursor: pointer;
     text-decoration: none;
     color: #000;
@@ -494,6 +494,7 @@ body {
     border-bottom: 2px solid #404040;
     padding: 2px 12px;
     font-size: 12px;
+    font-family: 'Win95';
     cursor: pointer;
     font-weight: bold;
   }
@@ -567,7 +568,7 @@ body {
     border-right: 1px solid #404040;
     border-bottom: 1px solid #404040;
     padding: 1px 6px;
-    font-size: 10px;
+    font-size: 12px;
   }
 
   .modal-footer {
@@ -591,6 +592,7 @@ body {
     min-width: 75px;
     text-align: center;
     text-decoration: none;
+    font-family: 'Win95';
     color: #000;
     display: inline-block;
   }

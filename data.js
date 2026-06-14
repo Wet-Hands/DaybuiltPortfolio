@@ -62,7 +62,10 @@ const projects = [
       tags: ['Arduino', 'C', 'SolidWorks', 'Project Management', 'Project Documentation', 'Data'],
       url: 'pdfs/rotary.pdf',
       slides: [
-        { img: 'photos/projects/rotary1.png', caption: 'Full machine assembly' },
+        { img: 'photos/projects/rotary1.png', caption: 'Full machine assembly; Bold example of function over form' },
+        { img: 'photos/projects/rotary/assem.png', caption: 'Assembly of the full machine' },
+        { img: 'photos/projects/rotary/assem2.png', caption: 'Pieced assembly of the full machine' },
+        { img: 'photos/projects/rotary/schem.png', caption: 'Schematic of my wiring' },
       ]
     }
   },
@@ -212,7 +215,7 @@ const projects = [
       tags: ['Server Administration', 'Networking', 'SQL', 'JSON'],
       url: '',
       slides: [
-        { img: 'photos/projects/d',  caption: 'Game Art' },
+        { img: 'photos/projects/d',  caption: 'N/A' },
       ]
     }
   },
