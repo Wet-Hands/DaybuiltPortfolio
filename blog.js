@@ -19,9 +19,19 @@
 
 const blogPosts = [
 
+    {
+    id:      'factorio-1',
+    title:   'Been getting into Factorio',
+    date:    '2026-05-14',
+    tags:    ['gaming', 'logistics'],
+    summary: 'Having fun with a logistics game.',
+    content: `
+      <p>I had some Steam Credit stored up from christmas and decided to take the plunge and purchase Factorio. After playing Minecraft: Create for roughly 400+ hours I figured I'd try the game that inspired it.</p>
+    `,
+  },
   {
     id:      'dinoland-1',
-    title:   'Just Released Maintainence at DinoLand for the Godot Wild Jam',
+    title:   'Released Maintainence at DinoLand for the Godot Wild Jam',
     date:    '2025-07-20',
     tags:    ['game-dev', 'godot'],
     summary: 'A recap of building DinoLand for the Godot Wild Jam #83.',
@@ -64,7 +74,11 @@ const blogPosts = [
     tags:    ['skills-usa', 'game-dev', 'personal'],
     summary: 'My time at Nationals Competition',
     content: `
-      <img src="photos/blog/nationals/group.jpg" alt="My Friends and I repping our state hat." width="200" height="150">
+      <img src="photos/blog/nationals/group.jpg" alt="My Friends and I repping our state hat." width="200" height="150"
+      onclick="openLightbox(this.src, this.alt)"
+       style="max-width:100%; cursor:zoom-in; display:block; margin:8px 0;
+              border-top:2px solid #404040; border-left:2px solid #404040;
+              border-right:2px solid #fff; border-bottom:2px solid #fff;">
       <p>Nationals was probably one of, if not the, coolest experience of my life. Being able to meet so many fellow students also into programming and game develop was so exciting. SkillsUSA really does feel like one big club.</p>
     `,
   },

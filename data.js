@@ -308,7 +308,6 @@ const certifications = [
         { img: 'photos/awards/skills24/4.jpg', caption: 'SkillsUSA Announces Medalists for Interactive App. and Game Design.' },
         { img: 'photos/awards/skills24/3.jpg', caption: 'Vincent Churilla and I getting our golden photo.' },
         { img: 'photos/awards/skills24/2.jpg', caption: 'All the Competitors Together, all Medalists' },
-        { img: 'photos/examples/skills24nat.jpg', caption: 'Photo with my friends in Atlanta repping our state.' },
       ]
     }
   },

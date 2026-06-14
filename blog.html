@@ -126,13 +126,39 @@
     background: #c0c0c0;
     border-top: 1px solid #fff; border-left: 1px solid #fff;
     border-right: 1px solid #404040; border-bottom: 1px solid #404040;
-    padding: 1px 6px; font-size: 10px;
+    padding: 1px 6px; font-size: 11px;
   }
 
   @media (max-width: 600px) {
     .blog-panes { grid-template-columns: 1fr; height: auto; }
     .blog-list-pane { height: 200px; border-right: none; border-bottom: 1px solid #808080; }
     .blog-reading-pane { height: 400px; }
+  }
+  .lightbox-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.8); z-index: 400;
+  align-items: center; justify-content: center;
+}
+  .lightbox-overlay.open { display: flex; }
+  .lightbox-win {
+    background: #c0c0c0;
+    border-top: 2px solid #fff; border-left: 2px solid #fff;
+    border-right: 2px solid #404040; border-bottom: 2px solid #404040;
+    box-shadow: 4px 4px 0 #000;
+    max-width: 92vw; max-height: 92vh;
+    display: flex; flex-direction: column;
+  }
+  .lightbox-body {
+    padding: 4px; background: #000;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .lightbox-body img {
+    max-width: calc(92vw - 8px); max-height: calc(92vh - 52px);
+    object-fit: contain; display: block;
+  }
+  .lightbox-statusbar {
+    display: flex; padding: 3px 6px 2px;
+    border-top: 1px solid #808080;
   }
 </style>
 </head>
@@ -204,7 +230,7 @@
   <div class="taskbar-clock" id="clock">00:00</div>
 </div>
 
-<!-- blog.js defines the blogPosts array — add new posts there -->
+<!-- blog.js defines the blogPosts array -->
 <script src="blog.js"></script>
 <script>
 
@@ -284,6 +310,34 @@
     selectedRow = listEl.firstChild;
     openPost(posts[0]);
   }
+  function openLightbox(src, alt) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox-caption').textContent = alt || '';
+  document.getElementById('lightbox').classList.add('open');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
 </script>
+
+<div id="lightbox" class="lightbox-overlay" onclick="closeLightbox()">
+  <div class="lightbox-win" onclick="event.stopPropagation()">
+    <div class="title-bar">
+      <div class="title-bar-left">&#128444; Image Viewer</div>
+      <div class="title-bar-buttons">
+        <div class="win-btn" onclick="closeLightbox()">&#x2715;</div>
+      </div>
+    </div>
+    <div class="lightbox-body">
+      <img id="lightbox-img" src="" alt="">
+    </div>
+    <div class="lightbox-statusbar">
+      <div class="status-panel" id="lightbox-caption"></div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
