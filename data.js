@@ -269,10 +269,12 @@ const certifications = [
     desc: 'The SkillsUSA Statesman Award is the highest individual honor a member can earn at the state level.',
     modal: {
       about: 'The SkillsUSA Statesman Award is the highest individual honor a member can earn at the state level. It recognizes students who demonstrate exceptional civic awareness, mastery of SkillsUSA knowledge, and the ability to articulate their Career and Technical Education (CTE) experiences.',      
-      tags: ['Project Management', 'Leadership', 'Teamwork', 'Marshmallow Toothpick Tower Construction'],
+      tags: ['Project Management', 'Leadership', 'Teamwork', 'Marshmallow Noodle Tower Construction'],
       url: '',
       slides: [
-        { img: 'photos/awards/skillsflc.jpg', caption: 'We stopped at Crackerbarrel on the way to Ocean City' },
+        { img: 'photos/awards/flc/1.jpg', caption: 'We stopped at Crackerbarrel on the way to Ocean City' },
+        { img: 'photos/awards/flc/2.jpg', caption: 'I bought an oversized dinosaur at Crackerbarrel. Named him Mr. Crackerbarrel Dinosaur. Vincent did not like sitting with Mr. CBD and I.' },
+        { img: 'photos/awards/flc/3.jpg', caption: 'The Spaghetti Noodle and Marshmallow Tower.' },
       ]
     }
   },
@@ -302,7 +304,10 @@ const certifications = [
       tags: ['Game Design', 'Godot', 'gdScript', 'Krita'],
       url: '',
       slides: [
-        { img: 'photos/awards/skills24-1.jpg', caption: 'All the Competitors Together, with Dave the Skeleton' },
+        { img: 'photos/awards/skills24/1.jpg', caption: 'All the Competitors Together, with Dave the Skeleton.' },
+        { img: 'photos/awards/skills24/4.jpg', caption: 'SkillsUSA Announces Medalists for Interactive App. and Game Design.' },
+        { img: 'photos/awards/skills24/3.jpg', caption: 'Vincent Churilla and I getting our golden photo.' },
+        { img: 'photos/awards/skills24/2.jpg', caption: 'All the Competitors Together, all Medalists' },
         { img: 'photos/examples/skills24nat.jpg', caption: 'Photo with my friends in Atlanta repping our state.' },
       ]
     }
