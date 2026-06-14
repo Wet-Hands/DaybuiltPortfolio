@@ -22,15 +22,15 @@
 // ── SKILLS ──────────────────────────────────────────────────────────────────
 // Bars show how many projects each skill appears in — no self-rating needed.
 // Update totalProjects when you add or remove projects below.
-const totalProjects = 9;
+const totalProjects = 12;
 
 const skillCategories = [
   {
     label: '🖥 Programming',
     skills: [
-      { name: 'C / C++',  projects: [' ', ' ', ' ', ' '] },
-      { name: 'Python',   projects: [' ', ' '] },
-      { name: 'Godot', projects: [' ', ' ', ' ', ' '] },
+      { name: 'C / C++',  projects: [' ', ' ', ' ', ' ', ' '] },
+      { name: 'Godot', projects: [' ', ' ', ' ', ' ', ' '] },
+      { name: 'SQL',   projects: [' ', ' '] },
     ]
   },
   {
