@@ -26,7 +26,7 @@ const blogPosts = [
     tags:    ['gaming', 'logistics'],
     summary: 'Having fun with a logistics game.',
     content: `
-      <p>I had some Steam Credit stored up from christmas and decided to take the plunge and purchase Factorio. After playing Minecraft: Create for roughly 400+ hours I figured I'd try the game that inspired it.</p>
+      <p>I had some Steam Credit stored up from christmas and decided to take the plunge and purchase <a href="https://store.steampowered.com/app/427520/Factorio/">Factorio</a>. After playing <a href="https://modrinth.com/mod/create">Minecraft: Create</a> for roughly 400+ hours I figured I'd try the game that inspired it.</p>
     `,
   },
   {
