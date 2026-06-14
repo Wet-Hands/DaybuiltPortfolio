@@ -59,7 +59,7 @@ const projects = [
     desc: 'Final project for Intro to Engineering.',
     modal: {
       about: 'Our team automated the quality assurance of 2-inch wood blocks. The sorter identifies and bins cubes that fail size or color specs, then sorts passing cubes by color (green, yellow, or orange). Built around a rotating base with three main components: the frame, sensor subassembly, and sorting bins.',
-      tags: ['Arduino', 'C', 'SolidWorks', 'Project Management', 'Project Documentation'],
+      tags: ['Arduino', 'C', 'SolidWorks', 'Project Management', 'Project Documentation', 'Data'],
       url: 'pdfs/rotary.pdf',
       slides: [
         { img: 'photos/projects/rotary1.png', caption: 'Full machine assembly' },
@@ -126,7 +126,7 @@ const projects = [
     desc: 'Mechanical drop system for a drone, 3 bottles on 3 targets.',
     modal: {
       about: 'Designed, fabricated, and field-tested a mechanical release system mounted to a quadcopter. Drops three water bottles sequentially onto three ground targets.',
-      tags: ['SolidWorks', 'Mechanical Design'],
+      tags: ['SolidWorks', 'Mechanical Design', 'Data'],
       url: 'https://sites.google.com/view/salty-dogs-drones25/home',
       slides: [
         { img: 'photos/projects/drone1.jpg', caption: 'Group Photo with Drone' },
@@ -173,6 +173,46 @@ const projects = [
         { img: 'photos/projects/dino1.png',  caption: 'Game Art' },
         { img: 'photos/projects/dino2.png',  caption: 'In-game computer mini-game' },
         { img: 'photos/projects/dino3.png',  caption: 'Dinosaur peeking around the corner!' },
+      ]
+    }
+  },
+  {
+    icon: '🎮',
+    name: 'LibreGames',
+    desc: 'Free & Open Source Video Game Development.',
+    modal: {
+      about: 'The goal of LibreGames is for people interested in any aspect of game development or software project management to come together to create great games for everyone to enjoy. Very small group right now, but Fall Semester 2026 we plan on inviting many college programming clubs to join.',
+      tags: ['Godot', 'gdScript', 'C++', 'Blender', 'Krita', 'JSON'],
+      url: '',
+      slides: [
+        { img: 'photos/projects/dungeondoom1.png', caption: 'Game Art' },
+      ]
+    }
+  },
+  {
+    icon: '🪵',
+    name: 'Raidercraft',
+    desc: 'School Minecraft Server that outgrew School.',
+    modal: {
+      about: 'Raidercraft started as the school Minecraft server for my video game club, however almost four years later it has led to some of the funniest moments of my life. The photos of us at the party we are dressed as our Minecraft Skins, that is not our normal attire.',
+      tags: ['Server Administration', 'Web-dev', 'Java', 'Multiplayer Networking', 'SQL', 'JSON'],
+      url: 'https://raidercraft.net',
+      slides: [
+        { img: 'photos/raidercraft/party-full.jpg', caption: 'The Only Full Group Photo at the Raidercraft Bonfire Party' },
+        { img: 'photos/raidercraft/validplus.jpg', caption: 'The Founding Players' },
+      ]
+    }
+  },
+  {
+    icon: '📟',
+    name: 'Personal Matrix Server',
+    desc: 'Selfhosted Fully Encrypted Discord-like Media Platform.',
+    modal: {
+      about: 'Selfhosted Fully Encrypted Discord-like Media Platform.',
+      tags: ['Server Administration', 'Networking', 'SQL', 'JSON'],
+      url: '',
+      slides: [
+        { img: 'photos/projects/d',  caption: 'Game Art' },
       ]
     }
   },

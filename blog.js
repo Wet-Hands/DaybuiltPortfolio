@@ -19,15 +19,32 @@
 
 const blogPosts = [
 
-    {
+  {
     id:      'factorio-1',
     title:   'Been getting into Factorio',
-    date:    '2026-05-14',
+    date:    '2026-05-24',
     tags:    ['gaming', 'logistics'],
     summary: 'Having fun with a logistics game.',
     content: `
       <p>I had some Steam Credit stored up from christmas and decided to take the plunge and purchase Factorio. After playing Minecraft: Create for roughly 400+ hours I figured I'd try the game that inspired it.</p>
     `,
+  },
+  {
+    id:      'libre-games1',
+    title:   'LibreGames Ideas',
+    date:    '2026-05-14',
+    tags:    ['gaming', 'game-dev', 'godot', 'project-management'],
+    summary: 'Having fun with a logistics game.',
+    content: `
+      <p>The goal of LibreGames is for people interested in any aspect of game development or software project management to come together to create great games for everyone to enjoy. Very small group right now, but Fall Semester 2026 we plan on inviting many college programming clubs to join.</p>
+      <p>I have a few ideas for projects I personally would like to lead development on.</p>
+      <ul>
+        <li>LibreDivers - Inspired by Arrowhead Studios' hit release, Helldivers: II. The main idea would be that players could choose between different self-hosted galactic wars.</li>
+        <li>LibreSurvivors - Inspired by the Survivors genre, popularized by games like Vampire Survivors and Megabonk. The heroes and enemy selection would be taken from the Public Domain; Featuring characters such as Thor, Winnie the Pooh, and the Iron Ace. </li>
+        <li>LibreFighters - In actuality, I believe my friend Vincent Churilla would like to lead development, but I would like to help out. A data-driven platform fighting game; Featuring Public Domain characters like in the previously mentioned 'LibreSurvivors'.</li>
+      </ul>
+      <p>All of these games would be built using FOSS such as the Godot Engine, Blender, Krita, Aseprite, and others. The only money gained would be from donations, whether that's individuals, organizations, and/or colleges. The money would go towards optional Official Servers and publishing fees. </p>
+      `,
   },
   {
     id:      'dinoland-1',
