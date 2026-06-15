@@ -14,14 +14,23 @@ body {
   color: #000;
   min-height: 100vh;
   padding: 20px;
-  zoom: 1.33;
+  zoom: 1.25;
+}
+
+.lightbox-overlay {
+  zoom: calc(1 / 1.25);
 }
 
 @media (max-width: 768px) {
   body {
     zoom: 1;
   }
+  .lightbox-overlay {
+    zoom: 1;
+  }
 }
+
+
 
   /* Window component */
   .window {
