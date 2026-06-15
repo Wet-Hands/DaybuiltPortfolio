@@ -17,6 +17,12 @@ body {
   zoom: 1.33;
 }
 
+@media (max-width: 768px) {
+  body {
+    zoom: 1;
+  }
+}
+
   /* Window component */
   .window {
     background: #c0c0c0;
