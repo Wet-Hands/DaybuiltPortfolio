@@ -260,8 +260,23 @@ const experience = [
 //        url in modal = verification/credential link (shown as "🔗 Verify" button)
 const certifications = [
   {
+    img: 'photos/awards/reports.png',
+    title: 'Cisco Networking Academy - Creating Compelling Reports',
+    issuer: 'Cisco',
+    date: 'June 2026',
+    desc: 'Fundamentals of writing reports, their value, and how they should be written.',
+    modal: {
+      about: 'Cisco verifies the earner of this badge successfully completed the Creating Compelling Reports course and achieved this student level credential. Earner has knowledge of why reports are valuable in business contexts, and how to select appropriate tone, key points of relevance and organizational structure to communicate a specific message to a particular audience. Completed up to 24 scenario-based interactions and one immersive branching scenario.',
+      tags: ['Data Analysis', 'Project Documentation', 'Word', 'Graphs', 'Powerpoint'],
+      url: 'https://www.credly.com/badges/8928c6da-5e34-4c21-97a5-1ecc2fff5243',
+      slides: [
+        { img: 'photos/awards/reports.png', caption: 'Cisco badge' },
+      ]
+    }
+  },
+  {
     img: 'photos/awards/introdata.png',
-    title: 'Cisco Networking Academy - Intro to Data Science',
+    title: 'Cisco Networking Academy - Introduction to Data Science',
     issuer: 'Cisco',
     date: 'June 2026',
     desc: 'Fundamentals of Data Analytics, Data Engineering, Data Science and AI/ML related job functions.',
