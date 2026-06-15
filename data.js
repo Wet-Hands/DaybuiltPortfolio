@@ -260,6 +260,21 @@ const experience = [
 //        url in modal = verification/credential link (shown as "🔗 Verify" button)
 const certifications = [
   {
+    img: 'photos/awards/introdata.png',
+    title: 'Cisco Networking Academy - Intro to Data Science',
+    issuer: 'Cisco',
+    date: 'June 2026',
+    desc: 'Fundamentals of Data Analytics, Data Engineering, Data Science and AI/ML related job functions.',
+    modal: {
+      about: 'Cisco verifies the earner of this badge successfully completed the Introduction to Data Science course. The holder of this student-level credential has a broad understanding in basic concepts of Data Analytics, Data Engineering, Data Science and AI/ML related job functions. They also have insight into opportunities available for pursuing career in various data roles.',
+      tags: ['Data Analysis', 'AI', 'Sheets', 'Graphs', 'Machine Learning', 'SQL'],
+      url: 'https://www.credly.com/earner/earned/badge/86a78d57-bc5c-41b2-ab02-516d44ece465',
+      slides: [
+        { img: 'photos/awards/introdata.png', caption: 'Cisco badge' },
+      ]
+    }
+  },
+  {
     img: 'photos/awards/skillsmaryland.jpg',
     title: 'SkillsUSA State Silver Medal - Interactive Application and Game Design',
     issuer: 'SkillsUSA Maryland',
@@ -279,11 +294,11 @@ const certifications = [
     title: 'Dassault Systèmes - SOLIDWORKS Additive Manufacturing Associate',
     issuer: 'Dr. James A. Forrest Career & Technology Center',
     date: 'November 2024',
-    desc: 'Fundamentals of computers and mobile devices, component installation, building and repairing PCs, and basic troubleshooting.',
+    desc: 'Entry-level certification that proves an understanding of the basics of 3D printing market, principles, and technology.',
     modal: {
-      about: 'Cisco verifies successful completion of the Computer Hardware Basics course. Covers fundamentals of computers and mobile devices, component installation, building and repairing personal computers, and basic troubleshooting tools and techniques.',
+      about: 'The certification proves knowledge on the full lifecycle of making a 3D-printed part: Machine Types & Technologies, Material Types, Design of Additive Manufacturing, Slicer Software & File Prep, and Post-Processing.',
       tags: ['CAD', 'Troubleshooting', 'Manufacturing'],
-      url: 'https://www.credly.com/earner/earned/badge/4b90ca94-2a40-462c-859d-e191ec99354d',
+      url: 'pdfs/3d-cert.pdf',
       slides: [
         { img: 'photos/awards/solidworks.png', caption: 'SOLIDWORKS badge' },
       ]
