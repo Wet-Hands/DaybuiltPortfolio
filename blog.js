@@ -20,6 +20,22 @@
 const blogPosts = [
 
   {
+    id:      'td1',
+    title:   'Interplanetary Tower Defense',
+    date:    '2026-07-11',
+    tags:    ['game-dev', 'project-management'],
+    summary: 'Having fun with a logistics game.',
+    content: `
+    <img src="photos/blog/td1.e4jPG1" alt="Visual of 3D Pixel Art look" width="250" height="150"
+    onclick="openLightbox(this.src, this.alt)"
+    style="max-width:100%; cursor:zoom-in; display:block; margin:8px 0;
+    border-top:2px solid #404040; border-left:2px solid #404040;
+    border-right:2px solid #fff; border-bottom:2px solid #fff;">
+    <p>I've started development on my newest video game to cope with reality. Despite the fact I really need money to support my family, I think I want to use this as the first game of the LibreGames Foundation. I do not know yet how I will find new members, my hope is once I start posting about the game online, people will take interest.</p>
+    <p>The main idea so far is the player must defend research probes from waves of aliens. We have been working on a 3D pixel art style inspired by the work of t3ssel8r.</p>
+    `,
+  },
+  {
     id:      'factorio-1',
     title:   'Been getting into Factorio',
     date:    '2026-05-24',
@@ -73,6 +89,23 @@ const blogPosts = [
       <p>I was inspired to make a dinosaur horror game after watching Jurrassic World: Rebirth, as it always bothered me that they never did a legitimate horror film. The main gameplay was inspired by the Five Nights at Freddys series of games, specifically this one minigame in Help Wanted where Mangle is coming at your from four sides while you're trying to repair the A/C system.</p>
     `,
   },
+{
+  id:      'egr-pc',
+  title:   'Legendary Find from IT Networking',
+  date:    '2025-05-11',
+  tags:    ['computer-hardware'],
+  summary: 'Having fun with a logistics game.',
+  content: `
+  <img src="photos/blog/engineeringpc.png" alt="Visual of 3D Pixel Art look" width="150" height="200"
+  onclick="openLightbox(this.src, this.alt)"
+  style="max-width:100%; cursor:zoom-in; display:block; margin:8px 0;
+  border-top:2px solid #404040; border-left:2px solid #404040;
+  border-right:2px solid #fff; border-bottom:2px solid #fff;">
+  <p>We found this "portable" computer in the Engineering room and brought it to IT Networking to try and get it running.</p>
+  <p>UPDATE 1: The computer's CPU capacitors are fried, luckily it uses a standard ATX motherboard, so we can replace it.</p>
+  <p>UPDATE 2: The computer is now at my house and it's insides were replaced and it works!</p>
+  `,
+},
   {
     id:      'skillsusa-2025',
     title:   'SkillsUSA 2025 — Silver Medal with Jimmy Rings',
