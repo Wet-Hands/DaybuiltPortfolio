@@ -31,8 +31,8 @@ const blogPosts = [
     style="max-width:100%; cursor:zoom-in; display:block; margin:8px 0;
     border-top:2px solid #404040; border-left:2px solid #404040;
     border-right:2px solid #fff; border-bottom:2px solid #fff;">
-    <p>I've started development on my newest video game to cope with reality. I think I want to use this as the first game of the LibreGames Foundation. I do not know yet how I will find new members, my hope is once I start posting about the game online, people will take interest.</p>
-    <p>The main idea so far is the player must defend research probes from waves of aliens. We have been working on a 3D pixel art style inspired by the work of t3ssel8r.</p>
+    <p>I've started development on my newest video game. I think I want to use this as the first game of the LibreGames Foundation. I do not know yet how I will find new members, my hope is once I start posting about the game online, people will take interest.</p>
+    <p>The main idea so far is the player must defend research probes from waves of aliens. We have been working on a 3D pixel art style inspired by the work of <a href="https://www.youtube.com/@t3ssel8r">t3ssel8r</a>.</p>
     `,
   },
   {
