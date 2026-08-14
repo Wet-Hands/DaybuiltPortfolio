@@ -20,6 +20,57 @@
 const blogPosts = [
 
   {
+    id:      'unfinished',
+    title:   'Behind the Scenes: My Unfinished Projects',
+    date:    '2026-08-13',
+    tags:    ['game-dev', 'project-management'],
+    summary: 'My Unfinished Projects',
+    content: `
+    <p>This is a collection of some of my unfinished games and visual tests I've developed over the past 3 years of making games.</p>
+
+
+    <img src="photos/blog/unfinished-games/image04.png" alt="Rotary sorter"
+    onclick="openLightbox(this.src, this.alt)"
+    style="float:left; width:45%; margin:0 0 8px 12px; cursor:zoom-in;
+    border-top:2px solid #404040; border-left:2px solid #404040;
+    border-right:2px solid #fff; border-bottom:2px solid #fff;">
+
+    <p>Every year or so I like to attempt to re-create Minecraft within the Godot Game Engine. This was my 2025 attempt, I used C# instead of using gdScript to try and save on performance. This was definetly my best attempt so far, but like usual it got too confusing for me once multi-threading was introduced into the code. I'm hoping my 2026 attempt will reach infinite terrain generation.</p>
+
+    <div style="clear:both;"></div>
+
+
+
+    <div style="display:flex; gap:8px; margin:8px 0;">
+      <img src="photos/blog/unfinished-games/image02.png" alt="Front view"
+        onclick="openLightbox(this.src, this.alt)"
+        style="width:50%; cursor:zoom-in;
+          border-top:2px solid #404040; border-left:2px solid #404040;
+          border-right:2px solid #fff; border-bottom:2px solid #fff;">
+      <img src="photos/blog/unfinished-games/image01.png" alt="Side view"
+        onclick="openLightbox(this.src, this.alt)"
+        style="width:50%; cursor:zoom-in;
+          border-top:2px solid #404040; border-left:2px solid #404040;
+          border-right:2px solid #fff; border-bottom:2px solid #fff;">
+    </div>
+
+    <p>These images come from me testing out visual styles for a video game adaptation of my story "Project: Snowglobe". I still would love to tell the story of this alternate future, however I currently cannot decide the gameplay.</p>
+
+
+
+    <img src="photos/blog/unfinished-games/image02.png" alt="Rotary sorter"
+    onclick="openLightbox(this.src, this.alt)"
+    style="float:left; width:45%; margin:0 0 8px 12px; cursor:zoom-in;
+    border-top:2px solid #404040; border-left:2px solid #404040;
+    border-right:2px solid #fff; border-bottom:2px solid #fff;">
+
+    <p>Our team was given the task of automating quality assurance for 2-inch wood blocks...</p>
+    <p>The rotating base design came from a second brainstorm session after our first approach proved too slow.</p>
+
+    <div style="clear:both;"></div>
+    `,
+  },
+  {
     id:      'td1',
     title:   'Interplanetary Tower Defense',
     date:    '2026-07-11',
