@@ -35,7 +35,7 @@ const blogPosts = [
     border-top:2px solid #404040; border-left:2px solid #404040;
     border-right:2px solid #fff; border-bottom:2px solid #fff;">
 
-    <p>Every year or so I like to attempt to re-create Minecraft within the Godot Game Engine. This was my 2025 attempt, I used C# instead of using gdScript to try and save on performance. This was definetly my best attempt so far, but like usual it got too confusing for me once multi-threading was introduced into the code. I'm hoping my 2026 attempt will reach infinite terrain generation.</p>
+    <p>Every year or so I like to attempt to re-create Minecraft within the Godot Game Engine. This was my 2025 attempt, I used C# instead of using gdScript to try and save on performance. This was definetly my best attempt so far. I'm hoping my 2026 attempt will reach infinite terrain generation.</p>
 
     <div style="clear:both;"></div>
 
@@ -58,14 +58,14 @@ const blogPosts = [
 
 
 
-    <img src="photos/blog/unfinished-games/image02.png" alt="Rotary sorter"
+    <img src="photos/blog/unfinished-games/image03.png" alt="Rotary sorter"
     onclick="openLightbox(this.src, this.alt)"
     style="float:left; width:45%; margin:0 0 8px 12px; cursor:zoom-in;
     border-top:2px solid #404040; border-left:2px solid #404040;
     border-right:2px solid #fff; border-bottom:2px solid #fff;">
 
-    <p>Our team was given the task of automating quality assurance for 2-inch wood blocks...</p>
-    <p>The rotating base design came from a second brainstorm session after our first approach proved too slow.</p>
+    <p>This was an early prototype written in gdScript for the final project of 'Intermediate Programming Concepts for Engineers'. Very simple noise-based isometric terrain generation.</p>
+    <p>The plan was to rewrite this in C++, however the Godot Engine and C++ are not natively compatible, so too many issues came up and I pivoted to another project.</p>
 
     <div style="clear:both;"></div>
     `,
@@ -77,9 +77,9 @@ const blogPosts = [
     tags:    ['game-dev', 'project-management'],
     summary: 'Having fun with a logistics game.',
     content: `
-    <img src="photos/blog/td1.e4jPG1" alt="Visual of 3D Pixel Art look" width="250" height="150"
+    <img src="photos/blog/td1.e4jPG1" alt="Visual of 3D Pixel Art look"
     onclick="openLightbox(this.src, this.alt)"
-    style="max-width:100%; cursor:zoom-in; display:block; margin:8px 0;
+    style="float:left; width:45%; margin:0 0 8px 12px; cursor:zoom-in;
     border-top:2px solid #404040; border-left:2px solid #404040;
     border-right:2px solid #fff; border-bottom:2px solid #fff;">
     <p>I've started development on my newest video game. I think I want to use this as the first game of the LibreGames Foundation. I do not know yet how I will find new members, my hope is once I start posting about the game online, people will take interest.</p>
@@ -147,11 +147,12 @@ const blogPosts = [
   tags:    ['computer-hardware'],
   summary: 'Having fun with a logistics game.',
   content: `
-  <img src="photos/blog/engineeringpc.png" alt="Visual of 3D Pixel Art look" width="150" height="200"
+  <img src="photos/blog/engineeringpc.png" alt="Cool Computer"
   onclick="openLightbox(this.src, this.alt)"
-  style="max-width:100%; cursor:zoom-in; display:block; margin:8px 0;
+  style="float:left; width:45%; margin:0 0 8px 12px; cursor:zoom-in;
   border-top:2px solid #404040; border-left:2px solid #404040;
   border-right:2px solid #fff; border-bottom:2px solid #fff;">
+
   <p>We found this "portable" computer in the Engineering room and brought it to IT Networking to try and get it running.</p>
   <p>UPDATE 1: The computer's CPU capacitors are fried, luckily it uses a standard ATX motherboard, so we can replace it.</p>
   <p>UPDATE 2: The computer is now at my house and it's insides were replaced and it works!</p>
@@ -190,12 +191,14 @@ const blogPosts = [
     tags:    ['skills-usa', 'game-dev', 'personal'],
     summary: 'My time at Nationals Competition',
     content: `
-      <img src="photos/blog/nationals/group.jpg" alt="My Friends and I repping our state hat." width="200" height="150"
+      <img src="photos/blog/nationals/group.jpg" alt="My Friends and I repping our state hat."
       onclick="openLightbox(this.src, this.alt)"
-       style="max-width:100%; cursor:zoom-in; display:block; margin:8px 0;
-              border-top:2px solid #404040; border-left:2px solid #404040;
-              border-right:2px solid #fff; border-bottom:2px solid #fff;">
+      style="float:left; width:45%; margin:0 0 8px 12px; cursor:zoom-in;
+      border-top:2px solid #404040; border-left:2px solid #404040;
+      border-right:2px solid #fff; border-bottom:2px solid #fff;">
+
       <p>Nationals was probably one of, if not the, coolest experience of my life. Being able to meet so many fellow students also into programming and game develop was so exciting. SkillsUSA really does feel like one big club.</p>
+      <p></p>
     `,
   },
 
