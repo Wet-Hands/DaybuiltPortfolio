@@ -28,7 +28,6 @@ const blogPosts = [
     content: `
     <p>This is a collection of some of my unfinished games and visual tests I've developed over the past 3 years of making games.</p>
 
-
     <img src="photos/blog/unfinished-games/image04.png" alt="Rotary sorter"
     onclick="openLightbox(this.src, this.alt)"
     style="float:left; width:45%; margin:0 0 8px 12px; cursor:zoom-in;
@@ -198,7 +197,7 @@ const blogPosts = [
       border-right:2px solid #fff; border-bottom:2px solid #fff;">
 
       <p>Nationals was probably one of, if not the, coolest experience of my life. Being able to meet so many fellow students also into programming and game develop was so exciting. SkillsUSA really does feel like one big club.</p>
-      <p></p>
+      <p>I must thank <a href="https://n-s-i.us/">N-S-I</a> for covering half the cost towards this trip to the SkillsUSA NLSC. Without their generosity I would've been eating ramen and white rice the whole trip.</p>
     `,
   },
 
