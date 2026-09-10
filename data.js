@@ -29,7 +29,7 @@ const skillCategories = [
     label: '🖥 Programming',
     skills: [
       { name: 'C / C++',  projects: [' ', ' ', ' ', ' ', ' '] },
-      { name: 'Godot', projects: [' ', ' ', ' ', ' ', ' '] },
+      { name: 'Golang', projects: [' ', ' ', ' ', ' ', ' '] },
       { name: 'SQL',   projects: [' ', ' '] },
     ]
   },
