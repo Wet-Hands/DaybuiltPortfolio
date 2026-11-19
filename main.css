@@ -29,6 +29,16 @@ body {
   zoom: 1.25;
 }
 
+/* Keyboard focus: the classic Win95 dotted focus rectangle. :focus-visible
+   keeps it hidden for mouse clicks. currentColor keeps it visible on both
+   light rows and dark (selected / navy) ones. */
+:focus-visible { outline: 1px dotted currentColor; outline-offset: 2px; }
+.project-card:focus-visible, .cert-card:focus-visible, .raised:focus-visible,
+.modal-action-btn:focus-visible, .carousel-btn:focus-visible,
+.start-btn:focus-visible, .taskbar-link:focus-visible, .contact-chip:focus-visible {
+  outline-offset: -5px;
+}
+
 h1 { font-size: 18px; font-weight: bold; margin-bottom: 2px; }
 h2 { font-size: 13px; font-weight: bold; margin-bottom: 8px; }
 p  { line-height: 1.5; margin-bottom: 6px; }
@@ -547,6 +557,7 @@ p:last-child { margin-bottom: 0; }
 .carousel-dot {
   width: 8px;
   height: 8px;
+  padding: 0;
   background: #808080;
   border: 1px solid;
   border-color: #404040 #fff #fff #404040;

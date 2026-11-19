@@ -73,6 +73,7 @@
   .blog-post-row:hover,
   .blog-post-row.selected { background: #000080; color: #fff; }
   .blog-post-row > div  { padding: 4px 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .blog-post-row:focus-visible { outline-offset: -3px; }  /* inside, so the pane doesn't clip it */
   .blog-post-row .post-date-col { font-size: 10px; text-align: right; opacity: 0.8; }
 
   /* ── READING PANE (right pane) ──────────────────────────────────────────── */
@@ -191,7 +192,7 @@
           <div>Title</div>
           <div>Date</div>
         </div>
-        <div id="post-list"></div>
+        <div id="post-list" role="listbox" aria-label="Posts"></div>
       </div>
 
       <!-- Right: reading pane -->
@@ -229,11 +230,11 @@
 
 <!-- ── LIGHTBOX ─────────────────────────────────────────────────────────── -->
 <div id="lightbox" class="lightbox-overlay" onclick="closeLightbox()">
-  <div class="lightbox-win" onclick="event.stopPropagation()">
+  <div class="lightbox-win" onclick="event.stopPropagation()" role="dialog" aria-modal="true" aria-label="Image viewer">
     <div class="title-bar">
       <div class="title-bar-left">&#128444; Image Viewer</div>
       <div class="title-bar-buttons">
-        <div class="win-btn" onclick="closeLightbox()">&#x2715;</div>
+        <div class="win-btn" onclick="closeLightbox()" role="button" tabindex="0" aria-label="Close image viewer">&#x2715;</div>
       </div>
     </div>
     <div class="lightbox-body">
@@ -309,12 +310,14 @@
         year = post.date.slice(0, 4);
         var yearRow = document.createElement('div');
         yearRow.className = 'blog-year-row';
+        yearRow.setAttribute('aria-hidden', 'true');
         yearRow.textContent = year;
         listEl.appendChild(yearRow);
       }
       var row = document.createElement('div');
       row.className = 'blog-post-row' + (post.id === selectedId ? ' selected' : '');
       row.dataset.id = post.id;
+      row.setAttribute('role', 'option');
       row.title = post.summary;
       row.innerHTML =
         '<div>&#128196; ' + post.title + '</div>' +
@@ -323,6 +326,7 @@
       listEl.appendChild(row);
     });
 
+    updateRowStates();
     document.getElementById('blog-count').textContent = activeTag
       ? visible.length + ' of ' + posts.length + ' post(s)'
       : posts.length + ' post(s)';
@@ -331,11 +335,34 @@
 
 
   // ── READING PANE ───────────────────────────────────────────────────────────
+  // Selected row is highlighted and is the list's single Tab stop
+  // (falls back to the first row when the selected post is filtered out).
+  function updateRowStates() {
+    var rows = listEl.querySelectorAll('.blog-post-row');
+    var hasSelected = Array.prototype.some.call(rows, function(row) { return row.dataset.id === selectedId; });
+    rows.forEach(function(row, i) {
+      var selected = row.dataset.id === selectedId;
+      row.classList.toggle('selected', selected);
+      row.setAttribute('aria-selected', selected);
+      row.tabIndex = selected || (!hasSelected && i === 0) ? 0 : -1;
+    });
+  }
+
+  // Up / Down / Home / End move through the list and open the post
+  listEl.addEventListener('keydown', function(e) {
+    var rows = Array.prototype.slice.call(listEl.querySelectorAll('.blog-post-row'));
+    var i = rows.indexOf(document.activeElement);
+    var next = { ArrowDown: i + 1, ArrowUp: i - 1, Home: 0, End: rows.length - 1 }[e.key];
+    if (next === undefined || !rows[next]) return;
+    e.preventDefault();
+    selectPost(findPost(rows[next].dataset.id));
+    focusElement(rows[next]);
+    rows[next].scrollIntoView({ block: 'nearest' });
+  });
+
   function selectPost(post) {
     selectedId = post.id;
-    listEl.querySelectorAll('.blog-post-row').forEach(function(row) {
-      row.classList.toggle('selected', row.dataset.id === post.id);
-    });
+    updateRowStates();
     // Give every post a shareable link: blog.html#<id>
     history.replaceState(null, '', '#' + post.id);
     openPost(post);
@@ -361,6 +388,12 @@
         '</div>' +
       '</div>' +
       '<div class="post-content">' + post.content + '</div>';
+
+    // Post images open in the lightbox; make them reachable by keyboard too
+    area.querySelectorAll('img.post-img').forEach(function(img) {
+      img.tabIndex = 0;
+      img.setAttribute('role', 'button');
+    });
 
     readingPane.scrollTop = 0;
   }
