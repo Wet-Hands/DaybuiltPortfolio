@@ -95,11 +95,11 @@
 
 <!-- ── FULLSCREEN GAME LAUNCHER OVERLAY ──────────────────────────────────── -->
 <!-- Appears over the whole page when a game is running.                      -->
-<div class="game-overlay" id="game-overlay">
+<div class="game-overlay" id="game-overlay" role="dialog" aria-modal="true" aria-labelledby="game-overlay-title">
   <div class="title-bar">
     <div class="title-bar-left" id="game-overlay-title">&#127918; Game</div>
     <div class="title-bar-buttons">
-      <div class="win-btn" onclick="closeGame()" title="Exit game">&#x2715;</div>
+      <div class="win-btn" onclick="closeGame()" title="Exit game" role="button" tabindex="0" aria-label="Exit game">&#x2715;</div>
     </div>
   </div>
   <div class="game-overlay-body">
@@ -228,6 +228,8 @@
     gameFrame.src = game.path;
     gameOverlay.classList.add('open');
     document.body.style.overflow = 'hidden';
+    // Focus the game so it receives keyboard input right away
+    openDialog(gameOverlay, closeGame, gameFrame);
   }
 
   function closeGame() {
@@ -235,11 +237,8 @@
     gameFrame.src = '';
     gameOverlay.classList.remove('open');
     document.body.style.overflow = '';
+    closeDialog(gameOverlay);
   }
-
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeGame();
-  });
 </script>
 </body>
 </html>

@@ -87,7 +87,7 @@
     <div class="window-content">
       <div class="profile-row">
         <div class="avatar" id="profile-avatar">
-          <img src="photos/pfp.jpg" alt="Ian Day"
+          <img src="photos/pfp.jpg" alt="Ian Day" tabindex="0" role="button" aria-label="Enlarge photo of Ian Day"
                onclick="openLightbox(this.src, this.alt)"
                onerror="this.style.display='none'; document.getElementById('avatar-emoji').style.display='flex'">
           <span class="thumb-fallback" id="avatar-emoji">&#128100;</span>
@@ -248,11 +248,11 @@
      All content lives in data.js. Never add per-item modal HTML here.
      ══════════════════════════════════════════════════════════════════════════ -->
 <div class="modal-overlay" id="project-modal">
-  <div class="modal-window">
+  <div class="modal-window" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="title-bar">
       <div class="title-bar-left" id="modal-title">Details</div>
       <div class="title-bar-buttons">
-        <div class="win-btn" onclick="closeModal()">&#x2715;</div>
+        <div class="win-btn" onclick="closeModal()" role="button" tabindex="0" aria-label="Close">&#x2715;</div>
       </div>
     </div>
     <div class="modal-body">
@@ -275,7 +275,7 @@
       <!-- Hidden by default; shown only when the item has a URL -->
       <a class="modal-action-btn" id="modal-url" href="#" target="_blank" rel="noopener"
          style="display:none;">&#x1F310; Visit / Verify</a>
-      <button class="modal-action-btn" onclick="closeModal()">Close</button>
+      <button class="modal-action-btn" id="modal-close" onclick="closeModal()">Close</button>
     </div>
   </div>
 </div>
@@ -286,11 +286,11 @@
      Click outside the window, press Escape, or hit ✕ to close.
      ══════════════════════════════════════════════════════════════════════════ -->
 <div id="lightbox" class="lightbox-overlay" onclick="closeLightbox()">
-  <div class="lightbox-win" onclick="event.stopPropagation()">
+  <div class="lightbox-win" onclick="event.stopPropagation()" role="dialog" aria-modal="true" aria-label="Image viewer">
     <div class="title-bar">
       <div class="title-bar-left">&#128444; Image Viewer</div>
       <div class="title-bar-buttons">
-        <div class="win-btn" onclick="closeLightbox()">&#x2715;</div>
+        <div class="win-btn" onclick="closeLightbox()" role="button" tabindex="0" aria-label="Close image viewer">&#x2715;</div>
       </div>
     </div>
     <div class="lightbox-body">
@@ -317,6 +317,13 @@
 
   function viewDetailsHTML(item) {
     return item.modal ? '<span class="view-details">&#128194; View details</span>' : '';
+  }
+
+  // Make a card focusable and announce it as a button that opens a dialog
+  function makeOpener(el) {
+    el.tabIndex = 0;
+    el.setAttribute('role', 'button');
+    el.setAttribute('aria-haspopup', 'dialog');
   }
 
   function setCount(id, list) {
@@ -357,6 +364,7 @@
   projects.forEach(function(p) {
     var card = document.createElement('div');
     card.className = 'project-card';
+    makeOpener(card);
     card.addEventListener('click', function() { openModal(p); });
     card.innerHTML =
       '<span class="project-icon">' + p.icon + '</span>' +
@@ -382,6 +390,7 @@
     var row = document.createElement('div');
     row.className = 'raised exp-entry' + (e.modal ? ' has-modal' : '');
     if (e.modal) {
+      makeOpener(row);
       row.addEventListener('click', function() { openModal(e); });
     }
     row.innerHTML =
@@ -408,6 +417,7 @@
     var card = document.createElement('div');
     card.className = 'cert-card' + (c.modal ? ' has-modal' : '');
     if (c.modal) {
+      makeOpener(card);
       card.addEventListener('click', function() { openModal(c); });
     }
 
@@ -457,6 +467,7 @@
     loadSlides(item.modal.slides);
     modalEl.classList.add('open');
     document.body.style.overflow = 'hidden';
+    openDialog(modalEl, closeModal, document.getElementById('modal-close'));
   }
 
   function slideHTML(s, i) {
@@ -473,6 +484,7 @@
     if (s.img) {
       // Photo slide: click opens lightbox
       return '<img src="' + s.img + '" alt="' + s.caption + '"' +
+        ' tabindex="0" role="button"' +
         ' onclick="openLightbox(this.src,this.alt)"' +
         ' onerror="this.style.opacity=0.3">';
     }
@@ -495,14 +507,18 @@
   function closeModal() {
     modalEl.classList.remove('open');
     document.body.style.overflow = '';
+    closeDialog(modalEl);
   }
 
-  // Close on overlay click or Escape key (common.js closes the lightbox)
+  // Close on overlay click (Escape is handled by openDialog in common.js)
   modalEl.addEventListener('click', function(e) {
     if (e.target === modalEl) closeModal();
   });
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeModal();
+
+  // Left / Right arrows change slides while the popup has focus
+  modalEl.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft')  carouselMove(-1);
+    if (e.key === 'ArrowRight') carouselMove(1);
   });
 
 
@@ -529,9 +545,15 @@
     var dots = document.getElementById('carousel-dots');
     dots.innerHTML = '';
     slides.forEach(function(_, i) {
-      var dot = document.createElement('div');
+      var dot = document.createElement('button');
       dot.className = 'carousel-dot' + (i === carouselIndex ? ' active' : '');
-      dot.addEventListener('click', function() { carouselIndex = i; carouselRender(); });
+      dot.setAttribute('aria-label', 'Slide ' + (i + 1) + ' of ' + slides.length);
+      if (i === carouselIndex) dot.setAttribute('aria-current', 'true');
+      dot.addEventListener('click', function() {
+        carouselIndex = i;
+        carouselRender();
+        focusElement(dots.children[i]);   // the dots were rebuilt; keep focus on this one
+      });
       dots.appendChild(dot);
     });
   }
@@ -540,6 +562,10 @@
     var total = carouselSlides().length;
     carouselIndex = Math.max(0, Math.min(total - 1, carouselIndex + dir));
     carouselRender();
+    // Reaching the first/last slide disables the focused button; move focus across
+    if (document.activeElement && document.activeElement.disabled) {
+      focusElement(document.getElementById(dir < 0 ? 'carousel-next' : 'carousel-prev'));
+    }
   }
 </script>
 </body>
