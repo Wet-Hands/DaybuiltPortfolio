@@ -12,8 +12,8 @@
   .blog-panes {
     display: grid;
     grid-template-columns: 320px 1fr;
-    /* Fill viewport minus taskbar + title-bar + status-bar + page padding   */
-    height: calc(100vh - 150px);
+    /* Fill viewport minus taskbar + title-bar + toolbar + status-bar + padding */
+    height: calc(100vh - 178px);
     min-height: 300px;
   }
 
@@ -25,6 +25,25 @@
     background: #fff;
     border-top: 2px solid #404040;
     border-left: 2px solid #404040;
+  }
+
+  /* ── TOOLBAR (tag filter) ───────────────────────────────────────────────── */
+  .blog-toolbar {
+    display: flex; align-items: center; gap: 6px;
+    padding: 4px 8px; font-size: 11px;
+  }
+  .blog-toolbar select {
+    font-family: 'Win95', Arial, sans-serif; font-size: 11px;
+    background: #fff; color: #000; padding: 1px 2px;
+    border: 2px solid; border-color: #404040 #fff #fff #404040;
+    border-radius: 0;
+  }
+
+  /* Year group header inside the post list */
+  .blog-year-row {
+    padding: 2px 6px; font-size: 11px; font-weight: bold;
+    background: #e0e0e0; border-bottom: 1px solid #c0c0c0;
+    position: sticky; top: 21px; /* below the 21px column header */
   }
 
   /* Column header bar */
@@ -68,7 +87,7 @@
   .blog-empty-state {
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
-    height: 100%; color: #808080; font-size: 12px; gap: 8px;
+    height: 100%; color: #595959; font-size: 12px; gap: 8px; /* 7:1 on white */
   }
   .blog-empty-icon { font-size: 32px; }
 
@@ -80,7 +99,7 @@
   }
   .post-header h2 { font-size: 15px; font-weight: bold; margin-bottom: 4px; }
   .post-meta {
-    display: flex; gap: 12px; font-size: 11px; color: #444;
+    display: flex; gap: 12px; font-size: 11px; color: var(--text-muted);
     align-items: center; flex-wrap: wrap;
   }
   .post-content {
@@ -105,11 +124,15 @@
 
   /* Tags in reading pane */
   .post-tags { display: flex; gap: 4px; flex-wrap: wrap; }
-  .post-tag {
-    background: #c0c0c0;
+  .post-tag, .post-link-btn {
+    background: #c0c0c0; color: inherit;
     border: 1px solid; border-color: #fff #404040 #404040 #fff;
-    padding: 1px 6px; font-size: 11px;
+    padding: 1px 6px; font-size: 11px; font-family: inherit;
+    cursor: pointer;
   }
+  .post-tag:hover, .post-link-btn:hover { background: #d0d0d0; }
+  .post-tag:active, .post-link-btn:active { border-color: #404040 #fff #fff #404040; }
+  .post-link-btn { margin-left: auto; }
 
   /* ── POST IMAGES (click to open in lightbox) ────────────────────────────── */
   .post-img {
@@ -149,6 +172,14 @@
         <div class="win-btn">&#9633;</div>
         <div class="win-btn">&#x2715;</div>
       </div>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="blog-toolbar">
+      <label for="tag-filter">Filter:</label>
+      <select id="tag-filter">
+        <option value="">All tags</option>
+      </select>
     </div>
 
     <!-- Two-pane layout -->
@@ -220,39 +251,96 @@
 <script>
   var listEl      = document.getElementById('post-list');
   var readingPane = document.getElementById('reading-pane');
-  var selectedRow = null;
+  var tagFilter   = document.getElementById('tag-filter');
+
+  var activeTag  = '';     // '' = show all posts
+  var selectedId = null;   // id of the post in the reading pane
 
   // Sort newest first
   var posts = blogPosts.slice().sort(function(a, b) {
     return new Date(b.date) - new Date(a.date);
   });
 
-  document.getElementById('blog-count').textContent = posts.length + ' post(s)';
+  function findPost(id) {
+    return posts.find(function(p) { return p.id === id; });
+  }
 
   // '2025-06-01' → 'Jun 01' (list) / 'June 1, 2025' (reading pane)
   function fmtDate(iso, options) {
     return new Date(iso + 'T00:00:00').toLocaleDateString('en-US', options);
   }
 
-  // Render post list
-  posts.forEach(function(post) {
-    var row = document.createElement('div');
-    row.className = 'blog-post-row';
-    row.innerHTML =
-      '<div>&#128196; ' + post.title + '</div>' +
-      '<div class="post-date-col">' + fmtDate(post.date, { month: 'short', day: '2-digit' }) + '</div>';
-    row.addEventListener('click', function() { selectPost(row, post); });
-    listEl.appendChild(row);
-  });
 
-  function selectPost(row, post) {
-    if (selectedRow) selectedRow.classList.remove('selected');
-    selectedRow = row;
-    row.classList.add('selected');
+  // ── TAG FILTER ─────────────────────────────────────────────────────────────
+  // Options list every tag with its post count, most used first.
+  var tagCounts = {};
+  posts.forEach(function(p) {
+    p.tags.forEach(function(t) { tagCounts[t] = (tagCounts[t] || 0) + 1; });
+  });
+  Object.keys(tagCounts)
+    .sort(function(a, b) { return tagCounts[b] - tagCounts[a] || a.localeCompare(b); })
+    .forEach(function(t) {
+      tagFilter.add(new Option(t + ' (' + tagCounts[t] + ')', t));
+    });
+
+  tagFilter.addEventListener('change', function() { setFilter(tagFilter.value); });
+
+  function setFilter(tag) {
+    activeTag = tag;
+    tagFilter.value = tag;
+    var visible = renderList();
+    // Keep the open post if it is still listed, otherwise open the newest match
+    if (!visible.some(function(p) { return p.id === selectedId; }) && visible.length) {
+      selectPost(visible[0]);
+    }
+  }
+
+
+  // ── POST LIST ──────────────────────────────────────────────────────────────
+  // Rebuilds the list for the active tag, grouped under year headers.
+  // Returns the posts that are shown.
+  function renderList() {
+    var visible = posts.filter(function(p) { return !activeTag || p.tags.indexOf(activeTag) !== -1; });
+    var year = null;
+    listEl.innerHTML = '';
+
+    visible.forEach(function(post) {
+      if (post.date.slice(0, 4) !== year) {
+        year = post.date.slice(0, 4);
+        var yearRow = document.createElement('div');
+        yearRow.className = 'blog-year-row';
+        yearRow.textContent = year;
+        listEl.appendChild(yearRow);
+      }
+      var row = document.createElement('div');
+      row.className = 'blog-post-row' + (post.id === selectedId ? ' selected' : '');
+      row.dataset.id = post.id;
+      row.title = post.summary;
+      row.innerHTML =
+        '<div>&#128196; ' + post.title + '</div>' +
+        '<div class="post-date-col">' + fmtDate(post.date, { month: 'short', day: '2-digit' }) + '</div>';
+      row.addEventListener('click', function() { selectPost(post); });
+      listEl.appendChild(row);
+    });
+
+    document.getElementById('blog-count').textContent = activeTag
+      ? visible.length + ' of ' + posts.length + ' post(s)'
+      : posts.length + ' post(s)';
+    return visible;
+  }
+
+
+  // ── READING PANE ───────────────────────────────────────────────────────────
+  function selectPost(post) {
+    selectedId = post.id;
+    listEl.querySelectorAll('.blog-post-row').forEach(function(row) {
+      row.classList.toggle('selected', row.dataset.id === post.id);
+    });
+    // Give every post a shareable link: blog.html#<id>
+    history.replaceState(null, '', '#' + post.id);
     openPost(post);
   }
 
-  // Show a post in the reading pane
   function openPost(post) {
     document.getElementById('empty-state').style.display = 'none';
     document.getElementById('blog-selected').textContent = post.title;
@@ -265,8 +353,11 @@
         '<div class="post-meta">' +
           '<span>&#128197; ' + fmtDate(post.date, { year: 'numeric', month: 'long', day: 'numeric' }) + '</span>' +
           '<span class="post-tags">' +
-            post.tags.map(function(t) { return '<span class="post-tag">' + t + '</span>'; }).join('') +
+            post.tags.map(function(t) {
+              return '<button class="post-tag" data-tag="' + t + '" title="Show all ' + t + ' posts">' + t + '</button>';
+            }).join('') +
           '</span>' +
+          '<button class="post-link-btn" title="Copy a link to this post">&#128279; Copy link</button>' +
         '</div>' +
       '</div>' +
       '<div class="post-content">' + post.content + '</div>';
@@ -274,13 +365,46 @@
     readingPane.scrollTop = 0;
   }
 
-  // Post images open in the lightbox
   readingPane.addEventListener('click', function(e) {
-    if (e.target.matches('img.post-img')) openLightbox(e.target.src, e.target.alt);
+    var el = e.target;
+    if (el.matches('img.post-img')) {
+      openLightbox(el.src, el.alt);           // post images open in the lightbox
+    } else if (el.matches('.post-tag')) {
+      setFilter(el.dataset.tag);              // tags filter the list
+    } else if (el.matches('.post-link-btn')) {
+      copyLink(el);
+    }
   });
 
-  // Open the newest post by default
-  if (posts.length > 0) selectPost(listEl.firstChild, posts[0]);
+  function copyLink(btn) {
+    var url = location.href;
+    var done = function() { btn.innerHTML = '&#10004; Copied'; };
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(url).then(done, function() { window.prompt('Copy this link:', url); });
+    } else {
+      window.prompt('Copy this link:', url);
+    }
+  }
+
+
+  // ── STARTUP ────────────────────────────────────────────────────────────────
+  // Open the post named in the URL hash, or the newest post.
+  function openFromHash() {
+    var post = findPost(location.hash.slice(1)) || posts[0];
+    if (!post) return;
+    if (activeTag && post.tags.indexOf(activeTag) === -1) {
+      activeTag = '';
+      tagFilter.value = '';
+      renderList();
+    }
+    selectPost(post);
+    var row = listEl.querySelector('.selected');
+    if (row) row.scrollIntoView({ block: 'nearest' });
+  }
+
+  window.addEventListener('hashchange', openFromHash);
+  renderList();
+  openFromHash();
 </script>
 </body>
 </html>

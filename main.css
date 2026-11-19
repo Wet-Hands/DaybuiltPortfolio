@@ -7,6 +7,11 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+:root {
+  /* Secondary text. 7.75:1 on the #c0c0c0 window gray (WCAG AAA). */
+  --text-muted: #2a2a2a;
+}
+
 @font-face {
   font-family: 'Win95';
   src: url('assets/win95.ttf') format('truetype');
@@ -202,7 +207,7 @@ p:last-child { margin-bottom: 0; }
 
 .skill-used-in {
   font-size: 10px;
-  color: #444;
+  color: var(--text-muted);
   font-style: italic;
   white-space: nowrap;
   overflow: hidden;
@@ -240,7 +245,7 @@ p:last-child { margin-bottom: 0; }
 
 .project-desc {
   font-size: 12px;
-  color: #333;
+  color: var(--text-muted);
   margin-bottom: 6px;
 }
 
@@ -532,7 +537,7 @@ p:last-child { margin-bottom: 0; }
 
 .carousel-counter {
   font-size: 11px;
-  color: #444;
+  color: var(--text-muted);
 }
 
 .carousel-dots {
