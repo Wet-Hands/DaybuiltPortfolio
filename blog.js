@@ -5,11 +5,11 @@
 
    POST FORMAT:
    {
-     id:      'unique-slug',          // used for URL anchors — no spaces
+     id:      'unique-slug',          // link to the post: blog.html#unique-slug — no spaces
      title:   'Post Title',
      date:    '2025-06-01',           // YYYY-MM-DD — used for sorting & display
      tags:    ['tag1', 'tag2'],
-     summary: 'One or two sentences shown in the post list.',
+     summary: 'One or two sentences, shown when hovering the post in the list.',
      content: `                       // Full post — plain HTML is fine
        <p>Your content here.</p>
        <p>You can use any HTML tags.</p>
