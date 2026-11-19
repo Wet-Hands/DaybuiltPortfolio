@@ -6,35 +6,8 @@
 <title>Resume.pdf — Day</title>
 <link rel="stylesheet" href="main.css">
 <style>
-
-  /* ── CROSS-PAGE NAVIGATION ──────────────────────────────────────────────── */
-  .taskbar-link {
-    height: 24px; padding: 0 8px;
-    background: #c0c0c0;
-    border-top: 2px solid #fff; border-left: 2px solid #fff;
-    border-right: 2px solid #404040; border-bottom: 2px solid #404040;
-    font-size: 13px; display: flex; align-items: center;
-    text-decoration: none; color: #000; white-space: nowrap; cursor: pointer;
-  }
-  .taskbar-link:hover { background: #d0d0d0; }
-  .taskbar-link.active {
-    border-top: 2px solid #404040; border-left: 2px solid #404040;
-    border-right: 2px solid #fff; border-bottom: 2px solid #fff;
-    background: #b8b8b8;
-  }
-
-
-  /* ── RESUME PAGE ──────────────────────────────────────────────────────── */       */
-
-  .resume-toolbar {
-    display: flex; align-items: center; gap: 6px;
-    padding: 4px 8px; background: #c0c0c0;
-    border-bottom: 1px solid #808080;
-    box-shadow: 0 1px 0 #fff;
-  }
-  .resume-toolbar span {
-    font-size: 11px; color: #444; flex: 1;
-  }
+  /* ── RESUME PAGE ──────────────────────────────────────────────────────── */
+  .resume-toolbar span { font-size: 11px; color: #444; }
   .resume-embed-wrap {
     background: #808080;
     padding: 8px;
@@ -53,6 +26,9 @@
     flex-direction: column; align-items: center; justify-content: center;
     height: 100%; gap: 10px; color: #fff; font-size: 13px; text-align: center;
   }
+  .resume-fallback-icon { font-size: 48px; }
+  .resume-fallback-hint { font-size: 11px; color: #ccc; }
+  .status-link { color: #000080; text-decoration: underline; font-size: 11px; }
 </style>
 </head>
 <body>
@@ -96,17 +72,16 @@
       </iframe>
       <!-- Shown if iframe fails (e.g. file not found) -->
       <div class="resume-fallback" id="resume-fallback">
-        <span style="font-size:48px">&#128196;</span>
+        <span class="resume-fallback-icon">&#128196;</span>
         <span>resume.pdf not found.</span>
-        <span style="font-size:11px;color:#ccc;">Place your resume at <strong>resume.pdf</strong> in this folder.</span>
+        <span class="resume-fallback-hint">Place your resume at <strong>resume.pdf</strong> in this folder.</span>
       </div>
     </div>
 
     <div class="status-bar">
       <div class="status-panel">resume.pdf</div>
       <div class="status-panel" style="flex:0;white-space:nowrap;">
-        <a href="resume.pdf" target="_blank"
-           style="color:#000080;text-decoration:underline;font-size:11px;">
+        <a class="status-link" href="resume.pdf" target="_blank" rel="noopener">
           &#128196; Open in new tab &#x2197;
         </a>
       </div>
@@ -129,17 +104,6 @@
   <div class="taskbar-clock" id="clock">00:00</div>
 </div>
 
-<script>
-
-  function updateClock() {
-    var now = new Date();
-    document.getElementById('clock').textContent =
-      String(now.getHours()).padStart(2,'0') + ':' +
-      String(now.getMinutes()).padStart(2,'0');
-  }
-  updateClock();
-  setInterval(updateClock, 10000);
-
-</script>
+<script src="common.js"></script>
 </body>
 </html>

@@ -6,97 +6,67 @@
 <title>Day-Portfolio</title>
 <link rel="stylesheet" href="main.css">
 <style>
-  /* ── PROFILE PICTURE ────────────────────────────────────────────────────── */
-  /* Drop a photo at photos/profile.jpg — falls back to the emoji if missing  */
+  /* ── PROFILE HEADER ─────────────────────────────────────────────────────── */
+  /* Photo at photos/pfp.jpg — falls back to the emoji if missing             */
   .avatar { overflow: hidden; }
   .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; cursor: zoom-in; }
+  .profile-subtitle { color: #000080; font-weight: bold; margin-bottom: 4px; }
+  .profile-tagline  { padding: 6px 10px; font-size: 11px; line-height: 1.5; }
+
+  /* Emoji shown in place of an image that failed to load (size inherited) */
+  .thumb-fallback {
+    display: none; width: 100%; height: 100%;
+    align-items: center; justify-content: center;
+  }
+
+  /* ── SHARED ENTRY PARTS (education + certifications) ────────────────────── */
+  .entry-header { display: flex; justify-content: space-between; align-items: baseline; }
+  .entry-date   { font-size: 12px; color: #444; flex-shrink: 0; margin-left: 8px; }
+  .tag-list     { display: flex; flex-wrap: wrap; gap: 4px; }
+  .view-details {
+    display: block; font-size: 10px; color: #000080;
+    text-decoration: underline; margin-top: 4px;
+  }
+
+  /* ── EDUCATION ──────────────────────────────────────────────────────────── */
+  .exp-entry { margin-bottom: 4px; }
+  .exp-entry.has-modal { cursor: pointer; }
+  .exp-entry .entry-header { margin-bottom: 2px; }
+  .exp-company { color: #000080; font-size: 11px; margin-bottom: 4px; }
+  .exp-desc    { font-size: 12px; margin-bottom: 6px; }
 
   /* ── CERTIFICATIONS ─────────────────────────────────────────────────────── */
   .cert-card {
     display: flex; gap: 10px; align-items: flex-start;
     padding: 8px; background: #c0c0c0; margin-bottom: 8px;
-    border-top: 2px solid #fff; border-left: 2px solid #fff;
-    border-right: 2px solid #404040; border-bottom: 2px solid #404040;
+    border: 2px solid; border-color: #fff #404040 #404040 #fff;
   }
   .cert-card:last-child { margin-bottom: 0; }
   .cert-card.has-modal { cursor: pointer; }
-  .cert-card.has-modal:hover { background: #d0d0d0; }
-  .cert-card.has-modal:active {
-    border-top: 2px solid #404040; border-left: 2px solid #404040;
-    border-right: 2px solid #fff;  border-bottom: 2px solid #fff;
-  }
+  .cert-card.has-modal:hover  { background: #d0d0d0; }
+  .cert-card.has-modal:active { border-color: #404040 #fff #fff #404040; }
   .cert-img-wrap {
     width: 64px; height: 64px; flex-shrink: 0; background: #fff; font-size: 28px;
-    border-top: 2px solid #404040; border-left: 2px solid #404040;
-    border-right: 2px solid #fff; border-bottom: 2px solid #fff;
+    border: 2px solid; border-color: #404040 #fff #fff #404040;
     display: flex; align-items: center; justify-content: center; overflow: hidden;
   }
   .cert-img-wrap img { width: 100%; height: 100%; object-fit: contain; cursor: zoom-in; }
-  .cert-info  { flex: 1; min-width: 0; }
-  .cert-title { font-weight: bold; font-size: 12px; }
+  .cert-info   { flex: 1; min-width: 0; }
+  .cert-title  { font-weight: bold; font-size: 12px; }
   .cert-issuer { font-size: 10px; color: #000080; font-weight: bold; margin-bottom: 4px; }
-  .cert-desc  { font-size: 12px; line-height: 1.5; color: #333; }
-  .cert-view-details {
-    display: block; font-size: 10px; color: #000080;
-    text-decoration: underline; margin-top: 4px;
-  }
+  .cert-desc   { font-size: 12px; line-height: 1.5; color: #333; }
 
-  /* ── LIGHTBOX ───────────────────────────────────────────────────────────── */
-  .lightbox-overlay {
-    display: none; position: fixed; inset: 0;
-    background: rgba(0,0,0,0.8); z-index: 400;
-    align-items: center; justify-content: center;
-  }
-  .lightbox-overlay.open { display: flex; }
-  .lightbox-win {
-    background: #c0c0c0;
-    border-top: 2px solid #fff; border-left: 2px solid #fff;
-    border-right: 2px solid #404040; border-bottom: 2px solid #404040;
-    box-shadow: 4px 4px 0 #000;
-    max-width: 92vw; max-height: 92vh;
-    display: flex; flex-direction: column;
-  }
-  .lightbox-body {
-    padding: 4px; background: #000;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .lightbox-body img {
-    max-width: calc(92vw - 8px); max-height: calc(92vh - 52px);
-    object-fit: contain; display: block;
-  }
-  .lightbox-statusbar {
-    display: flex; padding: 3px 6px 2px;
-    border-top: 1px solid #808080; box-shadow: 0 -1px 0 #fff;
-  }
-  .lightbox-statusbar .status-panel { flex: 1; font-size: 14px; }
-
-  /* ── PDF SLIDES ─────────────────────────────────────────────────────────── */
+  /* ── CAROUSEL SLIDES ────────────────────────────────────────────────────── */
+  .carousel-viewport img { cursor: zoom-in; display: block; }
+  .slide-placeholder-label { font-size: 12px; color: #ccc; }
   .pdf-viewport { width: 100%; height: 170px; background: #fff; }
   .pdf-frame    { width: 100%; height: 100%; border: none; display: block; }
   .pdf-open-bar { background: #c0c0c0; padding: 3px 6px; text-align: center; }
-  .pdf-open-btn {
-    font-size: 11px; color: #000080; text-decoration: underline; cursor: pointer;
-  }
+  .pdf-open-btn { font-size: 11px; color: #000080; text-decoration: underline; cursor: pointer; }
 
-  /* ── CLICKABLE CAROUSEL IMAGES ──────────────────────────────────────────── */
-  .carousel-viewport img { cursor: zoom-in; display: block; }
-
-  /* ── CROSS-PAGE NAVIGATION ──────────────────────────────────────────────── */
-  .taskbar-link {
-    height: 24px; padding: 0 8px;
-    background: #c0c0c0;
-    border-top: 2px solid #fff; border-left: 2px solid #fff;
-    border-right: 2px solid #404040; border-bottom: 2px solid #404040;
-    font-size: 13px; display: flex; align-items: center;
-    text-decoration: none; color: #000; white-space: nowrap; cursor: pointer;
-  }
-  .taskbar-link:hover { background: #d0d0d0; }
-  .taskbar-link.active {
-    border-top: 2px solid #404040; border-left: 2px solid #404040;
-    border-right: 2px solid #fff; border-bottom: 2px solid #fff;
-    background: #b8b8b8;
-  }
-
+  /* ── LIGHTBOX (page-specific additions to main.css) ─────────────────────── */
+  .lightbox-statusbar { box-shadow: 0 -1px 0 #fff; }
+  .lightbox-statusbar .status-panel { font-size: 14px; }
 </style>
 </head>
 <body>
@@ -120,17 +90,12 @@
           <img src="photos/pfp.jpg" alt="Ian Day"
                onclick="openLightbox(this.src, this.alt)"
                onerror="this.style.display='none'; document.getElementById('avatar-emoji').style.display='flex'">
-          <span id="avatar-emoji"
-                style="display:none;width:100%;height:100%;align-items:center;justify-content:center;font-size:32px;">
-            &#128100;
-          </span>
+          <span class="thumb-fallback" id="avatar-emoji">&#128100;</span>
         </div>
         <div>
           <h1>Ian Day</h1>
-          <div style="color:#000080;font-weight:bold;margin-bottom:4px;">Student at the College of Southern Maryland</div>
-          <div class="inset" style="padding:6px 10px;font-size:11px;line-height:1.5;">
-            Hello World! 20m | (he/him)
-          </div>
+          <div class="profile-subtitle">Student at the College of Southern Maryland</div>
+          <div class="inset profile-tagline">Hello World! 20m | (he/him)</div>
         </div>
       </div>
       <div class="status-bar" style="margin-top:8px;">
@@ -214,7 +179,7 @@
       <div id="experience-container"></div>
     </div>
     <div class="status-bar">
-      <div class="status-panel">3 object(s)</div>
+      <div class="status-panel" id="experience-count">0 object(s)</div>
     </div>
   </div>
 
@@ -339,18 +304,24 @@
 
 <!-- data.js must load before the main script so all const arrays are available -->
 <script src="data.js"></script>
+<script src="common.js"></script>
 <script>
   // ══════════════════════════════════════════════════════════════════════════
-  // CLOCK
+  // HELPERS
   // ══════════════════════════════════════════════════════════════════════════
-  function updateClock() {
-    var now = new Date();
-    document.getElementById('clock').textContent =
-      String(now.getHours()).padStart(2, '0') + ':' +
-      String(now.getMinutes()).padStart(2, '0');
+  var FALLBACK_BADGE = '&#127941;';
+
+  function tagsHTML(tags) {
+    return tags.map(function(t) { return '<span class="modal-tag">' + t + '</span>'; }).join('');
   }
-  updateClock();
-  setInterval(updateClock, 10000);
+
+  function viewDetailsHTML(item) {
+    return item.modal ? '<span class="view-details">&#128194; View details</span>' : '';
+  }
+
+  function setCount(id, list) {
+    document.getElementById(id).textContent = list.length + ' object(s)';
+  }
 
 
   // ══════════════════════════════════════════════════════════════════════════
@@ -362,15 +333,16 @@
     catEl.className = 'skill-category';
     catEl.innerHTML = '<div class="skill-category-label">' + cat.label + '</div>';
     cat.skills.forEach(function(s) {
-      var count  = s.projects.length;
-      var blocks = Array.from({ length: count }, function() { return '<div class="progress-block"></div>'; }).join('');
-      var row    = document.createElement('div');
+      var count = s.projects.length;
+      var row   = document.createElement('div');
       row.className = 'skill-row';
       row.innerHTML =
         '<span class="skill-label">' + s.name + '</span>' +
         '<div class="progress-track" title="Used in ' + count + ' of ' + totalProjects + ' projects"' +
-          ' style="width:' + (totalProjects * 14) + 'px">' + blocks + '</div>' +
-        '<span class="skill-used-in">' + s.projects.join('') + '</span>'; //'<span class="skill-used-in">' + s.projects.join(', ') + '</span>';
+          ' style="width:' + (totalProjects * 14) + 'px">' +
+          '<div class="progress-block"></div>'.repeat(count) +
+        '</div>' +
+        '<span class="skill-used-in">' + s.projects.join('') + '</span>';
       catEl.appendChild(row);
     });
     skillsContainer.appendChild(catEl);
@@ -381,11 +353,10 @@
   // PROJECTS  (data: projects — from data.js)
   // ══════════════════════════════════════════════════════════════════════════
   var projContainer = document.getElementById('projects-container');
-  document.getElementById('projects-count').textContent = projects.length + ' object(s)';
+  setCount('projects-count', projects);
   projects.forEach(function(p) {
     var card = document.createElement('div');
     card.className = 'project-card';
-    card.style.cursor = 'pointer';
     card.addEventListener('click', function() { openModal(p); });
     card.innerHTML =
       '<span class="project-icon">' + p.icon + '</span>' +
@@ -401,42 +372,38 @@
   // Entries with a `modal` property become clickable cards.
   // ══════════════════════════════════════════════════════════════════════════
   var expContainer = document.getElementById('experience-container');
+  setCount('experience-count', experience);
   experience.forEach(function(e, i) {
     if (i > 0) {
-      var div = document.createElement('div');
-      div.className = 'divider';
-      expContainer.appendChild(div);
+      var divider = document.createElement('div');
+      divider.className = 'divider';
+      expContainer.appendChild(divider);
     }
     var row = document.createElement('div');
-    row.className = 'raised';
-    row.style.marginBottom = '4px';
+    row.className = 'raised exp-entry' + (e.modal ? ' has-modal' : '');
     if (e.modal) {
-      row.style.cursor = 'pointer';
       row.addEventListener('click', function() { openModal(e); });
     }
     row.innerHTML =
-      '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2px;">' +
+      '<div class="entry-header">' +
         '<strong>' + e.role + '</strong>' +
-        '<span style="font-size:12px;color:#444;flex-shrink:0;margin-left:8px;">' + e.dates + '</span>' +
+        '<span class="entry-date">' + e.dates + '</span>' +
       '</div>' +
-      '<div style="color:#000080;font-size:11px;margin-bottom:4px;">' + e.company + '</div>' +
-      '<div style="font-size:12px;margin-bottom:6px;">' + e.desc + '</div>' +
-      '<div style="display:flex;flex-wrap:wrap;gap:4px;">' +
-        e.tags.map(function(t) { return '<span class="modal-tag">' + t + '</span>'; }).join('') +
-      '</div>' +
-      (e.modal ? '<span style="font-size:10px;color:#000080;text-decoration:underline;display:block;margin-top:4px;">&#128194; View details</span>' : '');
+      '<div class="exp-company">' + e.company + '</div>' +
+      '<div class="exp-desc">' + e.desc + '</div>' +
+      '<div class="tag-list">' + tagsHTML(e.tags) + '</div>' +
+      viewDetailsHTML(e);
     expContainer.appendChild(row);
   });
 
 
   // ══════════════════════════════════════════════════════════════════════════
   // CERTIFICATIONS  (data: certifications — from data.js)
-  // Cards with a `modal` property are fully clickable.
-  // Thumbnail images open the lightbox (with stopPropagation so they don't
-  // also trigger the modal on cards that have one).
+  // Cards with a `modal` property are fully clickable. Thumbnails open the
+  // lightbox and stop propagation so they don't also open the modal.
   // ══════════════════════════════════════════════════════════════════════════
   var certsContainer = document.getElementById('certs-container');
-  document.getElementById('certs-count').textContent = certifications.length + ' object(s)';
+  setCount('certs-count', certifications);
   certifications.forEach(function(c) {
     var card = document.createElement('div');
     card.className = 'cert-card' + (c.modal ? ' has-modal' : '');
@@ -444,160 +411,135 @@
       card.addEventListener('click', function() { openModal(c); });
     }
 
-    // Thumbnail: if img provided, make it lightbox-clickable (stop propagation
-    // so it doesn't also open the modal at the same time)
-    var thumbHTML;
-    if (c.img) {
-      thumbHTML =
-        '<img src="' + c.img + '" alt="' + c.title + '"' +
-        ' onclick="openLightbox(this.src,this.alt);event.stopPropagation()"' +
-        ' onerror="this.style.display=\'none\';this.nextSibling.style.display=\'flex\'">' +
-        '<span style="display:none;align-items:center;justify-content:center;width:100%;height:100%;font-size:28px;">' +
-          (c.emoji || '&#127941;') + '</span>';
-    } else {
-      thumbHTML = c.emoji || '&#127941;';
-    }
+    var badge = c.emoji || FALLBACK_BADGE;
+    var thumbHTML = c.img
+      ? '<img src="' + c.img + '" alt="' + c.title + '"' +
+          ' onclick="openLightbox(this.src,this.alt);event.stopPropagation()"' +
+          ' onerror="this.style.display=\'none\';this.nextSibling.style.display=\'flex\'">' +
+        '<span class="thumb-fallback">' + badge + '</span>'
+      : badge;
 
     card.innerHTML =
       '<div class="cert-img-wrap">' + thumbHTML + '</div>' +
       '<div class="cert-info">' +
-        '<div style="display:flex;justify-content:space-between;align-items:baseline;">' +
+        '<div class="entry-header">' +
           '<div class="cert-title">' + c.title + '</div>' +
-          '<span style="font-size:12px;color:#444;flex-shrink:0;margin-left:8px;">' + c.date + '</span>' +
+          '<span class="entry-date">' + c.date + '</span>' +
         '</div>' +
         '<div class="cert-issuer">&#127970; ' + c.issuer + '</div>' +
         '<div class="cert-desc">' + c.desc + '</div>' +
-        (c.modal ? '<span class="cert-view-details">&#128194; View details</span>' : '') +
+        viewDetailsHTML(c) +
       '</div>';
     certsContainer.appendChild(card);
   });
 
 
   // ══════════════════════════════════════════════════════════════════════════
-  // MODAL  — shared popup for projects, certs, and experience entries.
+  // MODAL — shared popup for projects, certs, and experience entries.
   //
-  // openModal(item)   — item must have (name or title) + item.modal
+  // openModal(item)    — item must have (name or title) + item.modal
   // loadSlides(slides) — builds carousel; supports img, emoji/bg, and pdf slides
   // closeModal()       — closes popup and restores page scroll
   // ══════════════════════════════════════════════════════════════════════════
+  var modalEl = document.getElementById('project-modal');
+
   function openModal(item) {
     var displayName = item.name || item.title || 'Details';
     document.getElementById('modal-title').textContent = displayName + ' — Details';
     document.getElementById('modal-about').textContent = item.modal.about;
-    document.getElementById('modal-tags').innerHTML =
-      item.modal.tags.map(function(t) { return '<span class="modal-tag">' + t + '</span>'; }).join('');
+    document.getElementById('modal-tags').innerHTML = tagsHTML(item.modal.tags);
 
     // Show Visit/Verify button only when a URL is provided
     var urlBtn = document.getElementById('modal-url');
-    if (item.modal.url) {
-      urlBtn.href = item.modal.url;
-      urlBtn.style.display = 'inline-block';
-    } else {
-      urlBtn.style.display = 'none';
-    }
+    urlBtn.style.display = item.modal.url ? 'inline-block' : 'none';
+    if (item.modal.url) urlBtn.href = item.modal.url;
 
     loadSlides(item.modal.slides);
-    document.getElementById('project-modal').classList.add('open');
+    modalEl.classList.add('open');
     document.body.style.overflow = 'hidden';
+  }
+
+  function slideHTML(s, i) {
+    if (s.pdf) {
+      // PDF slide: embedded iframe + button to open full PDF in new tab
+      return '<div class="pdf-viewport">' +
+          '<iframe src="' + s.pdf + '" class="pdf-frame"></iframe>' +
+        '</div>' +
+        '<div class="pdf-open-bar">' +
+          '<a href="' + s.pdf + '" target="_blank" rel="noopener" class="pdf-open-btn"' +
+            ' onclick="event.stopPropagation()">&#128196; Open PDF in new tab &#x2197;</a>' +
+        '</div>';
+    }
+    if (s.img) {
+      // Photo slide: click opens lightbox
+      return '<img src="' + s.img + '" alt="' + s.caption + '"' +
+        ' onclick="openLightbox(this.src,this.alt)"' +
+        ' onerror="this.style.opacity=0.3">';
+    }
+    // Emoji / colour placeholder
+    return '<div class="slide-placeholder" style="background:' + (s.bg || '#1a1a2e') + '">' +
+        '<span>' + (s.emoji || '&#128444;') + '</span>' +
+        '<span class="slide-placeholder-label">Screenshot ' + (i + 1) + '</span>' +
+      '</div>';
   }
 
   function loadSlides(slides) {
     carouselIndex = 0;
-    var viewport = document.getElementById('carousel-viewport');
-    viewport.innerHTML = slides.map(function(s, i) {
-      var inner;
-      if (s.pdf) {
-        // PDF slide: embedded iframe + button to open full PDF in new tab
-        inner =
-          '<div class="pdf-viewport">' +
-            '<iframe src="' + s.pdf + '" class="pdf-frame"></iframe>' +
-          '</div>' +
-          '<div class="pdf-open-bar">' +
-            '<a href="' + s.pdf + '" target="_blank" rel="noopener" class="pdf-open-btn"' +
-              ' onclick="event.stopPropagation()">&#128196; Open PDF in new tab &#x2197;</a>' +
-          '</div>';
-      } else if (s.img) {
-        // Photo slide: click opens lightbox
-        inner = '<img src="' + s.img + '" alt="' + s.caption + '"' +
-          ' onclick="openLightbox(this.src,this.alt)"' +
-          ' onerror="this.style.opacity=0.3">';
-      } else {
-        // Emoji/colour placeholder
-        inner =
-          '<div class="slide-placeholder" style="background:' + (s.bg || '#1a1a2e') + '">' +
-            '<span style="font-size:48px">' + (s.emoji || '&#128444;') + '</span>' +
-            '<span style="font-size:12px;color:#ccc">Screenshot ' + (i + 1) + '</span>' +
-          '</div>';
-      }
-      return '<div class="carousel-slide' + (i === 0 ? ' active' : '') + '">' +
-        inner + '<div class="slide-caption">' + s.caption + '</div></div>';
+    document.getElementById('carousel-viewport').innerHTML = slides.map(function(s, i) {
+      return '<div class="carousel-slide">' +
+        slideHTML(s, i) + '<div class="slide-caption">' + s.caption + '</div></div>';
     }).join('');
     carouselRender();
   }
 
   function closeModal() {
-    document.getElementById('project-modal').classList.remove('open');
+    modalEl.classList.remove('open');
     document.body.style.overflow = '';
   }
 
-  // Close on overlay click or Escape key
-  document.getElementById('project-modal').addEventListener('click', function(e) {
-    if (e.target === this) closeModal();
+  // Close on overlay click or Escape key (common.js closes the lightbox)
+  modalEl.addEventListener('click', function(e) {
+    if (e.target === modalEl) closeModal();
   });
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') { closeLightbox(); closeModal(); }
+    if (e.key === 'Escape') closeModal();
   });
 
 
   // ══════════════════════════════════════════════════════════════════════════
   // CAROUSEL
-  // carouselRender() — redraws slide visibility, counter, and dots.
+  // carouselRender()  — redraws slide visibility, counter, and dots.
   // carouselMove(dir) — moves +1 or -1 slides.
   // Kept at top scope because they are called from inline onclick= attributes.
   // ══════════════════════════════════════════════════════════════════════════
   var carouselIndex = 0;
 
+  function carouselSlides() {
+    return document.querySelectorAll('#carousel-viewport .carousel-slide');
+  }
+
   function carouselRender() {
-    var slides = document.querySelectorAll('#carousel-viewport .carousel-slide');
+    var slides = carouselSlides();
     var total  = slides.length;
     slides.forEach(function(s, i) { s.classList.toggle('active', i === carouselIndex); });
     document.getElementById('carousel-counter').textContent = (carouselIndex + 1) + ' / ' + total;
     document.getElementById('carousel-prev').disabled = (carouselIndex === 0);
     document.getElementById('carousel-next').disabled = (carouselIndex === total - 1);
+
     var dots = document.getElementById('carousel-dots');
     dots.innerHTML = '';
-    for (var i = 0; i < total; i++) {
+    slides.forEach(function(_, i) {
       var dot = document.createElement('div');
       dot.className = 'carousel-dot' + (i === carouselIndex ? ' active' : '');
-      (function(idx) {
-        dot.addEventListener('click', function() { carouselIndex = idx; carouselRender(); });
-      })(i);
+      dot.addEventListener('click', function() { carouselIndex = i; carouselRender(); });
       dots.appendChild(dot);
-    }
+    });
   }
 
   function carouselMove(dir) {
-    var total = document.querySelectorAll('#carousel-viewport .carousel-slide').length;
+    var total = carouselSlides().length;
     carouselIndex = Math.max(0, Math.min(total - 1, carouselIndex + dir));
     carouselRender();
-  }
-
-
-  // ══════════════════════════════════════════════════════════════════════════
-  // LIGHTBOX — fullscreen image viewer.
-  // openLightbox(src, alt) — called by onclick on any clickable image.
-  // closeLightbox()        — called by overlay click, close button, or Escape.
-  // Kept at top scope because called from inline onclick= attributes.
-  // ══════════════════════════════════════════════════════════════════════════
-  function openLightbox(src, alt) {
-    document.getElementById('lightbox-img').src = src;
-    document.getElementById('lightbox-img').alt = alt || '';
-    document.getElementById('lightbox-caption').textContent = alt || '';
-    document.getElementById('lightbox').classList.add('open');
-  }
-
-  function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('open');
   }
 </script>
 </body>
