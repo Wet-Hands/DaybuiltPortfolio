@@ -215,7 +215,7 @@ const projects = [
       tags: ['Server Administration', 'Networking', 'SQL', 'JSON'],
       url: '',
       slides: [
-        { img: 'photos/projects/d',  caption: 'N/A' },
+        { emoji: '📟', caption: 'Screenshots coming soon' },
       ]
     }
   },
@@ -229,7 +229,7 @@ const projects = [
 const experience = [
   {
     company: 'College of Southern Maryland',
-    role: 'Associates of Science in Electrical Engineering [In Progress...]',
+    role: 'Associate of Science in Electrical Engineering [In Progress...]',
     dates: '2025 – 2028',
     desc: 'At CSM I have been going for my Associates in Electrical Engineering. After about 3 years, I plan on transferring to the University of Maryland via the USMSM Transfer plan and taking classes here in Southern Maryland.',
     tags: ['C', 'C++', 'MatLab', 'SolidWorks', 'Project Documentation'],
@@ -300,7 +300,7 @@ const certifications = [
       tags: ['Game Design', 'Godot', 'gdScript', 'Blender', 'Multiplayer Networking'],
       url: '',
       slides: [
-        { img: 'photos/awards/skills25-1.jpg', caption: 'Vincent Churilla and I standing infront of our poster' },
+        { img: 'photos/awards/skills25-1.jpg', caption: 'Vincent Churilla and I standing in front of our poster' },
       ]
     }
   },
@@ -336,7 +336,7 @@ const certifications = [
   },
   {
     img: 'photos/awards/skillsflclogo.jpg',
-    title: 'SkillsUSA Statesmen Award',
+    title: 'SkillsUSA Statesman Award',
     issuer: 'SkillsUSA Maryland',
     date: 'October 2024',
     desc: 'The SkillsUSA Statesman Award is the highest individual honor a member can earn at the state level.',
@@ -407,7 +407,7 @@ const certifications = [
     date: 'December 2023',
     desc: 'The Slide Caliper Measurement Module specifically certifies the ability to handle, calibrate, and read both dial and digital calipers with accuracy.',
     modal: {
-      about: 'The Snap-on Precision Measuring Instruments Certification enables graduates to demonstrate a solid understanding of thefundamentals of working with precision measurement instruments.',
+      about: 'The Snap-on Precision Measuring Instruments Certification enables graduates to demonstrate a solid understanding of the fundamentals of working with precision measurement instruments.',
       tags: ['Caliper', 'Precision Measurement', 'Troubleshooting'],
       url: 'pdfs/caliper-cert.pdf',
       slides: [
