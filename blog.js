@@ -15,10 +15,17 @@
        <p>You can use any HTML tags.</p>
      `,
    }
+
+   IMAGES (all open in the lightbox when clicked):
+     <img class="post-img post-img-float" src="..." alt="Caption">  ← floated left, text wraps
+     <div class="clear"></div>                                     ← end the text wrap
+     <div class="post-img-row">                                    ← side-by-side pair
+       <img class="post-img" src="..." alt="Caption">
+       <img class="post-img" src="..." alt="Caption">
+     </div>
    ═══════════════════════════════════════════════════════════════════════════ */
 
 const blogPosts = [
-
   {
     id:      'unfinished',
     title:   'Behind the Scenes: My Unfinished Projects',
@@ -26,47 +33,27 @@ const blogPosts = [
     tags:    ['game-dev', 'project-management'],
     summary: 'My Unfinished Projects',
     content: `
-    <p>This is a collection of some of my unfinished games and visual tests I've developed over the past 3 years of making games.</p>
+      <p>This is a collection of some of my unfinished games and visual tests I've developed over the past 3 years of making games.</p>
 
-    <img src="photos/blog/unfinished-games/image04.png" alt="Rotary sorter"
-    onclick="openLightbox(this.src, this.alt)"
-    style="float:left; width:45%; margin:0 0 8px 12px; cursor:zoom-in;
-    border-top:2px solid #404040; border-left:2px solid #404040;
-    border-right:2px solid #fff; border-bottom:2px solid #fff;">
+      <img class="post-img post-img-float" src="photos/blog/unfinished-games/image04.png" alt="Rotary sorter">
 
-    <p>Every year or so I like to attempt to re-create Minecraft within the Godot Game Engine. This was my 2025 attempt, I used C# instead of using gdScript to try and save on performance. This was definetly my best attempt so far. I'm hoping my 2026 attempt will reach infinite terrain generation.</p>
+      <p>Every year or so I like to attempt to re-create Minecraft within the Godot Game Engine. This was my 2025 attempt, I used C# instead of using gdScript to try and save on performance. This was definetly my best attempt so far. I'm hoping my 2026 attempt will reach infinite terrain generation.</p>
 
-    <div style="clear:both;"></div>
+      <div class="clear"></div>
 
+      <div class="post-img-row">
+        <img class="post-img" src="photos/blog/unfinished-games/image02.png" alt="Front view">
+        <img class="post-img" src="photos/blog/unfinished-games/image01.png" alt="Side view">
+      </div>
 
+      <p>These images come from me testing out visual styles for a video game adaptation of my story "Project: Snowglobe". I still would love to tell the story of this alternate future, however I currently cannot decide the gameplay.</p>
 
-    <div style="display:flex; gap:8px; margin:8px 0;">
-      <img src="photos/blog/unfinished-games/image02.png" alt="Front view"
-        onclick="openLightbox(this.src, this.alt)"
-        style="width:50%; cursor:zoom-in;
-          border-top:2px solid #404040; border-left:2px solid #404040;
-          border-right:2px solid #fff; border-bottom:2px solid #fff;">
-      <img src="photos/blog/unfinished-games/image01.png" alt="Side view"
-        onclick="openLightbox(this.src, this.alt)"
-        style="width:50%; cursor:zoom-in;
-          border-top:2px solid #404040; border-left:2px solid #404040;
-          border-right:2px solid #fff; border-bottom:2px solid #fff;">
-    </div>
+      <img class="post-img post-img-float" src="photos/blog/unfinished-games/image03.png" alt="Rotary sorter">
 
-    <p>These images come from me testing out visual styles for a video game adaptation of my story "Project: Snowglobe". I still would love to tell the story of this alternate future, however I currently cannot decide the gameplay.</p>
+      <p>This was an early prototype written in gdScript for the final project of 'Intermediate Programming Concepts for Engineers'. Very simple noise-based isometric terrain generation.</p>
+      <p>The plan was to rewrite this in C++, however the Godot Engine and C++ are not natively compatible, so too many issues came up and I pivoted to another project.</p>
 
-
-
-    <img src="photos/blog/unfinished-games/image03.png" alt="Rotary sorter"
-    onclick="openLightbox(this.src, this.alt)"
-    style="float:left; width:45%; margin:0 0 8px 12px; cursor:zoom-in;
-    border-top:2px solid #404040; border-left:2px solid #404040;
-    border-right:2px solid #fff; border-bottom:2px solid #fff;">
-
-    <p>This was an early prototype written in gdScript for the final project of 'Intermediate Programming Concepts for Engineers'. Very simple noise-based isometric terrain generation.</p>
-    <p>The plan was to rewrite this in C++, however the Godot Engine and C++ are not natively compatible, so too many issues came up and I pivoted to another project.</p>
-
-    <div style="clear:both;"></div>
+      <div class="clear"></div>
     `,
   },
   {
@@ -76,13 +63,9 @@ const blogPosts = [
     tags:    ['game-dev', 'project-management'],
     summary: 'Having fun with a logistics game.',
     content: `
-    <img src="photos/blog/td1.e4jPG1" alt="Visual of 3D Pixel Art look"
-    onclick="openLightbox(this.src, this.alt)"
-    style="float:left; width:45%; margin:0 0 8px 12px; cursor:zoom-in;
-    border-top:2px solid #404040; border-left:2px solid #404040;
-    border-right:2px solid #fff; border-bottom:2px solid #fff;">
-    <p>I've started development on my newest video game. I think I want to use this as the first game of the LibreGames Foundation. I do not know yet how I will find new members, my hope is once I start posting about the game online, people will take interest.</p>
-    <p>The main idea so far is the player must defend research probes from waves of aliens. We have been working on a 3D pixel art style inspired by the work of <a href="https://www.youtube.com/@t3ssel8r">t3ssel8r</a>.</p>
+      <img class="post-img post-img-float" src="photos/blog/td1.png" alt="Visual of 3D Pixel Art look">
+      <p>I've started development on my newest video game. I think I want to use this as the first game of the LibreGames Foundation. I do not know yet how I will find new members, my hope is once I start posting about the game online, people will take interest.</p>
+      <p>The main idea so far is the player must defend research probes from waves of aliens. We have been working on a 3D pixel art style inspired by the work of <a href="https://www.youtube.com/@t3ssel8r">t3ssel8r</a>.</p>
     `,
   },
   {
@@ -111,7 +94,7 @@ const blogPosts = [
         <li>LibreBR - My friends and I used to play Fortnite quite regularly, however, between Epic Games' questionable decision making and my switching to Linux (an unsupported platform) we haven't played in a long time. So creating an open source alternative would be an interesting project.</li>
       </ul>
       <p>All of these games would be built using FOSS such as the Godot Engine, Blender, Krita, Aseprite, and others. The only money gained would be from donations, whether that's individuals, organizations, and/or colleges. The money would go towards optional Official Servers and publishing fees. </p>
-      `,
+    `,
   },
   {
     id:      'egr1150',
@@ -125,7 +108,7 @@ const blogPosts = [
       <p>To accomplish this task, our team presented an automated cube sorting machine based on a rotating base design. Made of three main components: the frame, sensor subassembly, and sorting bins mounted on a rotating base.</p>
       <p>It was my job to wire the all of the electrical components and program the logic via the Arduino in C. What made programming this very challenging was the low quality of the sensors, it wouldn't be uncommon to get a random spike in a certain color value. So what I did is I sampled the color value of the cube 10 times, then if a large majority were the same color it would choose that color. After that problem was solved, it came down to finding ways to speed up this process, as there was a four minute time limit that usually isn't a problem. </p>
       <p>The extra care I put into data sanitization paid off big, not only did we ace the demo, but we were the only group to complete a demo without error. And amazingly during our demo, the machine worked at double the usual speed, interrupting me as I was explaining to the class how it worked.</p>
-      `,
+    `,
   },
   {
     id:      'dinoland-1',
@@ -139,24 +122,20 @@ const blogPosts = [
       <p>I was inspired to make a dinosaur horror game after watching Jurrassic World: Rebirth, as it always bothered me that they never did a legitimate horror film. The main gameplay was inspired by the Five Nights at Freddys series of games, specifically this one minigame in Help Wanted where Mangle is coming at your from four sides while you're trying to repair the A/C system.</p>
     `,
   },
-{
-  id:      'egr-pc',
-  title:   'Legendary Find from IT Networking',
-  date:    '2025-05-11',
-  tags:    ['computer-hardware'],
-  summary: 'Having fun with a logistics game.',
-  content: `
-  <img src="photos/blog/engineeringpc.png" alt="Cool Computer"
-  onclick="openLightbox(this.src, this.alt)"
-  style="float:left; width:45%; margin:0 0 8px 12px; cursor:zoom-in;
-  border-top:2px solid #404040; border-left:2px solid #404040;
-  border-right:2px solid #fff; border-bottom:2px solid #fff;">
+  {
+    id:      'egr-pc',
+    title:   'Legendary Find from IT Networking',
+    date:    '2025-05-11',
+    tags:    ['computer-hardware'],
+    summary: 'Having fun with a logistics game.',
+    content: `
+      <img class="post-img post-img-float" src="photos/blog/engineeringpc.png" alt="Cool Computer">
 
-  <p>We found this "portable" computer in the Engineering room and brought it to IT Networking to try and get it running.</p>
-  <p>UPDATE 1: The computer's CPU capacitors are fried, luckily it uses a standard ATX motherboard, so we can replace it.</p>
-  <p>UPDATE 2: The computer is now at my house and it's insides were replaced and it works!</p>
-  `,
-},
+      <p>We found this "portable" computer in the Engineering room and brought it to IT Networking to try and get it running.</p>
+      <p>UPDATE 1: The computer's CPU capacitors are fried, luckily it uses a standard ATX motherboard, so we can replace it.</p>
+      <p>UPDATE 2: The computer is now at my house and it's insides were replaced and it works!</p>
+    `,
+  },
   {
     id:      'skillsusa-2025',
     title:   'SkillsUSA 2025 — Silver Medal with Jimmy Rings',
@@ -169,7 +148,6 @@ const blogPosts = [
       <p>Compared to last year's Dungeon Doom, the scope was much larger: 3D levels built in era accurate level building software Trenchbroom, custom weapon models, a lobby system, and swarms of multiplayer synced enemies. I'm happy with how far the project came in the time we had.</p>
     `,
   },
-
   {
     id:      'ev-battery-build',
     title:   'Building the EV Battery Box',
@@ -190,17 +168,12 @@ const blogPosts = [
     tags:    ['skills-usa', 'game-dev', 'personal'],
     summary: 'My time at Nationals Competition',
     content: `
-      <img src="photos/blog/nationals/group.jpg" alt="My Friends and I repping our state hat."
-      onclick="openLightbox(this.src, this.alt)"
-      style="float:left; width:45%; margin:0 0 8px 12px; cursor:zoom-in;
-      border-top:2px solid #404040; border-left:2px solid #404040;
-      border-right:2px solid #fff; border-bottom:2px solid #fff;">
+      <img class="post-img post-img-float" src="photos/blog/nationals/group.jpg" alt="My Friends and I repping our state hat.">
 
       <p>Nationals was probably one of, if not the, coolest experience of my life. Being able to meet so many fellow students also into programming and game develop was so exciting. SkillsUSA really does feel like one big club.</p>
       <p>I must thank <a href="https://n-s-i.us/">N-S-I</a> for covering half the cost towards this trip to the SkillsUSA NLSC. Without their generosity I would've been eating ramen and white rice the whole trip.</p>
     `,
   },
-
   {
     id:      'hello-world',
     title:   'Hello World',
@@ -214,5 +187,4 @@ const blogPosts = [
       <p>Today is the day I was born.</p>
     `,
   },
-
 ];

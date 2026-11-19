@@ -1,7 +1,7 @@
 /* ═══════════════════════════════════════════════════════════════════════════
    data.js  —  All portfolio content lives here.
    Edit this file to update your portfolio. The HTML reads everything
-   automatically. Never edit portfolio-win95.html for content changes.
+   automatically. Never edit index.html for content changes.
    ═══════════════════════════════════════════════════════════════════════════
 
    SLIDE TYPES (used in `slides` arrays for projects, certs, and experience):
@@ -341,7 +341,7 @@ const certifications = [
     date: 'October 2024',
     desc: 'The SkillsUSA Statesman Award is the highest individual honor a member can earn at the state level.',
     modal: {
-      about: 'The SkillsUSA Statesman Award is the highest individual honor a member can earn at the state level. It recognizes students who demonstrate exceptional civic awareness, mastery of SkillsUSA knowledge, and the ability to articulate their Career and Technical Education (CTE) experiences.',      
+      about: 'The SkillsUSA Statesman Award is the highest individual honor a member can earn at the state level. It recognizes students who demonstrate exceptional civic awareness, mastery of SkillsUSA knowledge, and the ability to articulate their Career and Technical Education (CTE) experiences.',
       tags: ['Project Management', 'Leadership', 'Teamwork', 'Marshmallow Noodle Tower Construction'],
       url: '',
       slides: [
